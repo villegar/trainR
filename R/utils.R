@@ -1,0 +1,54 @@
+#' Wrapper for \code{\link[base:getElement]{base::getElement}}
+#'
+#' Wrapper for \code{\link[base:getElement]{base::getElement}}, but instead of
+#' returning \code{NULL} when the \code{name} is not found, returns an user
+#' specified \code{default} value, \code{NA}.
+#'
+#' @inheritParams base::getElement
+#' @param as_list Boolean flag to return the element as a list.
+#' @param default Default value to return if \code{name} is not found.
+#'
+#' @return Element from object, if exists, \code{default} otherwise.
+#' @export
+#'
+#' @examples
+#' test_obj <- list(a = 4, c = 2)
+#' get_element(test_obj, "a")
+#' get_element(test_obj, "b")
+get_element <- function(object, name, as_list = FALSE, default = NA) {
+  out <- getElement(object, name)
+  if (is.null(out))
+    return(NA)
+  if (as_list)
+    return(out)
+  unlist(out)
+}
+
+#' Get user's token
+#'
+#' Get user's token to access the National Rail Enquiries (NRE) data feeds.
+#'
+#' @param path Path to text file with token.
+#'
+#' @return String with token, first line of the input file.
+#' @export
+get_token <- function(path = "inst/token.txt") {
+  tryCatch({
+    f <- file(path, open = "r")
+    on.exit(close(f))
+    readLines(f)[1]
+  }, error = function(e) {
+    stop("Error reading the token file: \n", path)
+  })
+}
+
+#' Configure user's token
+#'
+#' Configure user's token to access the National Rail Enquiries (NRE) data
+#' feeds.
+#'
+#' @param path Path to text file where the token should be stored.
+#' @export
+set_token <- function(path = "inst/token.txt") {
+  usethis::edit_file(path)
+}
