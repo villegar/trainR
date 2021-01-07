@@ -8,5 +8,5 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
-#' @return Return the result of the \code{rhs} of the expression.
+#' @return Result of the \code{rhs} expression.
 NULL
