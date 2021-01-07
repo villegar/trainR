@@ -23,5 +23,6 @@ Imports:
     magrittr,
     purrr,
     tibble,
+    tidyr,
     usethis,
     xml2
