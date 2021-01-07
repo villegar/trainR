@@ -2,6 +2,7 @@
 
 export("%>%")
 export(GetArrBoardWithDetailsRequest)
+export(get_calling_points)
 export(get_element)
 export(get_token)
 export(set_token)
