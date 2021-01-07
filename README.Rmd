@@ -1,7 +1,6 @@
 ---
 output: github_document
 ---
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -13,12 +12,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-# trainR: An Interface to the National Rail Enquiries Systems <img src="inst/images/logo.png" alt="logo" align="right" height=200px/>
+# trainR: An Interface to the National Rail Enquiries Systems <img src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/logo.png" alt="logo" align="right" height=200px/>
 
 <!-- badges: start -->
+`r badger::badge_devel("villegar/trainR", "yellow")`
+`r badger::badge_github_actions("villegar/trainR")`
+`r badger::badge_cran_release("trainR", "black")`
 <!-- badges: end -->
 
-The goal of trainR is to ...
+The goal of trainR is to provide a simple interface to the National Rail Enquiries (NRE) systems: https://www.nationalrail.co.uk/46391.aspx
 
 ## Installation
 
@@ -34,4 +36,4 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("villegar/trainR")
 ```
-## Example
+<!-- ## Example -->
