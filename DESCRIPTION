@@ -23,4 +23,5 @@ Imports:
     magrittr,
     purrr,
     tibble,
+    usethis,
     xml2
