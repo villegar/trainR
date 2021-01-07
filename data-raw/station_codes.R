@@ -1,4 +1,4 @@
-## code to prepare `station_codes` dataset goes here
+## code to prepare the `station_codes` dataset
 
 filename <- "https://www.nationalrail.co.uk/station_codes%20(07-12-2020).csv"
 station_codes <- readr::read_csv(filename)
