@@ -7,7 +7,7 @@
 lhs \%>\% rhs
 }
 \value{
-Return the result of the \code{rhs} of the expression.
+Result of the \code{rhs} expression.
 }
 \description{
 See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
