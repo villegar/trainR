@@ -4,3 +4,9 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^\.github$
+^inst/extdata$
+^inst/images$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^R\.ignore$
