@@ -23,9 +23,9 @@ extract <- function(x) {
                  delayReason = get_element(x, "delayReason"))
 }
 
-#' Get all public departures
+#' Get all public arrivals
 #'
-#' Get all public departures for the supplied CRS code within a defined time
+#' Get all public arrivals for the supplied CRS code within a defined time
 #' window, including service details.
 #'
 #' @param crs (string, 3 characters, alphabetic): The CRS code (see above) of
@@ -49,10 +49,8 @@ extract <- function(x) {
 #' @param verbose Boolean flag to indicate whether or not to show status
 #'     messages.
 #'
-#' @return Tibble with records.
+#' @return Tibble with arrival records.
 #' @export
-#
-# @examples
 GetArrBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
@@ -88,9 +86,8 @@ GetArrBoardWithDetailsRequest <-
                        <ldb:numRows>{numRows}</ldb:numRows>
                        <ldb:crs>{crs}</ldb:crs>
                        <!--Optional:-->
-
-                       <!--Optional:-->
                        {filterCrs}
+                       <!--Optional:-->
                        <ldb:filterType>{filterType}</ldb:filterType>
                        <!--Optional:-->
                        <ldb:timeOffset>{timeOffset}</ldb:timeOffset>
