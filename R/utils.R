@@ -52,7 +52,7 @@ get_token <- function(path = "inst/token.txt") {
 #'
 #' @examples
 #' out <- list(woof = list(name = "Barto", age = 6)) %>%
-#'   reclass(names(.))
+#'   trainR:::reclass(names(.))
 reclass <- function(data, class) {
   if (!is.null(class) & !inherits(data, class))
     class(data) <- c(class, class(data))
