@@ -6,16 +6,27 @@
 #' @return Tibble with the appropriate format.
 #' @rdname extract
 #' @keywords internal
-# @export
 extract <- function(x, ...) {
   UseMethod("extract", x)
 }
 
 #' @rdname extract
 #' @keywords internal
-# @export
-extract.GetServiceDetailsResult <- function() {
-
+extract.GetServiceDetailsResult <- function(x, ...) {
+  tibble::tibble(generatedAt = get_element(x, "generatedAt"),
+                 serviceType = get_element(x, "serviceType"),
+                 locationName = get_element(x, "locationName"),
+                 crs = get_element(x, "crs"),
+                 operator = get_element(x, "operator"),
+                 operatorCode = get_element(x, "operatorCode"),
+                 rsid = get_element(x, "rsid"),
+                 platform = get_element(x, "platform"),
+                 sta = get_element(x, "sta"),
+                 ata = get_element(x, "ata"),
+                 std = get_element(x, "std"),
+                 atd = get_element(x, "atd"),
+                 previousCallingPoints = get_element(x, "previousCallingPoints", TRUE),
+                 subsequentCallingPoints = get_element(x, "subsequentCallingPoints", TRUE))
 }
 
 # Extract departure details
