@@ -42,6 +42,23 @@ get_token <- function(path = "inst/token.txt") {
   })
 }
 
+#' Update class of data object
+#'
+#' @param data Data object (e.g. \code{list}).
+#' @param class String of new class.
+#'
+#' @return Original data object with new \code{class}.
+#' @keywords internal
+#'
+#' @examples
+#' out <- list(woof = list(name = "Barto", age = 6)) %>%
+#'   reclass(names(.))
+reclass <- function(data, class) {
+  if (!is.null(class) & !inherits(data, class))
+    class(data) <- c(class, class(data))
+  data
+}
+
 #' Configure user's token
 #'
 #' Configure user's token to access the National Rail Enquiries (NRE) data
