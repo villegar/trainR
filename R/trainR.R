@@ -13,6 +13,8 @@ extract <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.GetServiceDetailsResult <- function(x, ...) {
+  if (length(x) == 1 & names(x) == "GetServiceDetailsResult")
+    x <- x[[1]]
   tibble::tibble(generatedAt = get_element(x, "generatedAt"),
                  serviceType = get_element(x, "serviceType"),
                  locationName = get_element(x, "locationName"),
@@ -25,9 +27,11 @@ extract.GetServiceDetailsResult <- function(x, ...) {
                  ata = get_element(x, "ata"),
                  std = get_element(x, "std"),
                  atd = get_element(x, "atd"),
-                 previousCallingPoints = get_element(x,
-                                                     "previousCallingPoints",
-                                                     TRUE),
+                 previousCallingPoints =
+                   list(get_element(x, "previousCallingPoints", TRUE) %>%
+                          get_calling_points()
+                   ) %>%
+                   reclass("previousCallingPoints"),
                  subsequentCallingPoints = get_element(x,
                                                        "subsequentCallingPoints",
                                                        TRUE)) %>%
@@ -36,22 +40,51 @@ extract.GetServiceDetailsResult <- function(x, ...) {
 
 #' @rdname extract
 #' @keywords internal
+extract.GetStationBoardResult <- function(x, ...) {
+  class <- names(x)
+  if (length(x) == 1 & inherits(x, class))
+    x <- x[[1]]
+  tibble::tibble(generatedAt = get_element(x, "generatedAt"),
+                 locationName = get_element(x, "locationName"),
+                 crs = get_element(x, "crs"),
+                 platformAvailable = get_element(x, "platformAvailable"),
+                 trainServices =
+                   list(get_element(x, "trainServices", TRUE) %>%
+                          reclass("trainServices") %>%
+                          extract()
+                        ),
+                 busServices =
+                   list(get_element(x, "busServices", TRUE) %>%
+                          reclass("busServices") %>%
+                          extract()
+                        )) %>%
+    reclass(class)
+}
+
+#' @rdname extract
+#' @keywords internal
+extract.busServices <- function(x, ...) {
+  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract())
+}
+
+#' @rdname extract
+#' @keywords internal
 extract.callingPoint <- function(x, ...) {
   tibble::tibble(generatedAt = get_element(x, "locationName"),
                  serviceType = get_element(x, "crs"),
                  locationName = get_element(x, "st"),
-                 crs = get_element(x, "at")) %>%
-    reclass("callingPoint")
+                 crs = get_element(x, "at"))
 }
 
-# Extract departure details
-#
-# @param x List with departure details.
-#
-# @return Tibble with departure details.
 #' @rdname extract
 #' @keywords internal
-extract.default <- function(x, ...) {
+extract.trainServices <- function(x, ...) {
+  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract())
+}
+
+#' @rdname extract
+#' @keywords internal
+extract.service <- function(x, ...) {
   tibble::tibble(sta = get_element(x, "sta"),
                  eta = get_element(x, "eta"),
                  platform = get_element(x, "platform"),
@@ -62,9 +95,13 @@ extract.default <- function(x, ...) {
                  rsid = get_element(x, "rsid"),
                  origin = get_element(x, "origin", TRUE),
                  destination = get_element(x, "destination", TRUE),
-                 previousCallingPoints = get_element(x,
-                                                     "previousCallingPoints",
-                                                     TRUE),
+                 previousCallingPoints =
+                   list(get_element(x, "previousCallingPoints", TRUE) #%>%
+                          # purrr::map_df(function(x) x[[1]] %>%
+                          #                 reclass("callingPoint") %>%
+                          #                 extract())
+                   ) %>%
+                   reclass("previousCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
                  cancelReason = get_element(x, "cancelReason"),
                  delayReason = get_element(x, "delayReason"))
@@ -156,11 +193,15 @@ GetArrBoardWithDetailsRequest <-
                 httpheader = myheader,
                 verbose = verbose) %>%
     xml2::read_xml() %>%
-    xml2::xml_find_all(xpath = ".//lt7:trainServices") %>%
+    # xml2::xml_find_all(xpath = ".//lt7:trainServices") %>%
+    xml2::xml_find_all(".//soap:Body") %>%
     xml2::xml_contents() %>%
     xml2::as_list() %>%
-    purrr::map_df(extract) %>%
-    dplyr::bind_rows()
+    .[[1]] %>%
+    reclass(class = names(.)) %>%
+    extract()
+    # purrr::map_df(extract) %>%
+    # dplyr::bind_rows()
 }
 
 #' Get all public departures
@@ -313,7 +354,8 @@ GetServiceDetailsRequest <-
       xml2::xml_contents() %>%
       xml2::as_list() %>%
       .[[1]] %>%
-      reclass(class = names(.))
+      reclass(.[[1]], class = names(.)) %>%
+      extract()
       # purrr::map_df(extract) %>%
       # dplyr::bind_rows()
   }
