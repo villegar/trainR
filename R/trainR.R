@@ -147,7 +147,7 @@ GetArrBoardWithDetailsRequest <-
 GetArrDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
-           filterType = "to",
+           filterType = "from",
            numRows = 150,
            timeOffset = 0,
            timeWindow = 120,
@@ -208,6 +208,68 @@ GetArrDepBoardWithDetailsRequest <-
       purrr::map_df(extract) %>%
       dplyr::bind_rows()
 }
+
+#' Get service details
+#'
+#' Get the service details for a specific service identified by a station board.
+#' These details are supplied relative to the station board from which the
+#' \code{serviceID} field value was generated. Service details are only
+#' available while the service appears on the station board from which it was
+#' obtained. This is normally for two minutes after it is expected to have
+#' departed, or after a terminal arrival. If a request is made for a service
+#' that is no longer available then a \code{NULL} value is returned.
+#'
+#' @param serviceID (string): The LDBWS service ID of the service to request
+#'     the details of. The service ID is obtained from a service listed in a
+#'     \code{StationBoard} object returned from any other request.
+#' @param token Token to access the data feed. The token can be obtained at
+#'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
+#' @param url Data feed source URL.
+#' @param verbose Boolean flag to indicate whether or not to show status
+#'     messages.
+#'
+#' @return Tibble with departure records.
+#' @export
+GetServiceDetailsRequest <-
+  function(serviceID,
+           token = get_token(),
+           url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
+           verbose = FALSE) {
+
+    body <-
+      glue::glue('<soap:Envelope
+                  xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+                  xmlns:typ="http://thalesgroup.com/RTTI/2013-11-28/Token/types"
+                  xmlns:ldb="http://thalesgroup.com/RTTI/2017-10-01/ldb/">
+                     <soap:Header>
+                        <typ:AccessToken>
+                           <typ:TokenValue>{token}</typ:TokenValue>
+                        </typ:AccessToken>
+                     </soap:Header>
+                     <soap:Body>
+                        <ldb:GetServiceDetailsRequest>
+                           <ldb:serviceID>{serviceID}</ldb:serviceID>
+                        </ldb:GetServiceDetailsRequest>
+                     </soap:Body>
+                  </soap:Envelope>')
+
+    header <- c(Connection = "close",
+                'Content-Type' = "text/xml; charset=utf-8",
+                'Content-length' = nchar(body))
+
+    RCurl::getURL(url = url,
+                  postfields = body,
+                  httpheader = header,
+                  verbose = verbose) %>%
+      xml2::read_xml() %>%
+      xml2::xml_find_all(".//soap:Body") %>%
+      xml2::xml_contents() %>%
+      xml2::as_list() %>%
+      .[[1]] %>%
+      reclass(class = names(.))
+      # purrr::map_df(extract) %>%
+      # dplyr::bind_rows()
+  }
 
 #' Obtain previous calling points
 #'
