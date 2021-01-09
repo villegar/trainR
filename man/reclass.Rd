@@ -19,6 +19,6 @@ Update class of data object
 }
 \examples{
 out <- list(woof = list(name = "Barto", age = 6)) \%>\%
-  reclass(names(.))
+  trainR:::reclass(names(.))
 }
 \keyword{internal}
