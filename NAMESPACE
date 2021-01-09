@@ -3,6 +3,7 @@
 export("%>%")
 export(GetArrBoardWithDetailsRequest)
 export(GetArrDepBoardWithDetailsRequest)
+export(GetServiceDetailsRequest)
 export(get_calling_points)
 export(get_element)
 export(get_token)

@@ -7,7 +7,7 @@
 GetArrDepBoardWithDetailsRequest(
   crs,
   filterCrs = NA,
-  filterType = "to",
+  filterType = "from",
   numRows = 150,
   timeOffset = 0,
   timeWindow = 120,
