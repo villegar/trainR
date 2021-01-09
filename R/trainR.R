@@ -1,10 +1,31 @@
-#' Extract departure details
+#' Extract data from XML request
 #'
-#' @param x List with departure details.
+#' @param x List with request results.
+#' @param ... Optional parameters.
 #'
-#' @return Tibble with departure details.
+#' @return Tibble with the appropriate format.
+#' @rdname extract
 #' @keywords internal
-extract <- function(x) {
+# @export
+extract <- function(x, ...) {
+  UseMethod("extract", x)
+}
+
+#' @rdname extract
+#' @keywords internal
+# @export
+extract.GetServiceDetailsResult <- function() {
+
+}
+
+# Extract departure details
+#
+# @param x List with departure details.
+#
+# @return Tibble with departure details.
+#' @rdname extract
+#' @keywords internal
+extract.default <- function(x, ...) {
   tibble::tibble(sta = get_element(x, "sta"),
                  eta = get_element(x, "eta"),
                  platform = get_element(x, "platform"),
