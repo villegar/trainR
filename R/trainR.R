@@ -13,6 +13,9 @@ extract <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.GetServiceDetailsResult <- function(x, ...) {
+  # Local binding
+  . <- NULL
+
   class <- names(x)
   if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
@@ -96,6 +99,8 @@ extract.trainServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.service <- function(x, ...) {
+  # Local binding
+  . <- NULL
   tibble::tibble(sta = get_element(x, "sta"),
                  eta = get_element(x, "eta"),
                  platform = get_element(x, "platform"),
@@ -157,7 +162,8 @@ GetArrBoardWithDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
-
+  # Local binding
+  . <- NULL
   # Check arguments
 
   # Check if filterCrs is not empty
@@ -335,6 +341,8 @@ GetServiceDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
+    # Local binding
+    . <- NULL
 
     body <-
       glue::glue('<soap:Envelope
@@ -377,6 +385,8 @@ GetServiceDetailsRequest <-
 #' @return Tibble with previous calling point records.
 #' @export
 get_calling_points <- function(data) {
+  # Local binding
+  . <- locationName <- serviceID <- value <- value_id <- NULL
   idx <- purrr::map_lgl(data, ~length(.) != 0)
   data[idx] %>%
     tibble::enframe(., name = "serviceID") %>%
