@@ -25,8 +25,23 @@ extract.GetServiceDetailsResult <- function(x, ...) {
                  ata = get_element(x, "ata"),
                  std = get_element(x, "std"),
                  atd = get_element(x, "atd"),
-                 previousCallingPoints = get_element(x, "previousCallingPoints", TRUE),
-                 subsequentCallingPoints = get_element(x, "subsequentCallingPoints", TRUE))
+                 previousCallingPoints = get_element(x,
+                                                     "previousCallingPoints",
+                                                     TRUE),
+                 subsequentCallingPoints = get_element(x,
+                                                       "subsequentCallingPoints",
+                                                       TRUE)) %>%
+    reclass("GetServiceDetailsResult")
+}
+
+#' @rdname extract
+#' @keywords internal
+extract.callingPoint <- function(x, ...) {
+  tibble::tibble(generatedAt = get_element(x, "locationName"),
+                 serviceType = get_element(x, "crs"),
+                 locationName = get_element(x, "st"),
+                 crs = get_element(x, "at")) %>%
+    reclass("callingPoint")
 }
 
 # Extract departure details
