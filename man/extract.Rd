@@ -2,17 +2,37 @@
 % Please edit documentation in R/trainR.R
 \name{extract}
 \alias{extract}
-\title{Extract departure details}
+\alias{extract.GetServiceDetailsResult}
+\alias{extract.GetStationBoardResult}
+\alias{extract.busServices}
+\alias{extract.callingPoint}
+\alias{extract.trainServices}
+\alias{extract.service}
+\title{Extract data from XML request}
 \usage{
-extract(x)
+extract(x, ...)
+
+\method{extract}{GetServiceDetailsResult}(x, ...)
+
+\method{extract}{GetStationBoardResult}(x, ...)
+
+\method{extract}{busServices}(x, ...)
+
+\method{extract}{callingPoint}(x, ...)
+
+\method{extract}{trainServices}(x, ...)
+
+\method{extract}{service}(x, ...)
 }
 \arguments{
-\item{x}{List with departure details.}
+\item{x}{List with request results.}
+
+\item{...}{Optional parameters.}
 }
 \value{
-Tibble with departure details.
+Tibble with the appropriate format.
 }
 \description{
-Extract departure details
+Extract data from XML request
 }
 \keyword{internal}
