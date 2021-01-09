@@ -13,7 +13,8 @@ extract <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.GetServiceDetailsResult <- function(x, ...) {
-  if (length(x) == 1 & names(x) == "GetServiceDetailsResult")
+  class <- names(x)
+  if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
   tibble::tibble(generatedAt = get_element(x, "generatedAt"),
                  serviceType = get_element(x, "serviceType"),
@@ -29,13 +30,22 @@ extract.GetServiceDetailsResult <- function(x, ...) {
                  atd = get_element(x, "atd"),
                  previousCallingPoints =
                    list(get_element(x, "previousCallingPoints", TRUE) %>%
-                          get_calling_points()
+                          .[[1]] %>%
+                          purrr::map_df(function(x) x %>%
+                                          reclass("callingPoint") %>%
+                                          extract())
                    ) %>%
                    reclass("previousCallingPoints"),
-                 subsequentCallingPoints = get_element(x,
-                                                       "subsequentCallingPoints",
-                                                       TRUE)) %>%
-    reclass("GetServiceDetailsResult")
+                 subsequentCallingPoints =
+                   list(get_element(x, "subsequentCallingPoints", TRUE) %>%
+                          .[[1]] %>%
+                          purrr::map_df(function(x) x %>%
+                                          reclass("callingPoint") %>%
+                                          extract())
+                   ) %>%
+                   reclass("subsequentCallingPoints")
+                 ) %>%
+    reclass(class)
 }
 
 #' @rdname extract
@@ -70,10 +80,11 @@ extract.busServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.callingPoint <- function(x, ...) {
-  tibble::tibble(generatedAt = get_element(x, "locationName"),
-                 serviceType = get_element(x, "crs"),
-                 locationName = get_element(x, "st"),
-                 crs = get_element(x, "at"))
+  tibble::tibble(locationName = get_element(x, "locationName"),
+                 crs = get_element(x, "crs"),
+                 st = get_element(x, "st"),
+                 at = get_element(x, "at"),
+                 et = get_element(x, "et"))
 }
 
 #' @rdname extract
@@ -96,10 +107,11 @@ extract.service <- function(x, ...) {
                  origin = get_element(x, "origin", TRUE),
                  destination = get_element(x, "destination", TRUE),
                  previousCallingPoints =
-                   list(get_element(x, "previousCallingPoints", TRUE) #%>%
-                          # purrr::map_df(function(x) x[[1]] %>%
-                          #                 reclass("callingPoint") %>%
-                          #                 extract())
+                   list(get_element(x, "previousCallingPoints", TRUE) %>%
+                          .[[1]] %>%
+                          purrr::map_df(function(x) x %>%
+                                          reclass("callingPoint") %>%
+                                          extract())
                    ) %>%
                    reclass("previousCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
@@ -354,10 +366,8 @@ GetServiceDetailsRequest <-
       xml2::xml_contents() %>%
       xml2::as_list() %>%
       .[[1]] %>%
-      reclass(.[[1]], class = names(.)) %>%
+      reclass(class = names(.)) %>%
       extract()
-      # purrr::map_df(extract) %>%
-      # dplyr::bind_rows()
   }
 
 #' Obtain previous calling points
