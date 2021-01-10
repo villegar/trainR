@@ -310,10 +310,7 @@ GetArrDepBoardWithDetailsRequest <-
               </soap:Envelope>')
 
     myheader <- c(Connection = "close",
-                  # Accept = "text/xml",
-                  # Accept = "multipart/*",
                   'Content-Type' = "text/xml; charset=utf-8",
-                  # 'Content-Type' = "application/xml",
                   'Content-length' = nchar(body))
 
     RCurl::getURL(url = url,
@@ -321,11 +318,12 @@ GetArrDepBoardWithDetailsRequest <-
                   httpheader = myheader,
                   verbose = verbose) %>%
       xml2::read_xml() %>%
-      xml2::xml_find_all(xpath = ".//lt7:trainServices") %>%
+      xml2::xml_find_all(".//soap:Body") %>%
       xml2::xml_contents() %>%
       xml2::as_list() %>%
-      purrr::map_df(extract) %>%
-      dplyr::bind_rows()
+      .[[1]] %>%
+      reclass(class = names(.)) %>%
+      extract()
 }
 
 #' Get service details
