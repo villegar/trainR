@@ -68,11 +68,11 @@ extract.GetStationBoardResult <- function(x, ...) {
                  trainServices =
                    get_element(x, "trainServices", TRUE) %>%
                    reclass("trainServices") %>%
-                   extract() %>% list(),
+                   extract(),
                  busServices =
                    get_element(x, "busServices", TRUE) %>%
                    reclass("busServices") %>%
-                   extract() %>% list()
+                   extract()
                  ) %>%
     reclass(class)
 }
@@ -80,7 +80,9 @@ extract.GetStationBoardResult <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.busServices <- function(x, ...) {
-  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract())
+  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
+    list() %>%
+    reclass("busServices")
 }
 
 #' @rdname extract
@@ -96,7 +98,9 @@ extract.callingPoint <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.trainServices <- function(x, ...) {
-  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract())
+  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
+    list() %>%
+    reclass("trainServices")
 }
 
 #' @rdname extract
