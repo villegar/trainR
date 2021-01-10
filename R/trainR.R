@@ -19,7 +19,9 @@ extract.GetServiceDetailsResult <- function(x, ...) {
   class <- names(x)
   if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
-  tibble::tibble(generatedAt = get_element(x, "generatedAt"),
+  tibble::tibble(generatedAt =
+                   get_element(x, "generatedAt") %>%
+                   lubridate::parse_date_time("%Y-%m-%d %H:%M:%OS %z"),
                  serviceType = get_element(x, "serviceType"),
                  locationName = get_element(x, "locationName"),
                  crs = get_element(x, "crs"),
@@ -57,20 +59,21 @@ extract.GetStationBoardResult <- function(x, ...) {
   class <- names(x)
   if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
-  tibble::tibble(generatedAt = get_element(x, "generatedAt"),
+  tibble::tibble(generatedAt =
+                   get_element(x, "generatedAt")  %>%
+                   lubridate::parse_date_time("%Y-%m-%d %H:%M:%OS %z"),
                  locationName = get_element(x, "locationName"),
                  crs = get_element(x, "crs"),
                  platformAvailable = get_element(x, "platformAvailable"),
                  trainServices =
-                   list(get_element(x, "trainServices", TRUE) %>%
-                          reclass("trainServices") %>%
-                          extract()
-                        ),
+                   get_element(x, "trainServices", TRUE) %>%
+                   reclass("trainServices") %>%
+                   extract() %>% list(),
                  busServices =
-                   list(get_element(x, "busServices", TRUE) %>%
-                          reclass("busServices") %>%
-                          extract()
-                        )) %>%
+                   get_element(x, "busServices", TRUE) %>%
+                   reclass("busServices") %>%
+                   extract() %>% list()
+                 ) %>%
     reclass(class)
 }
 
