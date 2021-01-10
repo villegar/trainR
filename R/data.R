@@ -1,9 +1,9 @@
 #' National Rail Enquiries (NRE) Station Codes dataset
 #'
-#' A dataset containing information of 1972 British National Rail Enquiries
+#' A dataset containing information of 2580 British National Rail Enquiries
 #' (NRE) station 3 letter alpha (CRS) codes.
 #'
-#' @format A data frame with 1972 rows and 2 variables:
+#' @format A data frame with 2580 rows and 2 variables:
 #' \describe{
 #'     \item{name}{Station name.}
 #'     \item{crs}{Station code.}

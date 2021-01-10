@@ -2,11 +2,12 @@
 
 filename <- "https://www.nationalrail.co.uk/station_codes%20(07-12-2020).csv"
 station_codes <- readr::read_csv(filename)
-names(station_codes) <- rep(1:2, 4)
-station_codes <- dplyr::bind_rows(station_codes[, 1:2],
-                                  station_codes[, 3:4],
-                                  station_codes[, 5:6])[, 1:2]
-colnames(station_codes) <- c("name", "crs")
+names(station_codes) <- rep(c("name", "crs"), 4)
+station_codes <- station_codes %>%
+  tidyr::pivot_longer(c("name", "crs"), names_repair = "minimal") %>%
+  tidyr::pivot_wider(values_fn = list) %>%
+  tidyr::unnest(cols = c("name", "crs")) %>%
+  dplyr::arrange(name)
 
 station_codes <- station_codes[!is.na(station_codes$name) &
                                !is.na(station_codes$crs), ]
