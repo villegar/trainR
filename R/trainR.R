@@ -109,15 +109,21 @@ extract.service <- function(x, ...) {
                  serviceType = get_element(x, "serviceType"),
                  serviceID = get_element(x, "serviceID"),
                  rsid = get_element(x, "rsid"),
-                 origin = get_element(x, "origin", TRUE),
-                 destination = get_element(x, "destination", TRUE),
+                 origin =
+                   get_element(x, "origin", TRUE) %>%
+                   get_element("location") %>%
+                   get_element("crs"),
+                 destination =
+                   get_element(x, "destination", TRUE)  %>%
+                   get_element("location") %>%
+                   get_element("crs"),
                  previousCallingPoints =
-                   list(get_element(x, "previousCallingPoints", TRUE) %>%
-                          .[[1]] %>%
-                          purrr::map_df(function(x) x %>%
-                                          reclass("callingPoint") %>%
-                                          extract())
-                   ) %>%
+                   get_element(x, "previousCallingPoints", TRUE) %>%
+                   .[[1]] %>% # callingPointList
+                   purrr::map_df(function(x) x %>%
+                                   reclass("callingPoint") %>%
+                                   extract()) %>%
+                   list() %>%
                    reclass("previousCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
                  cancelReason = get_element(x, "cancelReason"),
