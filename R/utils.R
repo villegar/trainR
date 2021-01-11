@@ -30,13 +30,13 @@ get_element <- function(object, name, as_list = FALSE, default = NA) {
   })
 }
 
-# Get the full station name
+#' Get the full station name
 #' @param crs (string, 3 characters, alphabetic): The CRS code of the station.
 #' @return String with station name.
 #' @keywords internal
 get_location <- function(crs) {
   if (all(crs %in% station_codes$crs))
-    return(station_codes$name[station_codes$crs == crs])
+    return(purrr::map_chr(crs, ~station_codes$name[station_codes$crs == .]))
   return("UNK")
 }
 
