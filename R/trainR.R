@@ -80,6 +80,11 @@ extract.GetStationBoardResult <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.busServices <- function(x, ...) {
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]]))
+    return(NA)
   purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
     list() %>%
     reclass("busServices")
@@ -92,12 +97,18 @@ extract.callingPoint <- function(x, ...) {
                  crs = get_element(x, "crs"),
                  st = get_element(x, "st"),
                  at = get_element(x, "at"),
+                 length = get_element(x, "length"),
                  et = get_element(x, "et"))
 }
 
 #' @rdname extract
 #' @keywords internal
 extract.trainServices <- function(x, ...) {
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]]))
+    return(NA)
   purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
     list() %>%
     reclass("trainServices")
@@ -408,4 +419,3 @@ get_calling_points <- function(data) {
     dplyr::mutate(timestamp =
                     lubridate::as_datetime(glue::glue("{lubridate::today()} {st}:00 GMT")))
 }
-
