@@ -16,12 +16,18 @@
 #' get_element(test_obj, "a")
 #' get_element(test_obj, "b")
 get_element <- function(object, name, as_list = FALSE, default = NA) {
+  tryCatch({
   out <- getElement(object, name)
   if (is.null(out))
-    return(NA)
+    return(default)
   if (as_list)
     return(out)
   unlist(out)
+  }, error = function(e) {
+    if (as_list)
+      return(default)
+    return(default)
+  })
 }
 
 #' Get user's token
