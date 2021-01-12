@@ -32,6 +32,7 @@ specified \code{default} value, \code{NA}.
 }
 \examples{
 test_obj <- list(a = 4, c = 2)
-get_element(test_obj, "a")
-get_element(test_obj, "b")
+trainR:::get_element(test_obj, "a")
+trainR:::get_element(test_obj, "b")
 }
+\keyword{internal}
