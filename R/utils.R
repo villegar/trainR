@@ -85,3 +85,17 @@ reclass <- function(data, class) {
 set_token <- function(path = "inst/token.txt") {
   usethis::edit_file(path)
 }
+
+#' Validate output from \code{request}
+#'
+#' @param data Data object (e.g. \code{list}).
+#'
+#' @return Original data object, if data is valid
+#' @keywords internal
+validate <- function(data) {
+  if ("Reason" %in% names(data))
+    stop(glue::glue("[{get_element(data, 'Code')}] ",
+                    "{get_element(data, 'Reason')}"),
+         call. = FALSE)
+  data
+}
