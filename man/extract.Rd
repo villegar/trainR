@@ -6,6 +6,7 @@
 \alias{extract.GetStationBoardResult}
 \alias{extract.busServices}
 \alias{extract.callingPoint}
+\alias{extract.callingPointList}
 \alias{extract.trainServices}
 \alias{extract.service}
 \title{Extract data from XML request}
@@ -20,6 +21,8 @@ extract(x, ...)
 
 \method{extract}{callingPoint}(x, ...)
 
+\method{extract}{callingPointList}(x, ..., class = "previousCallingPoints")
+
 \method{extract}{trainServices}(x, ...)
 
 \method{extract}{service}(x, ...)
@@ -28,6 +31,8 @@ extract(x, ...)
 \item{x}{List with request results.}
 
 \item{...}{Optional parameters.}
+
+\item{class}{String with class of the output object.}
 }
 \value{
 Tibble with the appropriate format.

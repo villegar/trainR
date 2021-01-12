@@ -6,7 +6,8 @@
 \alias{print.busServices}
 \alias{print.trainServices}
 \alias{print.previousCallingPoints}
-\title{Print data}
+\alias{print.subsequentCallingPoints}
+\title{Print Values}
 \usage{
 print(x, ...)
 
@@ -17,15 +18,17 @@ print(x, ...)
 \method{print}{trainServices}(x, ...)
 
 \method{print}{previousCallingPoints}(x, ...)
+
+\method{print}{subsequentCallingPoints}(x, ...)
 }
 \arguments{
-\item{x}{Data}
+\item{x}{an object used to select a method.}
 
-\item{...}{Optional parameters.}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 Input data invisibly.
 }
 \description{
-Print data
+Print Values
 }
