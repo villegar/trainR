@@ -9,12 +9,12 @@
 #' @param default Default value to return if \code{name} is not found.
 #'
 #' @return Element from object, if exists, \code{default} otherwise.
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' test_obj <- list(a = 4, c = 2)
-#' get_element(test_obj, "a")
-#' get_element(test_obj, "b")
+#' trainR:::get_element(test_obj, "a")
+#' trainR:::get_element(test_obj, "b")
 get_element <- function(object, name, as_list = FALSE, default = NA) {
   tryCatch({
   out <- getElement(object, name)
@@ -35,6 +35,8 @@ get_element <- function(object, name, as_list = FALSE, default = NA) {
 #' @return String with station name.
 #' @keywords internal
 get_location <- function(crs) {
+  # Local binding
+  station_codes <- trainR::station_codes
   if (all(crs %in% station_codes$crs))
     return(purrr::map_chr(crs, ~station_codes$name[station_codes$crs == .]))
   return("UNK")
@@ -66,6 +68,8 @@ get_token <- function(path = "inst/token.txt") {
 #' @return Nothing, call for its side effect.
 #' @keywords internal
 is_valid_crs <- function(x, parameter = "crs") {
+  # Local binding
+  station_codes <- trainR::station_codes
   if (!(x %in% station_codes$crs))
     stop(glue::glue("The given value for `{parameter}`, {x}, it is not a ",
                     "valid CRS code. Check trainR::station_codes$crs for ",
