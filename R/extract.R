@@ -101,6 +101,31 @@ extract.callingPoint <- function(x, ...) {
                  et = get_element(x, "et"))
 }
 
+#' @param class String with class of the output object.
+#' @rdname extract
+#' @keywords internal
+extract.callingPointList <- function(x, ..., class = "previousCallingPoints") {
+  x <- x[[1]]
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]])) {
+    # return(NA)
+    return(list(NA) %>%
+             reclass(class))
+  }
+
+  purrr::map_df(x, function(x) x %>% reclass("callingPoint") %>% extract()) %>%
+    list() %>%
+    reclass(class)
+  # x %>% # callingPointList
+  #   purrr::map_df(function(x) x %>%
+  #                   reclass("callingPoint") %>%
+  #                   extract()) %>%
+  #   list() %>%
+  #   reclass(class)
+}
+
 #' @rdname extract
 #' @keywords internal
 extract.trainServices <- function(x, ...) {
@@ -117,10 +142,10 @@ extract.trainServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.service <- function(x, ...) {
-  # Local binding
-  . <- NULL
-  tibble::tibble(sta = get_element(x, "sta"),
+  tibble::tibble(sta = get_element(x, "sta"), # arrival
                  eta = get_element(x, "eta"),
+                 std = get_element(x, "std"), # departure
+                 etd = get_element(x, "etd"),
                  platform = get_element(x, "platform"),
                  operator = get_element(x, "operator"),
                  operatorCode = get_element(x, "operatorCode"),
@@ -137,12 +162,12 @@ extract.service <- function(x, ...) {
                    get_element("crs"),
                  previousCallingPoints =
                    get_element(x, "previousCallingPoints", TRUE) %>%
-                   .[[1]] %>% # callingPointList
-                   purrr::map_df(function(x) x %>%
-                                   reclass("callingPoint") %>%
-                                   extract()) %>%
-                   list() %>%
-                   reclass("previousCallingPoints"),
+                   reclass("callingPointList") %>%
+                   extract(class = "previousCallingPoints"),
+                 subsequentCallingPoints =
+                   get_element(x, "subsequentCallingPoints", TRUE) %>%
+                   reclass("callingPointList") %>%
+                   extract(class = "subsequentCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
                  cancelReason = get_element(x, "cancelReason"),
                  delayReason = get_element(x, "delayReason"))
