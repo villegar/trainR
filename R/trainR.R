@@ -20,9 +20,7 @@
 #'     for. Defaults to 120.
 #' @param token Token to access the data feed. The token can be obtained at
 #'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
-#' @param url Data feed source URL.
-#' @param verbose Boolean flag to indicate whether or not to show status
-#'     messages.
+#' @inheritParams request
 #'
 #' @return Tibble with arrival records.
 #' @export
@@ -36,12 +34,12 @@ GetArrBoardWithDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
-  # Local binding
-  . <- NULL
   # Check arguments
+  is_valid_crs(crs)
 
   # Check if filterCrs is not empty
   if (!is.na(filterCrs)) {
+    is_valid_crs(filterCrs, "filterCrs")
     filterCrs <- glue::glue("<ldb:filterCrs>{filterCrs}</ldb:filterCrs>")
   } else {
     filterCrs <- ""
@@ -89,9 +87,7 @@ GetArrBoardWithDetailsRequest <-
 #'     for. Defaults to 120.
 #' @param token Token to access the data feed. The token can be obtained at
 #'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
-#' @param url Data feed source URL.
-#' @param verbose Boolean flag to indicate whether or not to show status
-#'     messages.
+#' @inheritParams request
 #'
 #' @return Tibble with departure records.
 #' @export
@@ -105,11 +101,12 @@ GetArrDepBoardWithDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
-
     # Check arguments
+    is_valid_crs(crs)
 
     # Check if filterCrs is not empty
     if (!is.na(filterCrs)) {
+      is_valid_crs(filterCrs, "filterCrs")
       filterCrs <- glue::glue("<ldb:filterCrs>{filterCrs}</ldb:filterCrs>")
     } else {
       filterCrs <- ""
@@ -150,9 +147,7 @@ GetArrDepBoardWithDetailsRequest <-
 #'     \code{StationBoard} object returned from any other request.
 #' @param token Token to access the data feed. The token can be obtained at
 #'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
-#' @param url Data feed source URL.
-#' @param verbose Boolean flag to indicate whether or not to show status
-#'     messages.
+#' @inheritParams request
 #'
 #' @return Tibble with departure records.
 #' @export
@@ -177,7 +172,7 @@ GetServiceDetailsRequest <-
 #' @param data List with previous calling point records.
 #'
 #' @return Tibble with previous calling point records.
-#' @export
+#' @keywords internal
 get_calling_points <- function(data) {
   # Local binding
   . <- locationName <- serviceID <- value <- value_id <- NULL
@@ -192,6 +187,15 @@ get_calling_points <- function(data) {
                     lubridate::as_datetime(glue::glue("{lubridate::today()} {st}:00 GMT")))
 }
 
+#' Submit a SOAP XML request
+#'
+#' @param body XML body arguments.
+#' @param header XML header arguments.
+#' @param url Data feed source URL.
+#' @param verbose Boolean flag to indicate whether or not to show status
+#'     messages.
+#'
+#' @return Request results or error message if not found.
 #' @keywords internal
 request <- function(body, header, url, verbose = FALSE) {
   # Local binding
