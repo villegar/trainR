@@ -58,6 +58,20 @@ get_token <- function(path = "inst/token.txt") {
   })
 }
 
+#' Validate station code (CRS)
+#'
+#' @param crs Station code
+#'
+#' @return \code{TRUE} if station code is valid, error message otherwise.
+#' @keywords internal
+is_valid_crs <- function(crs) {
+  if (!(crs %in% station_codes$crs))
+    stop(glue::glue("The given CRS, {crs}, is not a valid code. Check ",
+                    "trainR::station_codes$crs for valid codes."),
+         call. = FALSE)
+  TRUE
+}
+
 #' Update class of data object
 #'
 #' @param data Data object (e.g. \code{list}).
