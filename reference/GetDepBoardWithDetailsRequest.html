@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Submit a SOAP XML request — request • trainR</title>
+<title>Get all public departures — GetDepBoardWithDetailsRequest • trainR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Submit a SOAP XML request — request" />
-<meta property="og:description" content="Submit a SOAP XML request" />
+<meta property="og:title" content="Get all public departures — GetDepBoardWithDetailsRequest" />
+<meta property="og:description" content="Get all public departures for the supplied CRS code within a defined time
+window, including service details." />
 
 
 
@@ -108,27 +109,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Submit a SOAP XML request</h1>
+    <h1>Get all public departures</h1>
     <small class="dont-index">Source: <a href='https://github.com/villegar/trainR/blob/master/R/trainR.R'><code>R/trainR.R</code></a></small>
-    <div class="hidden name"><code>request.Rd</code></div>
+    <div class="hidden name"><code>GetDepBoardWithDetailsRequest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Submit a SOAP XML request</p>
+    <p>Get all public departures for the supplied CRS code within a defined time
+window, including service details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>request</span><span class='op'>(</span><span class='va'>body</span>, <span class='va'>header</span>, <span class='va'>url</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>GetDepBoardWithDetailsRequest</span><span class='op'>(</span>
+  <span class='va'>crs</span>,
+  filterCrs <span class='op'>=</span> <span class='cn'>NA</span>,
+  filterType <span class='op'>=</span> <span class='st'>"from"</span>,
+  numRows <span class='op'>=</span> <span class='fl'>150</span>,
+  timeOffset <span class='op'>=</span> <span class='fl'>0</span>,
+  timeWindow <span class='op'>=</span> <span class='fl'>120</span>,
+  token <span class='op'>=</span> <span class='fu'><a href='get_token.html'>get_token</a></span><span class='op'>(</span><span class='op'>)</span>,
+  url <span class='op'>=</span> <span class='st'>"https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>body</th>
-      <td><p>XML body arguments.</p></td>
+      <th>crs</th>
+      <td><p>(string, 3 characters, alphabetic): The CRS code (see above) of
+the location for which the request is being made.</p></td>
     </tr>
     <tr>
-      <th>header</th>
-      <td><p>XML header arguments.</p></td>
+      <th>filterCrs</th>
+      <td><p>(string, 3 characters, alphabetic): The CRS code of either
+an origin or destination location to filter in. Optional.</p></td>
+    </tr>
+    <tr>
+      <th>filterType</th>
+      <td><p>(string, either "from" or "to"): The type of filter to
+apply. Filters services to include only those originating or terminating
+at the <code>filterCrs</code> location. Defaults to "to".</p></td>
+    </tr>
+    <tr>
+      <th>numRows</th>
+      <td><p>(integer, between 0 and 150 exclusive): The number of
+services to return in the resulting station board.</p></td>
+    </tr>
+    <tr>
+      <th>timeOffset</th>
+      <td><p>(integer, between -120 and 120 exclusive): An offset in
+minutes against the current time to provide the station board for.
+Defaults to 0.</p></td>
+    </tr>
+    <tr>
+      <th>timeWindow</th>
+      <td><p>(integer, between -120 and 120 exclusive): How far into
+the future in minutes, relative to <code>timeOffset</code>, to return services
+for. Defaults to 120.</p></td>
+    </tr>
+    <tr>
+      <th>token</th>
+      <td><p>Token to access the data feed. The token can be obtained at
+<a href='http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/'>http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/</a>.</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -139,15 +181,11 @@
       <td><p>Boolean flag to indicate whether or not to show status
 messages.</p></td>
     </tr>
-    <tr>
-      <th>type</th>
-      <td><p>String with request type.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Request results or error message if not found.</p>
+    <p>Tibble with departure records.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
