@@ -23,6 +23,7 @@ Imports:
     lubridate,
     magrittr,
     purrr,
+    stringr,
     tibble,
     tidyr,
     usethis,
