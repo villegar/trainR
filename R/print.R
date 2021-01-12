@@ -1,7 +1,7 @@
-#' Print data
+#' Print Values
 #'
-#' @param x Data
-#' @param ... Optional parameters.
+#' @param x an object used to select a method.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @return Input data invisibly.
 #' @rdname print
@@ -57,11 +57,30 @@ print.trainServices <- function(x, ...) {
 print.previousCallingPoints <- function(x, ...) {
   # Local binding
   . <- crs <- NULL
+  if (all(is.na(x[[1]])))
+    return(invisible(x))
   x[[1]] %>%
     dplyr::mutate(station = get_location(crs)) %>%
     glue::glue_data("{station} ({ifelse(is.na(et), st, st)})") %>%
     paste0(collapse = ", ") %>%
     paste0("Previous calls: ", ., "\n\n") %>%
+    cat()
+  invisible(x)
+}
+
+#' @rdname print
+#' @export
+print.subsequentCallingPoints <- function(x, ...) {
+  # Local binding
+  . <- crs <- NULL
+  if (all(is.na(x[[1]])))
+    return(invisible(x))
+  x[[1]] %>%
+    # dplyr::filter_all(is.na, .preserve = TRUE) %>%
+    dplyr::mutate(station = get_location(crs)) %>%
+    glue::glue_data("{station} ({ifelse(is.na(et), st, st)})") %>%
+    paste0(collapse = ", ") %>%
+    paste0("Calling at: ", ., "\n\n") %>%
     cat()
   invisible(x)
 }
@@ -86,7 +105,7 @@ print_board <- function(x,
   header <- "To"
   if (station == "origin")
     header <- "From"
-  header <- paste0(stringr::str_pad("Time", 8, 'right'),
+  header <- paste0(stringr::str_pad("Time", 9, 'right'),
                    stringr::str_pad(header, 40, 'right'),
                    stringr::str_pad("Plat", 8, 'right'),
                    "Expected\n")
@@ -106,7 +125,8 @@ print_board <- function(x,
                                     "{stringr::str_pad(platform, 4, 'right')}\t",
                                     "{eta}\n\n") %>%
                     cat()
-                  print(x[i, ]$previousCallingPoints)
+                  # print(x[i, ]$previousCallingPoints)
+                  print(x[i, ]$subsequentCallingPoints)
                 })
   } else {
     x %>%
