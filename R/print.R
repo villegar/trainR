@@ -101,7 +101,7 @@ print_board <- function(x,
                         station = "destination",
                         ...) {
   # Local binding
-  . <- NULL
+  . <- eta <- etd <- sta <- std <- NULL
   header <- "To"
   if (station == "origin")
     header <- "From"
@@ -113,27 +113,33 @@ print_board <- function(x,
 
   # Retrieve full station names
   x <- x %>%
-    dplyr::mutate(station = get_element(., station) %>%
+    dplyr::mutate(time = ifelse(station == "destination" & !is.na(std),
+                                std,
+                                sta),
+                  expected = ifelse(station == "destination" & !is.na(etd),
+                                    etd,
+                                    eta),
+                  station = get_element(., station) %>%
                     get_location())
 
   if (show_details) {
     purrr::walk(seq_len(nrow(x)),
                 function(i) {
                   x[i, ] %>%
-                    glue::glue_data("{stringr::str_pad(sta, 5, 'right')}\t",
+                    glue::glue_data("{stringr::str_pad(time, 5, 'right')}\t",
                                     "{stringr::str_pad(station, 40, 'right')}",
                                     "{stringr::str_pad(platform, 4, 'right')}\t",
-                                    "{eta}\n\n") %>%
+                                    "{expected}\n\n") %>%
                     cat()
                   # print(x[i, ]$previousCallingPoints)
                   print(x[i, ]$subsequentCallingPoints)
                 })
   } else {
     x %>%
-      glue::glue_data("{stringr::str_pad(sta, 5, 'right')}\t",
+      glue::glue_data("{stringr::str_pad(time, 5, 'right')}\t",
                       "{stringr::str_pad(station, 40, 'right')}",
                       "{stringr::str_pad(platform, 4, 'right')}\t",
-                      "{eta}\n\n") %>%
+                      "{expected}\n\n") %>%
       purrr::walk(cat)
   }
 }
