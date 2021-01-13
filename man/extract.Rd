@@ -3,7 +3,7 @@
 \name{extract}
 \alias{extract}
 \alias{extract.GetServiceDetailsResult}
-\alias{extract.GetStationBoardResult}
+\alias{extract.StationBoard}
 \alias{extract.busServices}
 \alias{extract.callingPoint}
 \alias{extract.callingPointList}
@@ -15,7 +15,7 @@ extract(x, ...)
 
 \method{extract}{GetServiceDetailsResult}(x, ...)
 
-\method{extract}{GetStationBoardResult}(x, ...)
+\method{extract}{StationBoard}(x, ...)
 
 \method{extract}{busServices}(x, ...)
 

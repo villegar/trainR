@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.R
 \name{print}
 \alias{print}
-\alias{print.GetStationBoardResult}
+\alias{print.StationBoard}
 \alias{print.busServices}
 \alias{print.trainServices}
 \alias{print.previousCallingPoints}
@@ -11,7 +11,7 @@
 \usage{
 print(x, ...)
 
-\method{print}{GetStationBoardResult}(x, ...)
+\method{print}{StationBoard}(x, ...)
 
 \method{print}{busServices}(x, ...)
 
