@@ -40,6 +40,28 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("villegar/trainR")
 ```
+
+## Setup
+Before starting to retrieve data from the NRE data feeds, you must obtain an access token. 
+Visit the following website for details: http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/
+
+Once you have received your access token, you have to store it in the `.Renviron` file. This can be 
+done by executing the following command:
+
+```{r, eval = FALSE}
+trainR::set_token()
+```
+
+This will open a text file, `.Renviron`, add a new line at the end:
+```{bash}
+NRE="<token>"
+```
+
+`<token>` should be replaced by the access token obtained from the NRE. Save the changes and restart 
+your session.
+
+This configuration is done once, unless you somehow delete the `.Renviron` file.
+
 ## Example
 
 Load `trainR` to your working environment:
@@ -47,7 +69,7 @@ Load `trainR` to your working environment:
 library(trainR)
 ```
 
-### Arrivals boards at Reading Station (RDG)
+### Arrivals board at Reading Station (RDG)
 
 Generated on `r lubridate::now()`.
 
@@ -56,9 +78,9 @@ rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
 ```
 
-Inspect the `rdg_arr` object:
+<!-- Inspect the `rdg_arr` object: -->
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = FALSE}
 rdg_arr %>%
   dplyr::select(-c(5:6)) %>% # Drop the lists of train and bus services
   knitr::kable()

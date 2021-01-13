@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/devel%20version-0.0.0.9000-yellow.svg)](https://github.com/villegar/trainR)
+[![](https://img.shields.io/badge/devel%20version-0.0.1-yellow.svg)](https://github.com/villegar/trainR)
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
 [![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
@@ -30,6 +30,31 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("villegar/trainR")
 ```
 
+## Setup
+
+Before starting to retrieve data from the NRE data feeds, you must
+obtain an access token. Visit the following website for details:
+<http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/>
+
+Once you have received your access token, you have to store it in the
+`.Renviron` file. This can be done by executing the following command:
+
+``` r
+trainR::set_token()
+```
+
+This will open a text file, `.Renviron`, add a new line at the end:
+
+``` bash
+NRE="<token>"
+```
+
+`<token>` should be replaced by the access token obtained from the NRE.
+Save the changes and restart your session.
+
+This configuration is done once, unless you somehow delete the
+`.Renviron` file.
+
 ## Example
 
 Load `trainR` to your working environment:
@@ -38,70 +63,50 @@ Load `trainR` to your working environment:
 library(trainR)
 ```
 
-### Arrivals boards at Reading Station (RDG)
+### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-13 10:03:46.
+Generated on 2021-01-13 15:05:25.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-13 10:03:46
+#> Reading (RDG) Station Board on 2021-01-13 15:05:26
 #> Time     From                                    Plat    Expected
-#> 09:55    Worcester Shrub Hill                    11A     09:59
-#> 10:00    Penzance                                11      10:03
-#> 10:05    Didcot Parkway                          15      10:08
-#> 10:06    Swansea                                 10      On time
-#> 10:10    London Waterloo                         5       On time
-#> 10:11    Bedwyn                                  11A     On time
-#> 10:11    London Paddington                       9       On time
-#> 10:13    London Paddington                       14      On time
-#> 10:14    Bristol Temple Meads                    10      On time
-#> 10:19    Basingstoke                             2       On time
+#> 14:59    Didcot Parkway                          14      On time
+#> 14:59    Penzance                                11      On time
+#> 15:06    Bournemouth                             8       15:03
+#> 15:10    London Waterloo                         4       On time
+#> 15:11    London Paddington                       9       On time
+#> 15:13    London Paddington                       13      On time
+#> 15:14    London Paddington                       12      On time
+#> 15:16    London Paddington                       9B      On time
+#> 15:22    Bedwyn                                  11A     On time
+#> 15:26    Basingstoke                             2       On time
 ```
 
-Inspect the `rdg_arr` object:
-
-``` r
-rdg_arr %>%
-  dplyr::select(-c(5:6)) %>% # Drop the lists of train and bus services
-  knitr::kable()
-if (!is.na(rdg_arr %>% dplyr::select(5) %>% .[[1]]))
-  rdg_arr %>%
-    dplyr::select(5) %>%
-    .[[1]] %>%
-    .[[1]] %>%
-    dplyr::select(-previousCallingPoints) %>%
-    knitr::kable(caption = "Train services")
-if (!is.na(rdg_arr %>% dplyr::select(6) %>% .[[1]]))
-  rdg_arr %>%
-    dplyr::select(6) %>%
-    .[[1]] %>%
-    .[[1]] %>%
-    dplyr::select(-previousCallingPoints) %>%
-    knitr::kable(caption = "Bus services")
-```
+<!-- Inspect the `rdg_arr` object: -->
 
 <!-- #### Previous calling points -->
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-13 10:03:46.
+Generated on 2021-01-13 15:05:26.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-13 10:03:47
+#> Reading (RDG) Station Board on 2021-01-13 15:05:27
 #> Time     To                                      Plat    Expected
-#> 09:57    London Paddington                       11A     10:01
-#> 10:04    London Paddington                       11      On time
-#> 10:08    London Paddington                       10      On time
-#> 10:12    London Paddington                       11A     On time
-#> 10:12    London Waterloo                         6       On time
-#> 10:12    Newbury                                 1       On time
-#> 10:13    Swansea                                 9       On time
-#> 10:15    Ealing Broadway                         15      On time
-#> 10:15    Manchester Piccadilly                   7       On time
-#> 10:16    London Paddington                       10      On time
+#> 15:04    London Paddington                       11      On time
+#> 15:05    Basingstoke                             2       On time
+#> 15:10    Ealing Broadway                         14      On time
+#> 15:10    Newbury                                 1       On time
+#> 15:12    London Waterloo                         6       On time
+#> 15:13    Swansea                                 9       On time
+#> 15:15    Manchester Piccadilly                   8       On time
+#> 15:18    Redhill                                 NA  On time
+#> 15:18    Worcester Foregate Street               9B      On time
+#> 15:22    Ealing Broadway                         13      On time
 ```
 
 <!-- #### Previous calling points -->
