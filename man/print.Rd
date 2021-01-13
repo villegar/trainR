@@ -11,7 +11,7 @@
 \usage{
 print(x, ...)
 
-\method{print}{StationBoard}(x, ...)
+\method{print}{StationBoard}(x, ..., station = NA)
 
 \method{print}{busServices}(x, ...)
 
@@ -25,6 +25,9 @@ print(x, ...)
 \item{x}{an object used to select a method.}
 
 \item{...}{further arguments passed to or from other methods.}
+
+\item{station}{String to indicate if the destination or origin station
+should be displayed.}
 }
 \value{
 Input data invisibly.
