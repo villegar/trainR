@@ -37,23 +37,23 @@ obtain an access token. Visit the following website for details:
 <http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/>
 
 Once you have received your access token, you have to store it in the
-`.Renviron` file. This can be done by executing the following command:
+`.Renviron` file; this can be done by executing the following command:
 
 ``` r
 trainR::set_token()
 ```
 
-This will open a text file, `.Renviron`, add a new line at the end:
+This will open a text file, `.Renviron`, add a new line at the end (as
+follows):
 
 ``` bash
 NRE="<token>"
 ```
 
 `<token>` should be replaced by the access token obtained from the NRE.
-Save the changes and restart your session.
+Save the changes and restart your R session.
 
-This configuration is done once, unless you somehow delete the
-`.Renviron` file.
+You only need to perform this configuration once.
 
 ## Example
 
@@ -65,23 +65,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-13 15:05:25.
+Generated on 2021-01-13 19:31:04.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-13 15:05:26
-#> Time     From                                    Plat    Expected
-#> 14:59    Didcot Parkway                          14      On time
-#> 14:59    Penzance                                11      On time
-#> 15:06    Bournemouth                             8       15:03
-#> 15:10    London Waterloo                         4       On time
-#> 15:11    London Paddington                       9       On time
-#> 15:13    London Paddington                       13      On time
-#> 15:14    London Paddington                       12      On time
-#> 15:16    London Paddington                       9B      On time
-#> 15:22    Bedwyn                                  11A     On time
-#> 15:26    Basingstoke                             2       On time
+#> Reading (RDG) Station Board on 2021-01-13 19:31:04
+#> Time   From                                    Plat  Expected
+#> 19:29  London Paddington                       7     On time
+#> 19:30  London Paddington                       12    On time
+#> 19:31  Cheltenham Spa                          11A   On time
+#> 19:33  Redhill                                 4     19:41
+#> 19:34  Basingstoke                             2     On time
+#> 19:34  London Paddington                       8     19:41
+#> 19:39  Bristol Temple Meads                    10A   19:42
+#> 19:41  London Paddington                       9     19:46
+#> 19:43  London Paddington                       13    On time
+#> 19:44  London Paddington                       12    On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -90,23 +90,32 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-13 15:05:26.
+Generated on 2021-01-13 19:31:04.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-13 15:05:27
-#> Time     To                                      Plat    Expected
-#> 15:04    London Paddington                       11      On time
-#> 15:05    Basingstoke                             2       On time
-#> 15:10    Ealing Broadway                         14      On time
-#> 15:10    Newbury                                 1       On time
-#> 15:12    London Waterloo                         6       On time
-#> 15:13    Swansea                                 9       On time
-#> 15:15    Manchester Piccadilly                   8       On time
-#> 15:18    Redhill                                 NA  On time
-#> 15:18    Worcester Foregate Street               9B      On time
-#> 15:22    Ealing Broadway                         13      On time
+#> Reading (RDG) Station Board on 2021-01-13 19:31:05
+#> Time   To                                      Plat  Expected
+#> 19:30  Didcot Parkway                          12    On time
+#> 19:31  Plymouth                                7     On time
+#> 19:34  London Paddington                       11A   On time
+#> 19:36  Bedwyn                                  8     19:42
+#> 19:36  London Waterloo                         5     On time
+#> 19:41  London Paddington                       10A   19:43
+#> 19:42  Newbury                                 1     On time
+#> 19:43  Swansea                                 9     19:47
+#> 19:49  Bournemouth                             7     On time
+#> 19:49  London Paddington                       10    19:52
 ```
 
 <!-- #### Previous calling points -->
+
+## Acknowledgements
+
+Access to the data feeds it is only possible thanks to the National Rail
+Enquiries. This package is just a tool to facilitate access to the data.
+For more information about the available data feeds, visit
+<https://www.nationalrail.co.uk>.
+
+![](https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg)

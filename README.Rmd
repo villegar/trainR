@@ -45,22 +45,22 @@ devtools::install_github("villegar/trainR")
 Before starting to retrieve data from the NRE data feeds, you must obtain an access token. 
 Visit the following website for details: http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/
 
-Once you have received your access token, you have to store it in the `.Renviron` file. This can be 
+Once you have received your access token, you have to store it in the `.Renviron` file; this can be 
 done by executing the following command:
 
 ```{r, eval = FALSE}
 trainR::set_token()
 ```
 
-This will open a text file, `.Renviron`, add a new line at the end:
+This will open a text file, `.Renviron`, add a new line at the end (as follows):
 ```{bash}
 NRE="<token>"
 ```
 
 `<token>` should be replaced by the access token obtained from the NRE. Save the changes and restart 
-your session.
+your R session.
 
-This configuration is done once, unless you somehow delete the `.Renviron` file.
+You only need to perform this configuration once.
 
 ## Example
 
@@ -142,3 +142,9 @@ print(rdg_dep)
 #   dplyr::select(-c("timestamp")) %>%
 #   knitr::kable()
 ```
+
+## Acknowledgements
+
+Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit https://www.nationalrail.co.uk.
+
+![](https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg)
