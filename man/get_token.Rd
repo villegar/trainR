@@ -4,13 +4,14 @@
 \alias{get_token}
 \title{Get user's token}
 \usage{
-get_token(path = "inst/token.txt")
+get_token(ENV = "NRE")
 }
 \arguments{
-\item{path}{Path to text file with token.}
+\item{ENV}{String with environment variable containing the token to access
+the NRE data feeds (default = "NRE").}
 }
 \value{
-String with token, first line of the input file.
+String with token.
 }
 \description{
 Get user's token to access the National Rail Enquiries (NRE) data feeds.

@@ -4,10 +4,10 @@
 \alias{set_token}
 \title{Configure user's token}
 \usage{
-set_token(path = "inst/token.txt")
+set_token()
 }
-\arguments{
-\item{path}{Path to text file where the token should be stored.}
+\value{
+Nothing, helper function to set up environment variable.
 }
 \description{
 Configure user's token to access the National Rail Enquiries (NRE) data
