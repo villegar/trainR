@@ -11,3 +11,4 @@
 ^docs$
 ^pkgdown$
 ^R\.ignore$
+^cran-comments\.md$
