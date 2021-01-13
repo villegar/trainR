@@ -110,7 +110,7 @@ print_board <- function(x,
                         station = "destination",
                         ...) {
   # Local binding
-  . <- eta <- etd <- sta <- std <- NULL
+  . <- eta <- etd <- platform <- sta <- std <- NULL
   header <- "To"
   if (station == "origin")
     header <- "From"
