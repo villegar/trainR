@@ -99,6 +99,9 @@ reclass <- function(data, class) {
 #' Configure user's token to access the National Rail Enquiries (NRE) data
 #' feeds.
 #'
+#' To obtain an access token, you must complete the registration form found at
+#' \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
+#'
 #' @return Nothing, helper function to set up environment variable.
 #' @export
 set_token <- function() {
