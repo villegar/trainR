@@ -46,18 +46,18 @@ get_location <- function(crs) {
 #'
 #' Get user's token to access the National Rail Enquiries (NRE) data feeds.
 #'
-#' @param path Path to text file with token.
+#' @param ENV String with environment variable containing the token to access
+#'     the NRE data feeds (default = "NRE").
 #'
-#' @return String with token, first line of the input file.
+#' @return String with token.
 #' @export
-get_token <- function(path = "inst/token.txt") {
-  tryCatch({
-    f <- file(path, open = "r")
-    on.exit(close(f))
-    readLines(f)[1]
-  }, error = function(e) {
-    stop("Error reading the token file: \n", path)
-  })
+get_token <- function(ENV = "NRE") {
+  token <- Sys.getenv(ENV)
+  if (token == "")
+    stop("The access token to the NRE was not found, `NRE`. ",
+         "Make sure to run `trainR::set_token()` to configure it.",
+         call. = FALSE)
+  token
 }
 
 #' Validate station code (CRS)
@@ -99,10 +99,10 @@ reclass <- function(data, class) {
 #' Configure user's token to access the National Rail Enquiries (NRE) data
 #' feeds.
 #'
-#' @param path Path to text file where the token should be stored.
+#' @return Nothing, helper function to set up environment variable.
 #' @export
-set_token <- function(path = "inst/token.txt") {
-  usethis::edit_file(path)
+set_token <- function() {
+  usethis::edit_r_environ(scope = "user")
 }
 
 #' Validate output from \code{request}
