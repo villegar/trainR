@@ -62,7 +62,7 @@ GetArrBoardWithDetailsRequest <-
                          <ldb:timeWindow>{timeWindow}</ldb:timeWindow>
                       </ldb:GetArrBoardWithDetailsRequest>")
   # Submit request
-  request(body, header, url, verbose)
+  request(body, header, url, verbose, type = "ArrBoardWithDetails")
 }
 
 #' Get all public arrivals and departures
@@ -300,6 +300,6 @@ request <- function(body, header, url, verbose = FALSE, type = NULL) {
     xml2::as_list() %>%
     .[[1]] %>% # Extract request result
     validate() %>% # Validate request result
-    reclass(class = c(names(.), type)) %>% # Update class of the result object
+    reclass(class = c("StationBoard", type)) %>% # Update class of the result object
     extract()
 }

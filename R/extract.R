@@ -55,8 +55,8 @@ extract.GetServiceDetailsResult <- function(x, ...) {
 
 #' @rdname extract
 #' @keywords internal
-extract.GetStationBoardResult <- function(x, ...) {
-  class <- names(x)
+extract.StationBoard <- function(x, ...) {
+  class <- class(x)[1:2]
   if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
   tibble::tibble(generatedAt =

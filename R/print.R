@@ -12,7 +12,7 @@ print <- function(x, ...) {
 
 #' @rdname print
 #' @export
-print.GetStationBoardResult <- function(x, ...) {
+print.StationBoard <- function(x, ...) {
   buses <- trains <- ""
   if (!is.na(x$busServices))
     buses <- paste0("\n- ",
