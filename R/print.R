@@ -70,7 +70,7 @@ print.previousCallingPoints <- function(x, ...) {
     return(invisible(x))
   x[[1]] %>%
     dplyr::mutate(station = get_location(crs)) %>%
-    glue::glue_data("{station} ({ifelse(is.na(et), st, st)})") %>%
+    glue::glue_data("{station} ({ifelse(is.na(at) | at == 'On time', st, at)})") %>%
     paste0(collapse = ", ") %>%
     paste0("Previous calls: ", ., "\n\n") %>%
     cat()
@@ -114,9 +114,9 @@ print_board <- function(x,
   header <- "To"
   if (station == "origin")
     header <- "From"
-  header <- paste0(stringr::str_pad("Time", 9, 'right'),
+  header <- paste0(stringr::str_pad("Time", 7, 'right'),
                    stringr::str_pad(header, 40, 'right'),
-                   stringr::str_pad("Plat", 8, 'right'),
+                   stringr::str_pad("Plat", 6, 'right'),
                    "Expected\n")
   cat(header)
 
@@ -128,6 +128,7 @@ print_board <- function(x,
                   expected = ifelse(station == "destination" & !is.na(etd),
                                     etd,
                                     eta),
+                  platform = ifelse(is.na(platform), "-", platform),
                   station = get_element(., station) %>%
                     get_location())
 
@@ -135,19 +136,22 @@ print_board <- function(x,
     purrr::walk(seq_len(nrow(x)),
                 function(i) {
                   x[i, ] %>%
-                    glue::glue_data("{stringr::str_pad(time, 5, 'right')}\t",
+                    glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
                                     "{stringr::str_pad(station, 40, 'right')}",
-                                    "{stringr::str_pad(platform, 4, 'right')}\t",
+                                    "{stringr::str_pad(platform, 6, 'right')}",
                                     "{expected}\n\n") %>%
                     cat()
-                  # print(x[i, ]$previousCallingPoints)
-                  print(x[i, ]$subsequentCallingPoints)
+                  if (station == "origin") {
+                    print(x[i, ]$previousCallingPoints)
+                  } else {
+                    print(x[i, ]$subsequentCallingPoints)
+                  }
                 })
   } else {
     x %>%
-      glue::glue_data("{stringr::str_pad(time, 5, 'right')}\t",
+      glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
                       "{stringr::str_pad(station, 40, 'right')}",
-                      "{stringr::str_pad(platform, 4, 'right')}\t",
+                      "{stringr::str_pad(platform, 6, 'right')}",
                       "{expected}\n\n") %>%
       purrr::walk(cat)
   }
