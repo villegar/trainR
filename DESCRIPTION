@@ -1,6 +1,6 @@
 Package: trainR
 Title: An Interface to the National Rail Enquiries Systems
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Roberto",
            family = "Villegas-Diaz",
