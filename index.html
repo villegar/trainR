@@ -92,13 +92,13 @@
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Before starting to retrieve data from the NRE data feeds, you must obtain an access token. Visit the following website for details: <a href="http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/" class="uri">http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/</a></p>
-<p>Once you have received your access token, you have to store it in the <code>.Renviron</code> file. This can be done by executing the following command:</p>
+<p>Once you have received your access token, you have to store it in the <code>.Renviron</code> file; this can be done by executing the following command:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/set_token.html">set_token</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This will open a text file, <code>.Renviron</code>, add a new line at the end:</p>
+<p>This will open a text file, <code>.Renviron</code>, add a new line at the end (as follows):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="va">NRE=</span><span class="st">"&lt;token&gt;"</span></span></code></pre></div>
-<p><code>&lt;token&gt;</code> should be replaced by the access token obtained from the NRE. Save the changes and restart your session.</p>
-<p>This configuration is done once, unless you somehow delete the <code>.Renviron</code> file.</p>
+<p><code>&lt;token&gt;</code> should be replaced by the access token obtained from the NRE. Save the changes and restart your R session.</p>
+<p>You only need to perform this configuration once.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -109,46 +109,52 @@
 <div id="arrivals-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#arrivals-board-at-reading-station-rdg" class="anchor"></a>Arrivals board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-13 15:05:25.</p>
+<p>Generated on 2021-01-13 19:31:04.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_arr</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetArrBoardWithDetailsRequest.html">GetArrBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_arr</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-13 15:05:26</span>
-<span class="co">#&gt; Time     From                                    Plat    Expected</span>
-<span class="co">#&gt; 14:59    Didcot Parkway                          14      On time</span>
-<span class="co">#&gt; 14:59    Penzance                                11      On time</span>
-<span class="co">#&gt; 15:06    Bournemouth                             8       15:03</span>
-<span class="co">#&gt; 15:10    London Waterloo                         4       On time</span>
-<span class="co">#&gt; 15:11    London Paddington                       9       On time</span>
-<span class="co">#&gt; 15:13    London Paddington                       13      On time</span>
-<span class="co">#&gt; 15:14    London Paddington                       12      On time</span>
-<span class="co">#&gt; 15:16    London Paddington                       9B      On time</span>
-<span class="co">#&gt; 15:22    Bedwyn                                  11A     On time</span>
-<span class="co">#&gt; 15:26    Basingstoke                             2       On time</span></code></pre></div>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-13 19:31:04</span>
+<span class="co">#&gt; Time   From                                    Plat  Expected</span>
+<span class="co">#&gt; 19:29  London Paddington                       7     On time</span>
+<span class="co">#&gt; 19:30  London Paddington                       12    On time</span>
+<span class="co">#&gt; 19:31  Cheltenham Spa                          11A   On time</span>
+<span class="co">#&gt; 19:33  Redhill                                 4     19:41</span>
+<span class="co">#&gt; 19:34  Basingstoke                             2     On time</span>
+<span class="co">#&gt; 19:34  London Paddington                       8     19:41</span>
+<span class="co">#&gt; 19:39  Bristol Temple Meads                    10A   19:42</span>
+<span class="co">#&gt; 19:41  London Paddington                       9     19:46</span>
+<span class="co">#&gt; 19:43  London Paddington                       13    On time</span>
+<span class="co">#&gt; 19:44  London Paddington                       12    On time</span></code></pre></div>
 <!-- Inspect the `rdg_arr` object: -->
 <!-- #### Previous calling points -->
 </div>
 <div id="departures-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#departures-board-at-reading-station-rdg" class="anchor"></a>Departures board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-13 15:05:26.</p>
+<p>Generated on 2021-01-13 19:31:04.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_dep</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetDepBoardWithDetailsRequest.html">GetDepBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_dep</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-13 15:05:27</span>
-<span class="co">#&gt; Time     To                                      Plat    Expected</span>
-<span class="co">#&gt; 15:04    London Paddington                       11      On time</span>
-<span class="co">#&gt; 15:05    Basingstoke                             2       On time</span>
-<span class="co">#&gt; 15:10    Ealing Broadway                         14      On time</span>
-<span class="co">#&gt; 15:10    Newbury                                 1       On time</span>
-<span class="co">#&gt; 15:12    London Waterloo                         6       On time</span>
-<span class="co">#&gt; 15:13    Swansea                                 9       On time</span>
-<span class="co">#&gt; 15:15    Manchester Piccadilly                   8       On time</span>
-<span class="co">#&gt; 15:18    Redhill                                 NA  On time</span>
-<span class="co">#&gt; 15:18    Worcester Foregate Street               9B      On time</span>
-<span class="co">#&gt; 15:22    Ealing Broadway                         13      On time</span></code></pre></div>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-13 19:31:05</span>
+<span class="co">#&gt; Time   To                                      Plat  Expected</span>
+<span class="co">#&gt; 19:30  Didcot Parkway                          12    On time</span>
+<span class="co">#&gt; 19:31  Plymouth                                7     On time</span>
+<span class="co">#&gt; 19:34  London Paddington                       11A   On time</span>
+<span class="co">#&gt; 19:36  Bedwyn                                  8     19:42</span>
+<span class="co">#&gt; 19:36  London Waterloo                         5     On time</span>
+<span class="co">#&gt; 19:41  London Paddington                       10A   19:43</span>
+<span class="co">#&gt; 19:42  Newbury                                 1     On time</span>
+<span class="co">#&gt; 19:43  Swansea                                 9     19:47</span>
+<span class="co">#&gt; 19:49  Bournemouth                             7     On time</span>
+<span class="co">#&gt; 19:49  London Paddington                       10    19:52</span></code></pre></div>
 <!-- #### Previous calling points -->
 </div>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<p>Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit <a href="https://www.nationalrail.co.uk" class="uri">https://www.nationalrail.co.uk</a>.</p>
+<p><img src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg"></p>
 </div>
 </div>
   </div>
