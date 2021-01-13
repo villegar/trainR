@@ -10,9 +10,18 @@ print <- function(x, ...) {
   UseMethod("print", x)
 }
 
+#' @param station String to indicate if the destination or origin station
+#'     should be displayed.
 #' @rdname print
 #' @export
-print.StationBoard <- function(x, ...) {
+print.StationBoard <- function(x, ..., station = NA) {
+  if (is.na(station)) {
+    if (inherits(x, "DepBoardWithDetails")) {
+      station = "destination"
+    } else {
+      station = "origin"
+    }
+  }
   buses <- trains <- ""
   if (!is.na(x$busServices))
     buses <- paste0("\n- ",
@@ -33,8 +42,8 @@ print.StationBoard <- function(x, ...) {
   # "{buses}",
   # "\n\n"))
   # cli::cat_line(x[, -c(5:6)])
-  if (!is.na(x$trainServices)) print(x$trainServices, ...)
-  if (!is.na(x$busServices)) print(x$busServices, ...)
+  if (!is.na(x$trainServices)) print(x$trainServices, station = station, ...)
+  if (!is.na(x$busServices)) print(x$busServices, station = station, ...)
   invisible(x)
 }
 
