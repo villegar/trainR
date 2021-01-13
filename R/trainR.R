@@ -129,7 +129,7 @@ GetArrDepBoardWithDetailsRequest <-
                            <ldb:timeWindow>{timeWindow}</ldb:timeWindow>
                         </ldb:GetArrDepBoardWithDetailsRequest>")
     # Submit request
-    request(body, header, url, verbose)
+    request(body, header, url, verbose, "ArrDepBoardWithDetails")
 }
 
 #' Get all public departures
@@ -231,7 +231,7 @@ GetServiceDetailsRequest <-
                            <ldb:serviceID>{serviceID}</ldb:serviceID>
                         </ldb:GetServiceDetailsRequest>")
     # Submit request
-    request(body, header, url, verbose)
+    request(body, header, url, verbose, "ServiceDetails")
   }
 
 #' Obtain previous calling points
