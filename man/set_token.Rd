@@ -13,3 +13,7 @@ Nothing, helper function to set up environment variable.
 Configure user's token to access the National Rail Enquiries (NRE) data
 feeds.
 }
+\details{
+To obtain an access token, you must complete the registration form found at
+\url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
+}
