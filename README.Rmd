@@ -42,31 +42,51 @@ devtools::install_github("villegar/trainR")
 ```
 ## Example
 
+Load `trainR` to your working environment:
+```{r, message = FALSE}
+library(trainR)
+```
+
 ### Arrivals boards at Reading Station (RDG)
 
 Generated on `r lubridate::now()`.
 
 ```{r arrivals}
-rdg <- trainR::GetArrBoardWithDetailsRequest("RDG") %>%
-  dplyr::mutate(origin = purrr::transpose(.$origin) %>%
-                  purrr::pluck("crs") %>%
-                  purrr::map_chr(as.character),
-                destination = purrr::transpose(.$destination) %>%
-                  purrr::pluck("crs") %>%
-                  purrr::map_chr(as.character))
-
-rdg %>%
-  dplyr::select(-11) %>% # Drop the calling points list
-  knitr::kable()
+rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
+print(rdg_arr)
 ```
 
-#### Previous calling points
-```{r arrivals-calling-points}
-names(rdg$previousCallingPoints) <- rdg$serviceID
-trainR::get_calling_points(rdg$previousCallingPoints) %>%
-  dplyr::left_join(rdg[, c(7, 9, 10)], by = "serviceID") %>%
-  dplyr::select(-c("timestamp")) %>%
+Inspect the `rdg_arr` object:
+
+```{r, eval = FALSE, echo = TRUE}
+rdg_arr %>%
+  dplyr::select(-c(5:6)) %>% # Drop the lists of train and bus services
   knitr::kable()
+if (!is.na(rdg_arr %>% dplyr::select(5) %>% .[[1]]))
+  rdg_arr %>%
+    dplyr::select(5) %>%
+    .[[1]] %>%
+    .[[1]] %>%
+    dplyr::select(-previousCallingPoints) %>%
+    knitr::kable(caption = "Train services")
+if (!is.na(rdg_arr %>% dplyr::select(6) %>% .[[1]]))
+  rdg_arr %>%
+    dplyr::select(6) %>%
+    .[[1]] %>%
+    .[[1]] %>%
+    dplyr::select(-previousCallingPoints) %>%
+    knitr::kable(caption = "Bus services")
+```
+
+<!-- #### Previous calling points -->
+```{r arrivals-calling-points, eval = FALSE, echo = FALSE}
+rdg_arr %>%
+  dplyr::select(5) %>%
+  .[[1]] %>%
+  .[[1]] %>%
+  dplyr::select(previousCallingPoints) %>%
+  .[[1]] %>%
+  knitr::kable(caption = "Train services")
 ```
 
 ### Departures board at Reading Station (RDG)
@@ -74,24 +94,29 @@ trainR::get_calling_points(rdg$previousCallingPoints) %>%
 Generated on `r lubridate::now()`.
 
 ```{r departures}
-rdg <- trainR::GetArrDepBoardWithDetailsRequest("RDG") %>%
-  dplyr::mutate(origin = purrr::transpose(.$origin) %>%
-                  purrr::pluck("crs") %>%
-                  purrr::map_chr(as.character),
-                destination = purrr::transpose(.$destination) %>%
-                  purrr::pluck("crs") %>%
-                  purrr::map_chr(as.character))
-
-rdg %>%
-  dplyr::select(-11) %>% # Drop the calling points list
-  knitr::kable()
+rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
+print(rdg_dep)
 ```
 
-#### Previous calling points
-```{r departures-calling-points}
-names(rdg$previousCallingPoints) <- rdg$serviceID
-trainR::get_calling_points(rdg$previousCallingPoints) %>%
-  dplyr::left_join(rdg[, c(7, 9, 10)], by = "serviceID") %>%
-  dplyr::select(-c("timestamp")) %>%
-  knitr::kable()
+```{r departures-old, echo = FALSE, eval = FALSE}
+# rdg_dep <- trainR::GetArrDepBoardWithDetailsRequest("rdg_dep") %>%
+#   dplyr::mutate(origin = purrr::transpose(.$origin) %>%
+#                   purrr::pluck("crs") %>%
+#                   purrr::map_chr(as.character),
+#                 destination = purrr::transpose(.$destination) %>%
+#                   purrr::pluck("crs") %>%
+#                   purrr::map_chr(as.character))
+# 
+# rdg_dep %>%
+#   dplyr::select(-11) %>% # Drop the calling points list
+#   knitr::kable()
+```
+
+<!-- #### Previous calling points -->
+```{r departures-calling-points, echo = FALSE}
+# names(rdg_dep$previousCallingPoints) <- rdg_dep$serviceID
+# trainR::get_calling_points(rdg_dep$previousCallingPoints) %>%
+#   dplyr::left_join(rdg_dep[, c(7, 9, 10)], by = "serviceID") %>%
+#   dplyr::select(-c("timestamp")) %>%
+#   knitr::kable()
 ```
