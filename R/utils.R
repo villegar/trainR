@@ -1,3 +1,23 @@
+#' Obtain previous calling points
+#'
+#' @param data List with previous calling point records.
+#'
+#' @return Tibble with previous calling point records.
+#' @keywords internal
+get_calling_points <- function(data) {
+  # Local binding
+  . <- locationName <- serviceID <- value <- value_id <- NULL
+  idx <- purrr::map_lgl(data, ~length(.) != 0)
+  data[idx] %>%
+    tibble::enframe(., name = "serviceID") %>%
+    tidyr::unnest_longer(value) %>%
+    tidyr::unnest_wider(value) %>%
+    tidyr::unnest(-serviceID) %>%
+    dplyr::select(-c(locationName, value_id)) %>%
+    dplyr::mutate(timestamp =
+                    lubridate::as_datetime(glue::glue("{lubridate::today()} {st}:00 GMT")))
+}
+
 #' Wrapper for \code{\link[base:getElement]{base::getElement}}
 #'
 #' Wrapper for \code{\link[base:getElement]{base::getElement}}, but instead of
