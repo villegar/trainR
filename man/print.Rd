@@ -11,7 +11,7 @@
 \usage{
 print(x, ...)
 
-\method{print}{StationBoard}(x, ..., station = NA)
+\method{print}{StationBoard}(x, ..., station = NA, string = FALSE)
 
 \method{print}{busServices}(x, ...)
 
@@ -28,6 +28,9 @@ print(x, ...)
 
 \item{station}{String to indicate if the destination or origin station
 should be displayed.}
+
+\item{string}{Boolean flag to indicate whether or not the station board
+results, should be returned as a string.}
 }
 \value{
 Input data invisibly.

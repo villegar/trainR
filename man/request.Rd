@@ -4,7 +4,7 @@
 \alias{request}
 \title{Submit a SOAP XML request}
 \usage{
-request(body, header, url, verbose = FALSE, type = NULL)
+request(body, header, url, verbose = FALSE, class = NULL)
 }
 \arguments{
 \item{body}{XML body arguments.}
@@ -16,7 +16,7 @@ request(body, header, url, verbose = FALSE, type = NULL)
 \item{verbose}{Boolean flag to indicate whether or not to show status
 messages.}
 
-\item{type}{String with request type.}
+\item{class}{String with request class.}
 }
 \value{
 Request results or error message if not found.
