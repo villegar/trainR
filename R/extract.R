@@ -141,7 +141,10 @@ extract.StationBoard <- function(x, ...) {
                  filterLocationName = get_element(x, "filterLocationName"),
                  filtercrs = get_element(x, "filtercrs"),
                  filterType = get_element(x, "filterType"),
-                 nrccMessages = get_element(x, "nrccMessages", TRUE),
+                 nrccMessages =
+                   get_element(x, "nrccMessages", TRUE) %>%
+                   reclass("nrccMessages") %>%
+                   extract(),
                  platformAvailable = get_element(x, "platformAvailable"),
                  trainServices =
                    get_element(x, "trainServices", TRUE) %>%
@@ -245,6 +248,21 @@ extract.ferryServices <- function(x, ...) {
   purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
     list() %>%
     reclass("ferryServices")
+}
+
+#' @rdname extract
+#' @keywords internal
+extract.nrccMessages <- function(x, ...) {
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]]))
+    return(NA)
+  purrr::transpose(x)[[1]] %>%
+    purrr::flatten_chr() %>%
+    tibble::tibble(message = .) %>%
+    list() %>%
+    reclass("nrccMessages")
 }
 
 #' @rdname extract
