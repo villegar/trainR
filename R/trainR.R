@@ -138,35 +138,16 @@ GetArrDepBoardWithDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
-    # Check arguments
-    is_valid_crs(crs)
-
-    # Check if filterCrs is not empty
-    if (!is.na(filterCrs)) {
-      is_valid_crs(filterCrs, "filterCrs")
-      filterCrs <- glue::glue("<ldb:filterCrs>{filterCrs}</ldb:filterCrs>")
-    } else {
-      filterCrs <- ""
-    }
-
-    # Create SOAP request components
-    header <- glue::glue("<typ:AccessToken>
-                           <typ:TokenValue>{token}</typ:TokenValue>
-                        </typ:AccessToken>")
-    body <- glue::glue("<ldb:GetArrDepBoardWithDetailsRequest>
-                           <ldb:numRows>{numRows}</ldb:numRows>
-                           <ldb:crs>{crs}</ldb:crs>
-                           <!--Optional:-->
-                           {filterCrs}
-                           <!--Optional:-->
-                           <ldb:filterType>{filterType}</ldb:filterType>
-                           <!--Optional:-->
-                           <ldb:timeOffset>{timeOffset}</ldb:timeOffset>
-                           <!--Optional:-->
-                           <ldb:timeWindow>{timeWindow}</ldb:timeWindow>
-                        </ldb:GetArrDepBoardWithDetailsRequest>")
-    # Submit request
-    request(body, header, url, verbose, "ArrDepBoardWithDetails")
+    process(crs = crs,
+            filterCrs = filterCrs,
+            filterType = filterType,
+            numRows = numRows,
+            timeOffset = timeOffset,
+            timeWindow = timeWindow,
+            token = token,
+            url = url,
+            verbose = verbose,
+            class = "ArrDepBoardWithDetails")
 }
 
 #' Get all public departures
@@ -232,35 +213,16 @@ GetDepBoardWithDetailsRequest <-
            token = get_token(),
            url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx",
            verbose = FALSE) {
-    # Check arguments
-    is_valid_crs(crs)
-
-    # Check if filterCrs is not empty
-    if (!is.na(filterCrs)) {
-      is_valid_crs(filterCrs, "filterCrs")
-      filterCrs <- glue::glue("<ldb:filterCrs>{filterCrs}</ldb:filterCrs>")
-    } else {
-      filterCrs <- ""
-    }
-
-    # Create SOAP request components
-    header <- glue::glue("<typ:AccessToken>
-                           <typ:TokenValue>{token}</typ:TokenValue>
-                        </typ:AccessToken>")
-    body <- glue::glue("<ldb:GetDepBoardWithDetailsRequest>
-                           <ldb:numRows>{numRows}</ldb:numRows>
-                           <ldb:crs>{crs}</ldb:crs>
-                           <!--Optional:-->
-                           {filterCrs}
-                           <!--Optional:-->
-                           <ldb:filterType>{filterType}</ldb:filterType>
-                           <!--Optional:-->
-                           <ldb:timeOffset>{timeOffset}</ldb:timeOffset>
-                           <!--Optional:-->
-                           <ldb:timeWindow>{timeWindow}</ldb:timeWindow>
-                        </ldb:GetDepBoardWithDetailsRequest>")
-    # Submit request
-    request(body, header, url, verbose, class = "DepBoardWithDetails")
+    process(crs = crs,
+            filterCrs = filterCrs,
+            filterType = filterType,
+            numRows = numRows,
+            timeOffset = timeOffset,
+            timeWindow = timeWindow,
+            token = token,
+            url = url,
+            verbose = verbose,
+            class = "DepBoardWithDetails")
   }
 
 #' Get service details
@@ -295,7 +257,7 @@ GetServiceDetailsRequest <-
                            <ldb:serviceID>{serviceID}</ldb:serviceID>
                         </ldb:GetServiceDetailsRequest>")
     # Submit request
-    request(body, header, url, verbose, "ServiceDetails")
+    request(body, header, url, verbose, c("ServiceDetails", "StationBoard"))
   }
 
 #' Process \code{StationBoard} request
