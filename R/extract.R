@@ -53,6 +53,30 @@ extract.GetServiceDetailsResult <- function(x, ...) {
     reclass(class)
 }
 
+#' @return \code{ServiceLocation:}
+#' \describe{
+#'  \item{locationName}{The name of the location.}
+#'  \item{crs}{The CRS code of this location. A CRS code of \code{???} indicates
+#'  an error situation where no crs code is known for this location.}
+#'  \item{via}{An optional via text that should be displayed after the location,
+#'  to indicate further information about an ambiguous route. Note that vias are
+#'  only present for \code{ServiceLocation} objects that appear in destination
+#'  lists.}
+#'  \item{futureChangeTo}{A text string contianing service type
+#'  (Bus/Ferry/Train) to which will be changed in the future.}
+#'  \item{assocIsCancelled}{This origin or destination can no longer be reached
+#'  because the association has been cancelled.}
+#' }
+#' @rdname extract
+#' @keywords internal
+extract.ServiceLocation <- function(x, ...) {
+  tibble::tibble(locationName = get_element(x, "locationName"),
+                 crs = get_element(x, "crs"),
+                 via = get_element(x, "via"),
+                 futureChangeTo = get_element(x, "futureChangeTo"),
+                 assocIsCancelled = get_element(x, "assocIsCancelled"))
+}
+
 #' @return \code{StationBoard:}
 #' \describe{
 #'  \item{generatedAt}{The time at which the station board was generated.}
