@@ -106,6 +106,10 @@ extract.StationBoard <- function(x, ...) {
                    lubridate::parse_date_time("%Y-%m-%d %H:%M:%OS %z"),
                  locationName = get_element(x, "locationName"),
                  crs = get_element(x, "crs"),
+                 filterLocationName = get_element(x, "filterLocationName"),
+                 filtercrs = get_element(x, "filtercrs"),
+                 filterType = get_element(x, "filterType"),
+                 nrccMessages = get_element(x, "nrccMessages", TRUE),
                  platformAvailable = get_element(x, "platformAvailable"),
                  trainServices =
                    get_element(x, "trainServices", TRUE) %>%
@@ -114,6 +118,10 @@ extract.StationBoard <- function(x, ...) {
                  busServices =
                    get_element(x, "busServices", TRUE) %>%
                    reclass("busServices") %>%
+                   extract(),
+                 ferryServices =
+                   get_element(x, "ferryServices", TRUE) %>%
+                   reclass("ferryServices") %>%
                    extract()
   ) %>%
     reclass(class)
