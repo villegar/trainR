@@ -62,7 +62,7 @@ extract.GetServiceDetailsResult <- function(x, ...) {
 #'  to indicate further information about an ambiguous route. Note that vias are
 #'  only present for \code{ServiceLocation} objects that appear in destination
 #'  lists.}
-#'  \item{futureChangeTo}{A text string contianing service type
+#'  \item{futureChangeTo}{A text string containing service type
 #'  (Bus/Ferry/Train) to which will be changed in the future.}
 #'  \item{assocIsCancelled}{This origin or destination can no longer be reached
 #'  because the association has been cancelled.}
@@ -88,7 +88,7 @@ extract.ServiceLocation <- function(x, ...) {
 #'  location.}
 #'  \item{filterType}{If a filter was requested, the type of filter.}
 #'  \item{nrccMessages}{An optional list of textual messages that should be
-#'  displayed with the station board. The message may include embedded and xml
+#'  displayed with the station board. The message may include embedded and XML
 #'  encoded HTML-like hyperlinks and paragraphs. The messages are typically
 #'  used to display important disruption information that applies to the
 #'  location that the station board was for. Any embedded \code{<p>} tags are
