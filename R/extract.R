@@ -70,11 +70,19 @@ extract.GetServiceDetailsResult <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.ServiceLocation <- function(x, ...) {
+  x <- x[[1]]
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]]))
+    return(NA)
   tibble::tibble(locationName = get_element(x, "locationName"),
                  crs = get_element(x, "crs"),
                  via = get_element(x, "via"),
                  futureChangeTo = get_element(x, "futureChangeTo"),
-                 assocIsCancelled = get_element(x, "assocIsCancelled"))
+                 assocIsCancelled = get_element(x, "assocIsCancelled")) %>%
+    list() %>%
+    reclass("ServiceLocation")
 }
 
 #' @return \code{StationBoard:}
@@ -267,8 +275,10 @@ extract.service <- function(x, ...) {
                  rsid = get_element(x, "rsid"),
                  origin =
                    get_element(x, "origin", TRUE) %>%
-                   get_element("location") %>%
-                   get_element("crs"),
+                   reclass("ServiceLocation") %>%
+                   extract(),
+                   # get_element("location") %>%
+                   # get_element("crs"),
                  destination =
                    get_element(x, "destination", TRUE)  %>%
                    get_element("location") %>%
