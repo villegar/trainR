@@ -12,9 +12,11 @@ print <- function(x, ...) {
 
 #' @param station String to indicate if the destination or origin station
 #'     should be displayed.
+#' @param string Boolean flag to indicate whether or not the station board
+#'     results, should be returned as a string.
 #' @rdname print
 #' @export
-print.StationBoard <- function(x, ..., station = NA) {
+print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   if (is.na(station)) {
     if (inherits(x, "DepBoardWithDetails")) {
       station = "destination"
@@ -35,6 +37,19 @@ print.StationBoard <- function(x, ..., station = NA) {
                      " train",
                      ifelse(nrow(x$trainServices[[1]]) == 1, "", "s"),
                      "\n")
+  if (string) {
+   board_txt <- ""
+   if (!is.na(x$trainServices))
+     board_txt <- print(x$trainServices,
+                        station = station,
+                        string = string,
+                        ...)
+   # return(strsplit(board_txt,'\\n'))
+   # return(strsplit(board_txt, ','))
+   # browser()
+   return(paste("", "", knitr::kable(board_txt, output = FALSE), collapse = "\n"))
+  }
+
   cat(glue::glue("{x$locationName} ({x$crs}) Station Board ",
                  "on {x$generatedAt}\n\n"))#,
   # "Number of services found:",
@@ -58,7 +73,7 @@ print.busServices <- function(x, ...) {
 #' @export
 print.trainServices <- function(x, ...) {
   print_board(x[[1]], ...)
-  invisible(x)
+  # invisible(x)
 }
 
 #' @rdname print
@@ -99,8 +114,7 @@ print.subsequentCallingPoints <- function(x, ...) {
 #' @param x Tibble with arrivals/departures information.
 #' @param show_details Boolean flag to indicate if detail information about
 #'     previous calling points should be included or not.
-#' @param station String to indicate if the destination or origin station
-#'     should be displayed.
+#' @inheritParams print.StationBoard
 #' @param ... Optional parameters (not used).
 #'
 #' @return Nothing, call for its side effect.
@@ -108,17 +122,13 @@ print.subsequentCallingPoints <- function(x, ...) {
 print_board <- function(x,
                         show_details = FALSE,
                         station = "destination",
+                        string = FALSE,
                         ...) {
   # Local binding
   . <- eta <- etd <- platform <- sta <- std <- NULL
   header <- "To"
   if (station == "origin")
     header <- "From"
-  header <- paste0(stringr::str_pad("Time", 7, 'right'),
-                   stringr::str_pad(header, 40, 'right'),
-                   stringr::str_pad("Plat", 6, 'right'),
-                   "Expected\n")
-  cat(header)
 
   # Retrieve full station names
   x <- x %>%
@@ -131,6 +141,17 @@ print_board <- function(x,
                   platform = ifelse(is.na(platform), "-", platform),
                   station = get_element(., station) %>%
                     get_location())
+
+  if (string) {
+    return(x %>%
+             dplyr::select(time, station, platform, expected))
+  }
+
+  header <- paste0(stringr::str_pad("Time", 7, 'right'),
+                   stringr::str_pad(header, 40, 'right'),
+                   stringr::str_pad("Plat", 6, 'right'),
+                   "Expected\n")
+  cat(header)
 
   if (show_details) {
     purrr::walk(seq_len(nrow(x)),
@@ -155,4 +176,13 @@ print_board <- function(x,
                       "{expected}\n\n") %>%
       purrr::walk(cat)
   }
+}
+
+#' @export
+#' @importFrom knitr knit_print asis_output
+knit_print.StationBoard <- function(x, ...) {
+  res <- capture.output(print(x, string = TRUE))
+  # class(x) <- 'knit_asis'
+  # x
+  asis_output(res)
 }
