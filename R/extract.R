@@ -132,6 +132,32 @@ extract.busServices <- function(x, ...) {
     reclass("busServices")
 }
 
+#' @return \code{callingPoint:}
+#' \describe{
+#'  \item{locationName}{The display name of this location.}
+#'  \item{crs}{The CRS code of this location. A CRS code of \code{???} indicates
+#'  an error situation where no crs code is known for this location.}
+#'  \item{st}{The scheduled time of the service at this location. The time will
+#'  be either an arrival or departure time, depending on whether it is in the
+#'  subsequent or previous calling point list.}
+#'  \item{et}{The estimated time of the service at this location. The time will
+#'  be either an arrival or departure time, depending on whether it is in the
+#'  subsequent or previous calling point list. Will only be present if an actual
+#'  time (at) is not present.}
+#'  \item{at}{The actual time of the service at this location. The time will be
+#'  either an arrival or departure time, depending on whether it is in the
+#'  subsequent or previous calling point list. Will only be present if an
+#'  estimated time (et) is not present.}
+#'  \item{isCancelled}{A flag to indicate that this service is cancelled at this
+#'  location.}
+#'  \item{length}{The train length (number of units) at this location. If not
+#'  supplied, or zero, the length is unknown.}
+#'  \item{detachFront}{True if the service detaches units from the front at this
+#'  location.}
+#'  \item{adhocAlerts}{A list of active Adhoc Alert texts for to this location.
+#'  This list contains an object called \code{AdhocAlertTextType} which contains
+#'  a string to show the Adhoc Alert Text for the location.}
+#' }
 #' @rdname extract
 #' @keywords internal
 extract.callingPoint <- function(x, ...) {
