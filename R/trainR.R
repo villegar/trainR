@@ -16,7 +16,7 @@
 #'  location.}
 #'  \item{filterType}{If a filter was requested, the type of filter.}
 #'  \item{nrccMessages}{An optional list of textual messages that should be
-#'  displayed with the station board. The message may include embedded and xml
+#'  displayed with the station board. The message may include embedded and XML
 #'  encoded HTML-like hyperlinks and paragraphs. The messages are typically
 #'  used to display important disruption information that applies to the
 #'  location that the station board was for. Any embedded \code{<p>} tags are
@@ -50,6 +50,7 @@
 #' @source Documentation for the Live Departure Boards Web Service
 #' (LDBWS / OpenLDBWS):
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
+# @eval StationBoard_return()
 #' @export
 GetArrBoardWithDetailsRequest <-
   function(crs,
@@ -78,26 +79,54 @@ GetArrBoardWithDetailsRequest <-
 #' Get all public arrivals and departures for the supplied CRS code within a
 #' defined time window, including service details.
 #'
-#' @param crs (string, 3 characters, alphabetic): The CRS code (see above) of
-#'     the location for which the request is being made.
-#' @param filterCrs (string, 3 characters, alphabetic): The CRS code of either
-#'     an origin or destination location to filter in. Optional.
-#' @param filterType (string, either "from" or "to"): The type of filter to
-#'     apply. Filters services to include only those originating or terminating
-#'     at the \code{filterCrs} location. Defaults to "to".
-#' @param numRows (integer, between 0 and 150 exclusive): The number of
-#'     services to return in the resulting station board.
-#' @param timeOffset (integer, between -120 and 120 exclusive): An offset in
-#'     minutes against the current time to provide the station board for.
-#'     Defaults to 0.
-#' @param timeWindow (integer, between -120 and 120 exclusive): How far into
-#'     the future in minutes, relative to \code{timeOffset}, to return services
-#'     for. Defaults to 120.
-#' @param token Token to access the data feed. The token can be obtained at
-#'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
-#' @inheritParams request
+#' @inheritParams process
 #'
-#' @return Tibble with arrival and departure records.
+#' @return Tibble with arrival and departure records. Each column is described
+#' below:
+#' \describe{
+#'  \item{generatedAt}{The time at which the station board was generated.}
+#'  \item{locationName}{The name of the location that the station board is for.}
+#'  \item{crs}{The CRS code of the location that the station board is for.}
+#'  \item{filterLocationName}{If a filter was requested, the location name of
+#'  the filter location.}
+#'  \item{filtercrs}{If a filter was requested, the CRS code of the filter
+#'  location.}
+#'  \item{filterType}{If a filter was requested, the type of filter.}
+#'  \item{nrccMessages}{An optional list of textual messages that should be
+#'  displayed with the station board. The message may include embedded and XML
+#'  encoded HTML-like hyperlinks and paragraphs. The messages are typically
+#'  used to display important disruption information that applies to the
+#'  location that the station board was for. Any embedded \code{<p>} tags are
+#'  used to force a new-line in the output. Embedded \code{<a>} tags allow
+#'  links to external web pages that may provide more information. Output
+#'  channels that do not support HTML should strip out the \code{<a>} tags and
+#'  just leave the enclosed text.}
+#'  \item{platformAvailable}{An optional value that indicates if platform
+#'  information is available. If this value is present with the value "true"
+#'  then platform information will be returned in the service lists. If this
+#'  value is not present, or has the value "false", then the platform "heading"
+#'  should be suppressed in the user interface for this station board.}
+#'  \item{areServicesAvailable}{An optional value that indicates if services
+#'  are currently available for this station board. If this value is present
+#'  with the value "false" then no services will be returned in the service
+#'  lists. This value may be set, for example, if access to a station has been
+#'  closed to the public at short notice, even though the scheduled services
+#'  are still running. It would be usual in such cases for one of the
+#'  \code{nrccMessages} to describe why the list of services has been
+#'  suppressed.}
+#'  \item{trainServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#'  \item{busServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#'  \item{ferryServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#' }
+#' @source Documentation for the Live Departure Boards Web Service
+#' (LDBWS / OpenLDBWS):
+#' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
 #' @export
 GetArrDepBoardWithDetailsRequest <-
   function(crs,
@@ -145,26 +174,53 @@ GetArrDepBoardWithDetailsRequest <-
 #' Get all public departures for the supplied CRS code within a defined time
 #' window, including service details.
 #'
-#' @param crs (string, 3 characters, alphabetic): The CRS code (see above) of
-#'     the location for which the request is being made.
-#' @param filterCrs (string, 3 characters, alphabetic): The CRS code of either
-#'     an origin or destination location to filter in. Optional.
-#' @param filterType (string, either "from" or "to"): The type of filter to
-#'     apply. Filters services to include only those originating or terminating
-#'     at the \code{filterCrs} location. Defaults to "to".
-#' @param numRows (integer, between 0 and 150 exclusive): The number of
-#'     services to return in the resulting station board.
-#' @param timeOffset (integer, between -120 and 120 exclusive): An offset in
-#'     minutes against the current time to provide the station board for.
-#'     Defaults to 0.
-#' @param timeWindow (integer, between -120 and 120 exclusive): How far into
-#'     the future in minutes, relative to \code{timeOffset}, to return services
-#'     for. Defaults to 120.
-#' @param token Token to access the data feed. The token can be obtained at
-#'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
 #' @inheritParams request
 #'
-#' @return Tibble with departure records.
+#' @return Tibble with departure records. Each column is described below:
+#' \describe{
+#'  \item{generatedAt}{The time at which the station board was generated.}
+#'  \item{locationName}{The name of the location that the station board is for.}
+#'  \item{crs}{The CRS code of the location that the station board is for.}
+#'  \item{filterLocationName}{If a filter was requested, the location name of
+#'  the filter location.}
+#'  \item{filtercrs}{If a filter was requested, the CRS code of the filter
+#'  location.}
+#'  \item{filterType}{If a filter was requested, the type of filter.}
+#'  \item{nrccMessages}{An optional list of textual messages that should be
+#'  displayed with the station board. The message may include embedded and XML
+#'  encoded HTML-like hyperlinks and paragraphs. The messages are typically
+#'  used to display important disruption information that applies to the
+#'  location that the station board was for. Any embedded \code{<p>} tags are
+#'  used to force a new-line in the output. Embedded \code{<a>} tags allow
+#'  links to external web pages that may provide more information. Output
+#'  channels that do not support HTML should strip out the \code{<a>} tags and
+#'  just leave the enclosed text.}
+#'  \item{platformAvailable}{An optional value that indicates if platform
+#'  information is available. If this value is present with the value "true"
+#'  then platform information will be returned in the service lists. If this
+#'  value is not present, or has the value "false", then the platform "heading"
+#'  should be suppressed in the user interface for this station board.}
+#'  \item{areServicesAvailable}{An optional value that indicates if services
+#'  are currently available for this station board. If this value is present
+#'  with the value "false" then no services will be returned in the service
+#'  lists. This value may be set, for example, if access to a station has been
+#'  closed to the public at short notice, even though the scheduled services
+#'  are still running. It would be usual in such cases for one of the
+#'  \code{nrccMessages} to describe why the list of services has been
+#'  suppressed.}
+#'  \item{trainServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#'  \item{busServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#'  \item{ferryServices}{A list of \code{ServiceItem} object for each services
+#'  of the relevant type that is to appear on the station board. May contain
+#'  zero items, or may not be present at all.}
+#' }
+#' @source Documentation for the Live Departure Boards Web Service
+#' (LDBWS / OpenLDBWS):
+#' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
 #' @export
 GetDepBoardWithDetailsRequest <-
   function(crs,
@@ -204,7 +260,7 @@ GetDepBoardWithDetailsRequest <-
                            <ldb:timeWindow>{timeWindow}</ldb:timeWindow>
                         </ldb:GetDepBoardWithDetailsRequest>")
     # Submit request
-    request(body, header, url, verbose, type = "DepBoardWithDetails")
+    request(body, header, url, verbose, class = "DepBoardWithDetails")
   }
 
 #' Get service details
