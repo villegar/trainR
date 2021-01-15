@@ -204,6 +204,19 @@ extract.callingPointList <- function(x, ..., class = "previousCallingPoints") {
 
 #' @rdname extract
 #' @keywords internal
+extract.ferryServices <- function(x, ...) {
+  if (all(is.null(x)) |
+      all(is.na(x)) |
+      length(x) == 0 |
+      is.null(x[[1]]))
+    return(NA)
+  purrr::map_df(x, function(x) x %>% reclass("service") %>% extract()) %>%
+    list() %>%
+    reclass("ferryServices")
+}
+
+#' @rdname extract
+#' @keywords internal
 extract.trainServices <- function(x, ...) {
   if (all(is.null(x)) |
       all(is.na(x)) |
