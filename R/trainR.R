@@ -24,6 +24,12 @@
 #'
 #' @return Tibble with arrival records.
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
+#' rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg_arr)
+#' }
 GetArrBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
@@ -91,6 +97,12 @@ GetArrBoardWithDetailsRequest <-
 #'
 #' @return Tibble with arrival and departure records.
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg<- trainR::GetArrDepBoardWithDetailsRequest("RDG")
+#' rdg <- trainR::GetArrDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg)
+#' }
 GetArrDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
@@ -158,6 +170,12 @@ GetArrDepBoardWithDetailsRequest <-
 #'
 #' @return Tibble with departure records.
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
+#' rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg_dep)
+#' }
 GetDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
