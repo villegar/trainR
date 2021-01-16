@@ -53,3 +53,10 @@ Tibble with arrival and departure records.
 Get all public arrivals and departures for the supplied CRS code within a
 defined time window, including service details.
 }
+\examples{
+\dontrun{
+rdg<- trainR::GetArrDepBoardWithDetailsRequest("RDG")
+rdg <- trainR::GetArrDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+trainR::print(rdg)
+}
+}
