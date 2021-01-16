@@ -16,10 +16,10 @@
     National Rail Enquiries (NRE) systems. There are few data feeds 
     available, the simplest of them is Darwin, which provides real-time 
     arrival and departure predictions, platform numbers, delay estimates, 
-    schedule changes and cancellations. There are other data feeds that 
-    provide historical data, Historic Service Performance (HSP), and much 
-    more. trainR simplifies the data retrieval, so the users can focus 
-    on their analyses. For more details visit 
+    schedule changes and cancellations. Other data feeds provide historical 
+    data, Historic Service Performance (HSP), and much more. trainR 
+    simplifies the data retrieval, so that the users can focus on their 
+    analyses. For more details visit 
     &lt;https://www.nationalrail.co.uk/46391.aspx&gt;. ">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -83,7 +83,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>trainR</code> is to provide a simple interface to the National Rail Enquiries (NRE) systems. There are few data feeds available, the simplest of them is Darwin, which provides real-time arrival and departure predictions, platform numbers, delay estimates, schedule changes and cancellations. There are other data feeds that provide historical data, Historic Service Performance (HSP), and much more. <code>trainR</code> simplifies the data retrieval, so the users can focus on their analyses. For more details visit <a href="https://www.nationalrail.co.uk/46391.aspx" class="uri">https://www.nationalrail.co.uk/46391.aspx</a>.</p>
+<p>The goal of <code>trainR</code> is to provide a simple interface to the National Rail Enquiries (NRE) systems. There are few data feeds available, the simplest of them is Darwin, which provides real-time arrival and departure predictions, platform numbers, delay estimates, schedule changes and cancellations. Other data feeds provide historical data, Historic Service Performance (HSP), and much more. <code>trainR</code> simplifies the data retrieval, so that the users can focus on their analyses. For more details visit <a href="https://www.nationalrail.co.uk/46391.aspx" class="uri">https://www.nationalrail.co.uk/46391.aspx</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -116,45 +116,46 @@
 <div id="arrivals-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#arrivals-board-at-reading-station-rdg" class="anchor"></a>Arrivals board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-16 19:44:48.</p>
+<p>Generated on 2021-01-16 19:59:12.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_arr</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetArrBoardWithDetailsRequest.html">GetArrBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_arr</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:44:48</span>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:59:13</span>
 <span class="co">#&gt; Time   From                                    Plat  Expected</span>
-<span class="co">#&gt; 19:39  Manchester Piccadilly                   13    19:44</span>
-<span class="co">#&gt; 19:41  London Waterloo                         4     19:43</span>
-<span class="co">#&gt; 19:44  London Paddington                       12    On time</span>
-<span class="co">#&gt; 19:45  London Paddington                       7B    On time</span>
-<span class="co">#&gt; 19:46  London Paddington                       9     On time</span>
-<span class="co">#&gt; 19:50  Swansea                                 11    19:52</span>
-<span class="co">#&gt; 19:51  Gatwick Airport                         5     On time</span>
-<span class="co">#&gt; 19:58  Great Malvern                           10A   On time</span>
+<span class="co">#&gt; 19:58  Great Malvern                           10A   19:55</span>
 <span class="co">#&gt; 19:59  Basingstoke                             2     On time</span>
-<span class="co">#&gt; 20:08  London Paddington                       8     On time</span></code></pre></div>
+<span class="co">#&gt; 20:01  Didcot Parkway                          15    On time</span>
+<span class="co">#&gt; 20:08  London Paddington                       8     On time</span>
+<span class="co">#&gt; 20:11  London Waterloo                         6     On time</span>
+<span class="co">#&gt; 20:13  London Paddington                       14    On time</span>
+<span class="co">#&gt; 20:16  London Paddington                       9     On time</span>
+<span class="co">#&gt; 20:21  Bedwyn                                  11    On time</span>
+<span class="co">#&gt; 20:27  Basingstoke                             2     On time</span>
+<span class="co">#&gt; Time   From                                    Plat  Expected</span>
+<span class="co">#&gt; 20:13  Swindon (Wilts)                         BUS   On time</span></code></pre></div>
 <!-- Inspect the `rdg_arr` object: -->
 <!-- #### Previous calling points -->
 </div>
 <div id="departures-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#departures-board-at-reading-station-rdg" class="anchor"></a>Departures board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-16 19:44:48.</p>
+<p>Generated on 2021-01-16 19:59:13.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_dep</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetDepBoardWithDetailsRequest.html">GetDepBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_dep</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:44:48</span>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:59:13</span>
 <span class="co">#&gt; Time   To                                      Plat  Expected</span>
-<span class="co">#&gt; 19:42  London Waterloo                         5     On time</span>
-<span class="co">#&gt; 19:47  Bedwyn                                  7B    On time</span>
-<span class="co">#&gt; 19:49  Oxford                                  9     On time</span>
-<span class="co">#&gt; 19:52  Basingstoke                             2     On time</span>
-<span class="co">#&gt; 19:52  Ealing Broadway                         14    On time</span>
-<span class="co">#&gt; 19:53  Didcot Parkway                          12    On time</span>
-<span class="co">#&gt; 19:55  London Paddington                       11    On time</span>
 <span class="co">#&gt; 20:00  London Paddington                       10A   On time</span>
 <span class="co">#&gt; 20:01  Redhill                                 6     On time</span>
+<span class="co">#&gt; 20:10  Swansea                                 8     On time</span>
+<span class="co">#&gt; 20:12  London Waterloo                         4     On time</span>
+<span class="co">#&gt; 20:14  Newbury                                 1     On time</span>
+<span class="co">#&gt; 20:15  Ealing Broadway                         15    On time</span>
+<span class="co">#&gt; 20:15  Manchester Piccadilly                   13    On time</span>
+<span class="co">#&gt; 20:19  Great Malvern                           9     On time</span>
+<span class="co">#&gt; 20:22  Ealing Broadway                         14    On time</span>
 <span class="co">#&gt; Time   To                                      Plat  Expected</span>
-<span class="co">#&gt; 19:55  Swindon (Wilts)                         BUS   On time</span></code></pre></div>
+<span class="co">#&gt; 20:20  Swindon (Wilts)                         BUS   On time</span></code></pre></div>
 <!-- #### Previous calling points -->
 </div>
 </div>
