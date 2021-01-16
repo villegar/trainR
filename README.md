@@ -11,8 +11,15 @@ status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](htt
 [![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
 <!-- badges: end -->
 
-The goal of trainR is to provide a simple interface to the National Rail
-Enquiries (NRE) systems: <https://www.nationalrail.co.uk/46391.aspx>
+The goal of `trainR` is to provide a simple interface to the National
+Rail Enquiries (NRE) systems. There are few data feeds available, the
+simplest of them is Darwin, which provides real-time arrival and
+departure predictions, platform numbers, delay estimates, schedule
+changes and cancellations. There are other data feeds that provide
+historical data, Historic Service Performance (HSP), and much more.
+`trainR` simplifies the data retrieval, so the users can focus on their
+analyses. For more details visit
+<https://www.nationalrail.co.uk/46391.aspx>.
 
 ## Installation
 
@@ -65,23 +72,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-13 19:31:04.
+Generated on 2021-01-16 19:44:48.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-13 19:31:04
+#> Reading (RDG) Station Board on 2021-01-16 19:44:48
 #> Time   From                                    Plat  Expected
-#> 19:29  London Paddington                       7     On time
-#> 19:30  London Paddington                       12    On time
-#> 19:31  Cheltenham Spa                          11A   On time
-#> 19:33  Redhill                                 4     19:41
-#> 19:34  Basingstoke                             2     On time
-#> 19:34  London Paddington                       8     19:41
-#> 19:39  Bristol Temple Meads                    10A   19:42
-#> 19:41  London Paddington                       9     19:46
-#> 19:43  London Paddington                       13    On time
+#> 19:39  Manchester Piccadilly                   13    19:44
+#> 19:41  London Waterloo                         4     19:43
 #> 19:44  London Paddington                       12    On time
+#> 19:45  London Paddington                       7B    On time
+#> 19:46  London Paddington                       9     On time
+#> 19:50  Swansea                                 11    19:52
+#> 19:51  Gatwick Airport                         5     On time
+#> 19:58  Great Malvern                           10A   On time
+#> 19:59  Basingstoke                             2     On time
+#> 20:08  London Paddington                       8     On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -90,23 +97,24 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-13 19:31:04.
+Generated on 2021-01-16 19:44:48.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-13 19:31:05
+#> Reading (RDG) Station Board on 2021-01-16 19:44:48
 #> Time   To                                      Plat  Expected
-#> 19:30  Didcot Parkway                          12    On time
-#> 19:31  Plymouth                                7     On time
-#> 19:34  London Paddington                       11A   On time
-#> 19:36  Bedwyn                                  8     19:42
-#> 19:36  London Waterloo                         5     On time
-#> 19:41  London Paddington                       10A   19:43
-#> 19:42  Newbury                                 1     On time
-#> 19:43  Swansea                                 9     19:47
-#> 19:49  Bournemouth                             7     On time
-#> 19:49  London Paddington                       10    19:52
+#> 19:42  London Waterloo                         5     On time
+#> 19:47  Bedwyn                                  7B    On time
+#> 19:49  Oxford                                  9     On time
+#> 19:52  Basingstoke                             2     On time
+#> 19:52  Ealing Broadway                         14    On time
+#> 19:53  Didcot Parkway                          12    On time
+#> 19:55  London Paddington                       11    On time
+#> 20:00  London Paddington                       10A   On time
+#> 20:01  Redhill                                 6     On time
+#> Time   To                                      Plat  Expected
+#> 19:55  Swindon (Wilts)                         BUS   On time
 ```
 
 <!-- #### Previous calling points -->
