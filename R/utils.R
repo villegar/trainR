@@ -10,7 +10,7 @@
 #'
 #' @return Element from object, if exists, \code{default} otherwise.
 #' @keywords internal
-#'
+#' @noRd
 #' @examples
 #' test_obj <- list(a = 4, c = 2)
 #' trainR:::get_element(test_obj, "a")
@@ -84,7 +84,7 @@ is_valid_crs <- function(x, parameter = "crs") {
 #'
 #' @return Original data object with new \code{class}.
 #' @keywords internal
-#'
+#' @noRd
 #' @examples
 #' out <- list(woof = list(name = "Barto", age = 6)) %>%
 #'   trainR:::reclass(names(.))
