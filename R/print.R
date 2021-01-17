@@ -139,8 +139,14 @@ print_board <- function(x,
                                     etd,
                                     eta),
                   platform = ifelse(is.na(platform), "-", platform),
-                  station = get_element(., station) %>%
-                    get_location())
+                  via =
+                    get_element(x, station, TRUE) %>%
+                    purrr::transpose() %>%
+                    get_element("via"),
+                  station =
+                    get_element(x, station, TRUE) %>%
+                    purrr::transpose() %>%
+                    get_element("locationName"))
 
   if (string) {
     return(x %>%
@@ -173,7 +179,15 @@ print_board <- function(x,
       glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
                       "{stringr::str_pad(station, 40, 'right')}",
                       "{stringr::str_pad(platform, 6, 'right')}",
-                      "{expected}\n\n") %>%
+                      "{expected}\n",
+                      "{ifelse(!is.na(via),
+                               stringr::str_pad(stringr::str_pad(via,
+                                                                 40,
+                                                                 'right'),
+                                                47,
+                                                'left'),
+                               '')}",
+                      "{ifelse(!is.na(via), '\n', '')}") %>%
       purrr::walk(cat)
   }
 }
