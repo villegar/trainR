@@ -55,7 +55,7 @@
 GetArrBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
-           filterType = "to",
+           filterType = "from",
            numRows = 150,
            timeOffset = 0,
            timeWindow = 120,
@@ -206,7 +206,7 @@ GetArrDepBoardWithDetailsRequest <-
 GetDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
-           filterType = "from",
+           filterType = "to",
            numRows = 150,
            timeOffset = 0,
            timeWindow = 120,
