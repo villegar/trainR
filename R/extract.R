@@ -299,8 +299,10 @@ extract.service <- function(x, ...) {
                    # get_element("crs"),
                  destination =
                    get_element(x, "destination", TRUE)  %>%
-                   get_element("location") %>%
-                   get_element("crs"),
+                   reclass("ServiceLocation") %>%
+                   extract(),
+                   # get_element("location") %>%
+                   # get_element("crs"),
                  previousCallingPoints =
                    get_element(x, "previousCallingPoints", TRUE) %>%
                    reclass("callingPointList") %>%
