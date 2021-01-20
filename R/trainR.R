@@ -51,6 +51,7 @@
 #' (LDBWS / OpenLDBWS):
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
 # @eval StationBoard_return()
+#' @family OpenLDBSVWS requests
 #' @export
 GetArrBoardWithDetailsRequest <-
   function(crs,
@@ -127,6 +128,7 @@ GetArrBoardWithDetailsRequest <-
 #' @source Documentation for the Live Departure Boards Web Service
 #' (LDBWS / OpenLDBWS):
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
+#' @family OpenLDBSVWS requests
 #' @export
 GetArrDepBoardWithDetailsRequest <-
   function(crs,
@@ -202,6 +204,7 @@ GetArrDepBoardWithDetailsRequest <-
 #' @source Documentation for the Live Departure Boards Web Service
 #' (LDBWS / OpenLDBWS):
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
+#' @family OpenLDBSVWS requests
 #' @export
 GetDepBoardWithDetailsRequest <-
   function(crs,
@@ -243,6 +246,7 @@ GetDepBoardWithDetailsRequest <-
 #' @inheritParams request
 #'
 #' @return Tibble with departure records.
+#' @family OpenLDBSVWS requests
 #' @export
 GetServiceDetailsRequest <-
   function(serviceID,
