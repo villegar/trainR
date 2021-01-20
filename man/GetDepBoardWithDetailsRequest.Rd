@@ -12,7 +12,7 @@ Documentation for the Live Departure Boards Web Service
 GetDepBoardWithDetailsRequest(
   crs,
   filterCrs = NA,
-  filterType = "from",
+  filterType = "to",
   numRows = 150,
   timeOffset = 0,
   timeWindow = 120,
