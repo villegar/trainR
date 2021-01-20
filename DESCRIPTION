@@ -33,4 +33,4 @@ Imports:
     usethis,
     xml2
 Suggests:
-    knitr
+    openxlsx
