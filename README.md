@@ -9,6 +9,7 @@
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
 [![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
+[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of trainR is to provide a simple interface to the National Rail
@@ -65,23 +66,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-13 19:31:04.
+Generated on 2021-01-20 14:18:17.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-13 19:31:04
+#> Reading (RDG) Station Board on 2021-01-20 14:18:17
 #> Time   From                                    Plat  Expected
-#> 19:29  London Paddington                       7     On time
-#> 19:30  London Paddington                       12    On time
-#> 19:31  Cheltenham Spa                          11A   On time
-#> 19:33  Redhill                                 4     19:41
-#> 19:34  Basingstoke                             2     On time
-#> 19:34  London Paddington                       8     19:41
-#> 19:39  Bristol Temple Meads                    10A   19:42
-#> 19:41  London Paddington                       9     19:46
-#> 19:43  London Paddington                       13    On time
-#> 19:44  London Paddington                       12    On time
+#> 14:14  London Paddington                       12    On time
+#> 14:16  London Paddington                       9B    On time
+#> 14:22  Bedwyn                                  11    On time
+#> 14:24  Oxford                                  10A   On time
+#> 14:25  London Paddington                       9     On time
+#> 14:27  London Paddington                       7     On time
+#> 14:29  Cheltenham Spa                          11A   On time
+#> 14:32  London Paddington                       7B    On time
+#> 14:33  Redhill                                 5     On time
+#> 14:40  Newbury                                 1     On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -90,23 +91,23 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-13 19:31:04.
+Generated on 2021-01-20 14:18:18.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-13 19:31:05
+#> Reading (RDG) Station Board on 2021-01-20 14:18:19
 #> Time   To                                      Plat  Expected
-#> 19:30  Didcot Parkway                          12    On time
-#> 19:31  Plymouth                                7     On time
-#> 19:34  London Paddington                       11A   On time
-#> 19:36  Bedwyn                                  8     19:42
-#> 19:36  London Waterloo                         5     On time
-#> 19:41  London Paddington                       10A   19:43
-#> 19:42  Newbury                                 1     On time
-#> 19:43  Swansea                                 9     19:47
-#> 19:49  Bournemouth                             7     On time
-#> 19:49  London Paddington                       10    19:52
+#> 14:18  Great Malvern                           9B    On time
+#> 14:20  Redhill                                 5     On time
+#> 14:22  Ealing Broadway                         14    On time
+#> 14:24  London Paddington                       11    On time
+#> 14:25  Didcot Parkway                          12    On time
+#> 14:26  London Paddington                       10A   On time
+#> 14:27  Bristol Temple Meads                    9     On time
+#> 14:29  Penzance                                7     On time
+#> 14:32  Basingstoke                             3     On time
+#> 14:35  London Paddington                       11A   On time
 ```
 
 <!-- #### Previous calling points -->
@@ -118,4 +119,4 @@ Enquiries. This package is just a tool to facilitate access to the data.
 For more information about the available data feeds, visit
 <https://www.nationalrail.co.uk>.
 
-![](https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg)
+<img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%">
