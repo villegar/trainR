@@ -95,3 +95,10 @@ zero items, or may not be present at all.}
 Get all public arrivals and departures for the supplied CRS code within a
 defined time window, including service details.
 }
+\seealso{
+Other OpenLDBSVWS requests: 
+\code{\link{GetArrBoardWithDetailsRequest}()},
+\code{\link{GetDepBoardWithDetailsRequest}()},
+\code{\link{GetServiceDetailsRequest}()}
+}
+\concept{OpenLDBSVWS requests}
