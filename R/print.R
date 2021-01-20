@@ -192,11 +192,11 @@ print_board <- function(x,
   }
 }
 
-#' @export
-#' @importFrom knitr knit_print asis_output
-knit_print.StationBoard <- function(x, ...) {
-  res <- capture.output(print(x, string = TRUE))
-  # class(x) <- 'knit_asis'
-  # x
-  asis_output(res)
-}
+#' #' @export
+#' #' @importFrom knitr knit_print asis_output
+#' knit_print.StationBoard <- function(x, ...) {
+#'   res <- capture.output(print(x, string = TRUE))
+#'   # class(x) <- 'knit_asis'
+#'   # x
+#'   asis_output(res)
+#' }
