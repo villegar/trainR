@@ -1,3 +1,6 @@
+#' @keywords internal
+"_PACKAGE"
+
 #' Get all public arrivals
 #'
 #' Get all public arrivals for the supplied CRS code within a defined time
