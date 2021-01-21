@@ -46,25 +46,30 @@ store.trainServices <- function(x, ..., wb) {
   # openxlsx::write.xlsx(file = file, sheetName = "trainServices", row.names = FALSE, overwrite = FALSE)
   openxlsx::addWorksheet(wb, "CallingPoints")
 
-  purrr::map_df(x[[1]]$serviceID,
-              function(serviceID) {
-                prev <- x[[1]]$previousCallingPoints[x[[1]]$serviceID == serviceID]
-                subs <- x[[1]]$subsequentCallingPoints[x[[1]]$serviceID == serviceID]
-                if (any(!is.na(prev)) | any(!is.na(subs))) {
-                  aux <- list(prev[[1]], subs[[1]])
-                  names(aux) <- rep(serviceID, 2)
-                  aux <- aux %>%
-                    tibble::enframe(., name = "serviceID") %>%
-                    tidyr::unnest(value) %>%
-                    dplyr::filter(!is.na(locationName) & !is.na(crs))
-                  if ("value" %in% colnames(aux))
-                    aux <- aux %>%
-                      dplyr::select(-value)
-                  aux
-                } else {
-                  NA
-                }
-              }) %>%
+  # Find services without previous and subsequential calling points
+  idx <- is.na(x[[1]]$previousCallingPoints) & is.na(x[[1]]$subsequentCallingPoints)
+  x[[1]] <- x[[1]][!idx, ]
+  if (any(!is.na(x[[1]]$previousCallingPoints)) |
+      any(!is.na(x[[1]]$subsequentCallingPoints)))
+    purrr::map_df(x[[1]]$serviceID,
+                  function(serviceID) {
+                    prev <- x[[1]]$previousCallingPoints[x[[1]]$serviceID == serviceID]
+                    subs <- x[[1]]$subsequentCallingPoints[x[[1]]$serviceID == serviceID]
+                    if (any(!is.na(prev)) | any(!is.na(subs))) {
+                      aux <- list(prev[[1]], subs[[1]])
+                      names(aux) <- rep(serviceID, 2)
+                      aux <- aux %>%
+                        tibble::enframe(., name = "serviceID") %>%
+                        tidyr::unnest(value) %>%
+                        dplyr::filter(!is.na(locationName) & !is.na(crs))
+                      if ("value" %in% colnames(aux))
+                        aux <- aux %>%
+                        dplyr::select(-value)
+                      aux
+                    } else {
+                      NA
+                    }
+                  }) %>%
     openxlsx::writeData(wb = wb, sheet = "CallingPoints", ...)
 
   # openxlsx::addWorksheet(wb, "previousCallingPoints")
