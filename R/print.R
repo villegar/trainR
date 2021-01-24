@@ -61,12 +61,22 @@ print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
     print(x$busServices, station = station, show_header = show_header, ...)
     show_header <- FALSE
   }
+  if (!is.na(x$ferryServices))
+    print(x$ferryServices, station = station, show_header = show_header, ...)
   invisible(x)
 }
 
 #' @rdname print
 #' @export
 print.busServices <- function(x, ...) {
+  print_board(x[[1]], ...)
+  invisible(x)
+}
+
+
+#' @rdname print
+#' @export
+print.ferryServices <- function(x, ...) {
   print_board(x[[1]], ...)
   invisible(x)
 }
