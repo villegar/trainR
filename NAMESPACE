@@ -2,6 +2,7 @@
 
 S3method(print,StationBoard)
 S3method(print,busServices)
+S3method(print,ferryServices)
 S3method(print,previousCallingPoints)
 S3method(print,subsequentCallingPoints)
 S3method(print,trainServices)

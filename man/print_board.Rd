@@ -9,6 +9,7 @@ print_board(
   show_details = FALSE,
   station = "destination",
   string = FALSE,
+  show_header = TRUE,
   ...
 )
 }
@@ -23,6 +24,9 @@ should be displayed.}
 
 \item{string}{Boolean flag to indicate whether or not the station board
 results, should be returned as a string.}
+
+\item{show_header}{Boolean flag to indicate if the header of board should be
+displayed or not.}
 
 \item{...}{Optional parameters (not used).}
 }
