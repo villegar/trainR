@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 
+[![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
 [![](https://img.shields.io/badge/devel%20version-0.0.1-yellow.svg)](https://github.com/villegar/trainR)
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
-[![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
@@ -66,23 +66,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-20 14:18:17.
+Generated on 2021-01-24 16:37:39.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-20 14:18:17
+#> Reading (RDG) Station Board on 2021-01-24 16:37:40
 #> Time   From                                    Plat  Expected
-#> 14:14  London Paddington                       12    On time
-#> 14:16  London Paddington                       9B    On time
-#> 14:22  Bedwyn                                  11    On time
-#> 14:24  Oxford                                  10A   On time
-#> 14:25  London Paddington                       9     On time
-#> 14:27  London Paddington                       7     On time
-#> 14:29  Cheltenham Spa                          11A   On time
-#> 14:32  London Paddington                       7B    On time
-#> 14:33  Redhill                                 5     On time
-#> 14:40  Newbury                                 1     On time
+#> 16:18  Bristol Temple Meads                    10    16:38
+#> 16:39  Manchester Piccadilly                   13    On time
+#> 16:41  London Paddington                       7B    On time
+#> 16:43  London Paddington                       14    16:37
+#> 16:45  Salisbury                               1     On time
+#> 16:51  Swansea                                 10A   16:53
+#> 16:58  Worcester Shrub Hill                    10A   On time
+#> 16:45  Guildford                               BUS   On time
+#> 16:50  Swindon                                 BUS   On time
+#> 16:52  Ascot                                   BUS   On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -91,23 +91,23 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-20 14:18:18.
+Generated on 2021-01-24 16:37:40.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-20 14:18:19
+#> Reading (RDG) Station Board on 2021-01-24 16:37:40
 #> Time   To                                      Plat  Expected
-#> 14:18  Great Malvern                           9B    On time
-#> 14:20  Redhill                                 5     On time
-#> 14:22  Ealing Broadway                         14    On time
-#> 14:24  London Paddington                       11    On time
-#> 14:25  Didcot Parkway                          12    On time
-#> 14:26  London Paddington                       10A   On time
-#> 14:27  Bristol Temple Meads                    9     On time
-#> 14:29  Penzance                                7     On time
-#> 14:32  Basingstoke                             3     On time
-#> 14:35  London Paddington                       11A   On time
+#> 16:25  London Paddington                       10    16:44
+#> 16:35  Newbury                                 8     On time
+#> 16:38  Basingstoke                             2     On time
+#> 16:46  Bristol Temple Meads                    7B    On time
+#> 16:52  Ealing Broadway                         14    On time
+#> 16:55  London Paddington                       10A   On time
+#> 16:40  Guildford                               BUS   On time
+#> 16:45  Ascot                                   BUS   On time
+#> 16:55  Chippenham                              BUS   On time
+#> 17:00  Ascot                                   BUS   On time
 ```
 
 <!-- #### Previous calling points -->

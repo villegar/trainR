@@ -19,9 +19,9 @@ knitr::opts_knit$set(
 # trainR: An Interface to the National Rail Enquiries Systems <img src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/logo.png" alt="logo" align="right" height=200px/>
 
 <!-- badges: start -->
+`r badger::badge_cran_release("trainR", "black")`
 `r badger::badge_devel("villegar/trainR", "yellow")`
 `r badger::badge_github_actions("villegar/trainR")`
-`r badger::badge_cran_release("trainR", "black")`
 `r badger::badge_lifecycle()`
 <!-- badges: end -->
 
