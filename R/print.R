@@ -52,8 +52,15 @@ print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   # "{buses}",
   # "\n\n"))
   # cli::cat_line(x[, -c(5:6)])
-  if (!is.na(x$trainServices)) print(x$trainServices, station = station, ...)
-  if (!is.na(x$busServices)) print(x$busServices, station = station, ...)
+  show_header <- TRUE
+  if (!is.na(x$trainServices)) {
+    print(x$trainServices, station = station, show_header = show_header, ...)
+    show_header <- FALSE
+  }
+  if (!is.na(x$busServices)) {
+    print(x$busServices, station = station, show_header = show_header, ...)
+    show_header <- FALSE
+  }
   invisible(x)
 }
 
@@ -109,6 +116,8 @@ print.subsequentCallingPoints <- function(x, ...) {
 #' @param x Tibble with arrivals/departures information.
 #' @param show_details Boolean flag to indicate if detail information about
 #'     previous calling points should be included or not.
+#' @param show_header Boolean flag to indicate if the header of board should be
+#'     displayed or not.
 #' @inheritParams print.StationBoard
 #' @param ... Optional parameters (not used).
 #'
@@ -118,6 +127,7 @@ print_board <- function(x,
                         show_details = FALSE,
                         station = "destination",
                         string = FALSE,
+                        show_header = TRUE,
                         ...) {
   # Local binding
   . <- eta <- etd <- expected <- platform <- sta <- std <- time <- NULL
@@ -152,7 +162,9 @@ print_board <- function(x,
                    stringr::str_pad(header, 40, 'right'),
                    stringr::str_pad("Plat", 6, 'right'),
                    "Expected\n")
-  cat(header)
+
+  if (show_header)
+    cat(header)
 
   if (show_details) {
     purrr::walk(seq_len(nrow(x)),
