@@ -1,14 +1,9 @@
 #' Print Values
-#'
 #' @param x an object used to select a method.
 #' @param ... further arguments passed to or from other methods.
-#'
-#' @return Input data invisibly.
 #' @rdname print
 #' @export
-print <- function(x, ...) {
-  UseMethod("print", x)
-}
+NULL
 
 #' @param station String to indicate if the destination or origin station
 #'     should be displayed.
@@ -125,7 +120,7 @@ print_board <- function(x,
                         string = FALSE,
                         ...) {
   # Local binding
-  . <- eta <- etd <- platform <- sta <- std <- NULL
+  . <- eta <- etd <- expected <- platform <- sta <- std <- time <- NULL
   header <- "To"
   if (station == "origin")
     header <- "From"
