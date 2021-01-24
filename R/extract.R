@@ -253,6 +253,8 @@ extract.ferryServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.nrccMessages <- function(x, ...) {
+  # Local binding
+  . <- NULL
   if (all(is.null(x)) |
       all(is.na(x)) |
       length(x) == 0 |
