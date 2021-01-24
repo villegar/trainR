@@ -7,6 +7,7 @@
 #' window, including service details.
 #'
 #' @inheritParams process
+#' @inheritParams request
 #'
 #' @return Tibble with arrival records. Each column is described below:
 #' \describe{
@@ -84,6 +85,7 @@ GetArrBoardWithDetailsRequest <-
 #' defined time window, including service details.
 #'
 #' @inheritParams process
+#' @inheritParams request
 #'
 #' @return Tibble with arrival and departure records. Each column is described
 #' below:
@@ -160,6 +162,7 @@ GetArrDepBoardWithDetailsRequest <-
 #' Get all public departures for the supplied CRS code within a defined time
 #' window, including service details.
 #'
+#' @inheritParams process
 #' @inheritParams request
 #'
 #' @return Tibble with departure records. Each column is described below:
@@ -244,8 +247,8 @@ GetDepBoardWithDetailsRequest <-
 #' @param serviceID (string): The LDBWS service ID of the service to request
 #'     the details of. The service ID is obtained from a service listed in a
 #'     \code{StationBoard} object returned from any other request.
-#' @param token Token to access the data feed. The token can be obtained at
-#'     \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.
+#'
+#' @inheritParams process
 #' @inheritParams request
 #'
 #' @return Tibble with departure records.
