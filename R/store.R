@@ -1,18 +1,26 @@
 #' Store object to disk
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' @details
+#' The goal of this generic is to facilitate storing data retrieved from
+#' arrival and departure boards. Each request has multiple parts that should be
+#' stored individually (e.g. Excel Workbook or individual CSV files).
+#'
 #' @param x Data.
 #' @param ... Optional parameters.
 #'
 #' @return Nothing, call for its side effect.
 #' @rdname store
-#' @keywords internal
+#' @export
 store <- function(x, ...) {
   UseMethod("store", x)
 }
 
 #' @param file String with filename and path.
 #' @rdname store
-#' @keywords internal
+#' @export
 store.StationBoard <- function(x, ..., file) {
   wb <- openxlsx::createWorkbook(title = "trainR")
   openxlsx::addWorksheet(wb, "StationBoard")
@@ -31,7 +39,7 @@ store.StationBoard <- function(x, ..., file) {
 #' @param wb Workbook object, created with
 #'     \code{\link[openxlsx:createWorkbook]{openxlsx::createWorkbook}}.
 #' @rdname store
-#' @keywords internal
+#' @export
 store.trainServices <- function(x, ..., wb) {
   services <- x[[1]] %>%
     dplyr::mutate(origin_crs = purrr::map(origin, "crs"),
@@ -82,7 +90,7 @@ store.trainServices <- function(x, ..., wb) {
 
 #' @inheritParams GetServiceDetailsRequest
 #' @rdname store
-#' @keywords internal
+#' @export
 store.CallingPoints <- function(x, ..., wb, serviceID) {
   names(x) <- serviceID
   x %>%
@@ -95,7 +103,7 @@ store.CallingPoints <- function(x, ..., wb, serviceID) {
 
 #' @inheritParams GetServiceDetailsRequest
 #' @rdname store
-#' @keywords internal
+#' @export
 store.previousCallingPoints <- function(x, ..., wb, serviceID) {
   names(x) <- serviceID
   x %>%
@@ -108,7 +116,7 @@ store.previousCallingPoints <- function(x, ..., wb, serviceID) {
 
 #' @inheritParams GetServiceDetailsRequest
 #' @rdname store
-#' @keywords internal
+#' @export
 store.subsequentCallingPoints <- function(x, ..., wb, serviceID) {
   names(x) <- serviceID
   x %>%
