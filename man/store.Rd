@@ -39,6 +39,11 @@ the details of. The service ID is obtained from a service listed in a
 Nothing, call for its side effect.
 }
 \description{
-Store object to disk
+Store object to disk:
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 }
-\keyword{internal}
+\details{
+The goal of this generic is to facilitate storing data retrieved from
+arrival and departure boards. Each request has multiple parts that should be
+stored individually (e.g. Excel Workbook or individual CSV files).
+}

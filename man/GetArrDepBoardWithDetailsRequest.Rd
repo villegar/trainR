@@ -45,6 +45,11 @@ for. Defaults to 120.}
 
 \item{token}{Token to access the data feed. The token can be obtained at
 \url{http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/}.}
+
+\item{url}{Data feed source URL.}
+
+\item{verbose}{Boolean flag to indicate whether or not to show status
+messages.}
 }
 \value{
 Tibble with arrival and departure records. Each column is described
