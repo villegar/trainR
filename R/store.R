@@ -21,8 +21,21 @@ store <- function(x, ...) {
 #' @param file String with filename and path.
 #' @rdname store
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' `%>%` <- magrittr::`%>%`
+#' pad <- trainR::GetArrBoardWithDetailsRequest("PAD")
+#' pad %>%
+#'   trainR::store(file = "arrivals-PAD.xlsx")
+#'
+#' # Delete test file
+#' unlink("arrivals-PAD.xlsx")
+#' }
 store.StationBoard <- function(x, ..., file) {
+  # Create workbook
   wb <- openxlsx::createWorkbook(title = "trainR")
+  # Add worksheet "StationBoard"
   openxlsx::addWorksheet(wb, "StationBoard")
   x %>%
     dplyr::select(-c(nrccMessages,
