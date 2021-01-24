@@ -33,6 +33,9 @@ store <- function(x, ...) {
 #' unlink("arrivals-PAD.xlsx")
 #' }
 store.StationBoard <- function(x, ..., file) {
+  # Local bindings
+  busServices <- ferryServices <- nrccMessages <- trainServices <- NULL
+
   # Create workbook
   wb <- openxlsx::createWorkbook(title = "trainR")
   # Add worksheet "StationBoard"
@@ -54,6 +57,10 @@ store.StationBoard <- function(x, ..., file) {
 #' @rdname store
 #' @export
 store.trainServices <- function(x, ..., wb) {
+  # Local bindings
+  . <- crs <- destination <- locationName <- origin <- NULL
+  previousCallingPoints <- subsequentCallingPoints <- value <- NULL
+
   services <- x[[1]] %>%
     dplyr::mutate(origin_crs = purrr::map(origin, "crs"),
                   origin_via = purrr::map(origin, "via"),
@@ -105,6 +112,9 @@ store.trainServices <- function(x, ..., wb) {
 #' @rdname store
 #' @export
 store.CallingPoints <- function(x, ..., wb, serviceID) {
+  # Local bindings
+  . <- crs <- locationName <- value <- NULL
+
   names(x) <- serviceID
   x %>%
     tibble::enframe(., name = "serviceID") %>%
@@ -118,6 +128,9 @@ store.CallingPoints <- function(x, ..., wb, serviceID) {
 #' @rdname store
 #' @export
 store.previousCallingPoints <- function(x, ..., wb, serviceID) {
+  # Local bindings
+  . <- crs <- locationName <- value <- NULL
+
   names(x) <- serviceID
   x %>%
     tibble::enframe(., name = "serviceID") %>%
@@ -131,6 +144,9 @@ store.previousCallingPoints <- function(x, ..., wb, serviceID) {
 #' @rdname store
 #' @export
 store.subsequentCallingPoints <- function(x, ..., wb, serviceID) {
+  # Local bindings
+  . <- crs <- locationName <- value <- NULL
+
   names(x) <- serviceID
   x %>%
     tibble::enframe(., name = "serviceID") %>%
