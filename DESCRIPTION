@@ -7,8 +7,15 @@ Authors@R:
            role = c("aut", "cre"),
            email = "villegas.roberto@hotmail.com",
            comment = c(ORCID = "0000-0001-5036-8661"))
-Description: The goal of trainR is to provide a simple interface to the National 
-    Rail Enquiries (NRE) systems.
+Description: The goal of 'trainR' is to provide a simple interface to the 
+    National Rail Enquiries (NRE) systems. There are few data feeds 
+    available, the simplest of them is Darwin, which provides real-time 
+    arrival and departure predictions, platform numbers, delay estimates, 
+    schedule changes and cancellations. Other data feeds provide historical 
+    data, Historic Service Performance (HSP), and much more. 'trainR' 
+    simplifies the data retrieval, so that the users can focus on their 
+    analyses. For more details visit 
+    <https://www.nationalrail.co.uk/46391.aspx>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
