@@ -3,6 +3,8 @@
 \name{store}
 \alias{store}
 \alias{store.StationBoard}
+\alias{store.busServices}
+\alias{store.ferryServices}
 \alias{store.trainServices}
 \alias{store.CallingPoints}
 \alias{store.previousCallingPoints}
@@ -12,6 +14,10 @@
 store(x, ...)
 
 \method{store}{StationBoard}(x, ..., file)
+
+\method{store}{busServices}(x, ..., wb)
+
+\method{store}{ferryServices}(x, ..., wb)
 
 \method{store}{trainServices}(x, ..., wb)
 
