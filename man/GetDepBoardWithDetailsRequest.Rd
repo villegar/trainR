@@ -99,6 +99,7 @@ zero items, or may not be present at all.}
 Get all public departures for the supplied CRS code within a defined time
 window, including service details.
 }
+
 \seealso{
 Other OpenLDBSVWS requests: 
 \code{\link{GetArrBoardWithDetailsRequest}()},
@@ -106,3 +107,11 @@ Other OpenLDBSVWS requests:
 \code{\link{GetServiceDetailsRequest}()}
 }
 \concept{OpenLDBSVWS requests}
+
+\examples{
+\dontrun{
+rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
+rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+trainR::print(rdg_dep)
+}
+}

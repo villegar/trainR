@@ -57,6 +57,12 @@
 # @eval StationBoard_return()
 #' @family OpenLDBSVWS requests
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
+#' rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg_arr)
+#' }
 GetArrBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
@@ -135,6 +141,12 @@ GetArrBoardWithDetailsRequest <-
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
 #' @family OpenLDBSVWS requests
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg<- trainR::GetArrDepBoardWithDetailsRequest("RDG")
+#' rdg <- trainR::GetArrDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg)
+#' }
 GetArrDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,
@@ -212,6 +224,12 @@ GetArrDepBoardWithDetailsRequest <-
 #' \url{http://lite.realtime.nationalrail.co.uk/openldbws/}
 #' @family OpenLDBSVWS requests
 #' @export
+#' @examples
+#' \dontrun{
+#' rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
+#' rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG", filterCrs = "BRI")
+#' trainR::print(rdg_dep)
+#' }
 GetDepBoardWithDetailsRequest <-
   function(crs,
            filterCrs = NA,

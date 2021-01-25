@@ -12,8 +12,14 @@ status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](htt
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of trainR is to provide a simple interface to the National Rail
-Enquiries (NRE) systems: <https://www.nationalrail.co.uk/46391.aspx>
+The goal of `trainR` is to provide a simple interface to the National
+Rail Enquiries (NRE) systems. There are few data feeds available, the
+simplest of them is Darwin, which provides real-time arrival and
+departure predictions, platform numbers, delay estimates, schedule
+changes and cancellations. Other data feeds provide historical data,
+Historic Service Performance (HSP), and much more. `trainR` simplifies
+the data retrieval, so that the users can focus on their analyses. For
+more details visit <https://www.nationalrail.co.uk/46391.aspx>.
 
 ## Installation
 
@@ -83,6 +89,7 @@ print(rdg_arr)
 #> 16:45  Guildford                               BUS   On time
 #> 16:50  Swindon                                 BUS   On time
 #> 16:52  Ascot                                   BUS   On time
+
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -96,6 +103,7 @@ Generated on 2021-01-24 16:37:40.
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
+
 #> Reading (RDG) Station Board on 2021-01-24 16:37:40
 #> Time   To                                      Plat  Expected
 #> 16:25  London Paddington                       10    16:44
@@ -108,6 +116,7 @@ print(rdg_dep)
 #> 16:45  Ascot                                   BUS   On time
 #> 16:55  Chippenham                              BUS   On time
 #> 17:00  Ascot                                   BUS   On time
+
 ```
 
 <!-- #### Previous calling points -->
