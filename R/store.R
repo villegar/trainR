@@ -52,6 +52,9 @@ store.StationBoard <- function(x, ..., file) {
   openxlsx::addWorksheet(wb, "busServices")
   if (all(!is.na(x$busServices)))
     store(x$busServices, wb = wb)
+  openxlsx::addWorksheet(wb, "ferryServices")
+  if (all(!is.na(x$ferryServices)))
+    store(x$ferryServices, wb = wb)
   openxlsx::saveWorkbook(wb, file = file)
 }
 
@@ -74,7 +77,6 @@ store.busServices <- function(x, ..., wb) {
                      previousCallingPoints,
                      subsequentCallingPoints)) #%>%
   openxlsx::writeData(wb, "busServices", services)
-  # openxlsx::write.xlsx(file = file, sheetName = "busServices", row.names = FALSE, overwrite = FALSE)
   openxlsx::addWorksheet(wb, "busCallingPoints")
 
   # Find services without previous and subsequential calling points
@@ -102,13 +104,27 @@ store.busServices <- function(x, ..., wb) {
                     }
                   }) %>%
     openxlsx::writeData(wb = wb, sheet = "busCallingPoints", ...)
+}
 
-  # openxlsx::addWorksheet(wb, "previousCallingPoints")
-  # if (any(!is.na(x[[1]]$previousCallingPoints)))
-  #   store(x[[1]]$previousCallingPoints, wb = wb, serviceID = x[[1]]$serviceID)
-  # openxlsx::addWorksheet(wb, "subsequentCallingPoints")
-  # if (any(!is.na(x[[1]]$subsequentCallingPoints)))
-  #   store(x[[1]]$subsequentCallingPoints, wb = wb, serviceID = x[[1]]$serviceID)
+#' @param wb Workbook object, created with
+#'     \code{\link[openxlsx:createWorkbook]{openxlsx::createWorkbook}}.
+#' @rdname store
+#' @export
+store.ferryServices <- function(x, ..., wb) {
+  # Local bindings
+  . <- crs <- destination <- locationName <- origin <- NULL
+  previousCallingPoints <- subsequentCallingPoints <- value <- NULL
+
+  services <- x[[1]] %>%
+    dplyr::mutate(origin_crs = purrr::map(origin, "crs"),
+                  origin_via = purrr::map(origin, "via"),
+                  dest_crs = purrr::map(destination, "crs"),
+                  dest_via = purrr::map(destination, "via")) %>%
+    dplyr::select(-c(origin,
+                     destination,
+                     previousCallingPoints,
+                     subsequentCallingPoints)) #%>%
+  openxlsx::writeData(wb, "ferryServices", services)
 }
 
 #' @param wb Workbook object, created with
