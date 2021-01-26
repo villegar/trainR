@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">trainR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
 
@@ -116,46 +116,45 @@
 <div id="arrivals-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#arrivals-board-at-reading-station-rdg" class="anchor"></a>Arrivals board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-16 19:59:12.</p>
+<p>Generated on 2021-01-24 16:37:39.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_arr</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetArrBoardWithDetailsRequest.html">GetArrBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
-<span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_arr</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:59:13</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rdg_arr</span><span class="op">)</span>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-24 16:37:40</span>
 <span class="co">#&gt; Time   From                                    Plat  Expected</span>
-<span class="co">#&gt; 19:58  Great Malvern                           10A   19:55</span>
-<span class="co">#&gt; 19:59  Basingstoke                             2     On time</span>
-<span class="co">#&gt; 20:01  Didcot Parkway                          15    On time</span>
-<span class="co">#&gt; 20:08  London Paddington                       8     On time</span>
-<span class="co">#&gt; 20:11  London Waterloo                         6     On time</span>
-<span class="co">#&gt; 20:13  London Paddington                       14    On time</span>
-<span class="co">#&gt; 20:16  London Paddington                       9     On time</span>
-<span class="co">#&gt; 20:21  Bedwyn                                  11    On time</span>
-<span class="co">#&gt; 20:27  Basingstoke                             2     On time</span>
-<span class="co">#&gt; Time   From                                    Plat  Expected</span>
-<span class="co">#&gt; 20:13  Swindon (Wilts)                         BUS   On time</span></code></pre></div>
+<span class="co">#&gt; 16:18  Bristol Temple Meads                    10    16:38</span>
+<span class="co">#&gt; 16:39  Manchester Piccadilly                   13    On time</span>
+<span class="co">#&gt; 16:41  London Paddington                       7B    On time</span>
+<span class="co">#&gt; 16:43  London Paddington                       14    16:37</span>
+<span class="co">#&gt; 16:45  Salisbury                               1     On time</span>
+<span class="co">#&gt; 16:51  Swansea                                 10A   16:53</span>
+<span class="co">#&gt; 16:58  Worcester Shrub Hill                    10A   On time</span>
+<span class="co">#&gt; 16:45  Guildford                               BUS   On time</span>
+<span class="co">#&gt; 16:50  Swindon                                 BUS   On time</span>
+<span class="co">#&gt; 16:52  Ascot                                   BUS   On time</span></code></pre></div>
 <!-- Inspect the `rdg_arr` object: -->
 <!-- #### Previous calling points -->
 </div>
 <div id="departures-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#departures-board-at-reading-station-rdg" class="anchor"></a>Departures board at Reading Station (RDG)</h3>
-<p>Generated on 2021-01-16 19:59:13.</p>
+<p>Generated on 2021-01-24 16:37:40.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_dep</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetDepBoardWithDetailsRequest.html">GetDepBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
-<span class="fu"><a href="reference/print.html">print</a></span><span class="op">(</span><span class="va">rdg_dep</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-16 19:59:13</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rdg_dep</span><span class="op">)</span>
+
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-01-24 16:37:40</span>
 <span class="co">#&gt; Time   To                                      Plat  Expected</span>
-<span class="co">#&gt; 20:00  London Paddington                       10A   On time</span>
-<span class="co">#&gt; 20:01  Redhill                                 6     On time</span>
-<span class="co">#&gt; 20:10  Swansea                                 8     On time</span>
-<span class="co">#&gt; 20:12  London Waterloo                         4     On time</span>
-<span class="co">#&gt; 20:14  Newbury                                 1     On time</span>
-<span class="co">#&gt; 20:15  Ealing Broadway                         15    On time</span>
-<span class="co">#&gt; 20:15  Manchester Piccadilly                   13    On time</span>
-<span class="co">#&gt; 20:19  Great Malvern                           9     On time</span>
-<span class="co">#&gt; 20:22  Ealing Broadway                         14    On time</span>
-<span class="co">#&gt; Time   To                                      Plat  Expected</span>
-<span class="co">#&gt; 20:20  Swindon (Wilts)                         BUS   On time</span></code></pre></div>
+<span class="co">#&gt; 16:25  London Paddington                       10    16:44</span>
+<span class="co">#&gt; 16:35  Newbury                                 8     On time</span>
+<span class="co">#&gt; 16:38  Basingstoke                             2     On time</span>
+<span class="co">#&gt; 16:46  Bristol Temple Meads                    7B    On time</span>
+<span class="co">#&gt; 16:52  Ealing Broadway                         14    On time</span>
+<span class="co">#&gt; 16:55  London Paddington                       10A   On time</span>
+<span class="co">#&gt; 16:40  Guildford                               BUS   On time</span>
+<span class="co">#&gt; 16:45  Ascot                                   BUS   On time</span>
+<span class="co">#&gt; 16:55  Chippenham                              BUS   On time</span>
+<span class="co">#&gt; 17:00  Ascot                                   BUS   On time</span></code></pre></div>
 <!-- #### Previous calling points -->
 </div>
 </div>
@@ -163,7 +162,7 @@
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
 <p>Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit <a href="https://www.nationalrail.co.uk" class="uri">https://www.nationalrail.co.uk</a>.</p>
-<p><img src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg"></p>
+<p><img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%"></p>
 </div>
 </div>
   </div>
@@ -172,6 +171,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=trainR">https://​cloud.r-project.org/​package=trainR</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/villegar/trainR/">https://​github.com/​villegar/​trainR/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/villegar/trainR/issues/">https://​github.com/​villegar/​trainR/​issues/​</a>
@@ -195,9 +196,10 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=trainR"><img src="https://www.r-pkg.org/badges/version/trainR?color=black"></a></li>
 <li><a href="https://github.com/villegar/trainR"><img src="https://img.shields.io/badge/devel%20version-0.0.1-yellow.svg"></a></li>
 <li><a href="https://github.com/villegar/trainR/actions"><img src="https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://cran.r-project.org/package=trainR"><img src="https://www.r-pkg.org/badges/version/trainR?color=black"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
 </ul>
 </div>
 </div>

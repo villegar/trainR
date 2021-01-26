@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Validate station code (CRS) — is_valid_crs • trainR</title>
+<title>Process StationBoard request — process • trainR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Validate station code (CRS) — is_valid_crs" />
-<meta property="og:description" content="Validate station code (CRS)" />
+<meta property="og:title" content="Process StationBoard request — process" />
+<meta property="og:description" content="Process StationBoard request" />
 
 
 
@@ -111,33 +111,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Validate station code (CRS)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/villegar/trainR/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>is_valid_crs.Rd</code></div>
+    <h1>Process <code>StationBoard</code> request</h1>
+    <small class="dont-index">Source: <a href='https://github.com/villegar/trainR/blob/master/R/trainR.R'><code>R/trainR.R</code></a></small>
+    <div class="hidden name"><code>process.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Validate station code (CRS)</p>
+    <p>Process <code>StationBoard</code> request</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_valid_crs</span><span class='op'>(</span><span class='va'>x</span>, parameter <span class='op'>=</span> <span class='st'>"crs"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>process</span><span class='op'>(</span>
+  <span class='va'>crs</span>,
+  filterCrs <span class='op'>=</span> <span class='cn'>NA</span>,
+  filterType <span class='op'>=</span> <span class='st'>"to"</span>,
+  numRows <span class='op'>=</span> <span class='fl'>150</span>,
+  timeOffset <span class='op'>=</span> <span class='fl'>0</span>,
+  timeWindow <span class='op'>=</span> <span class='fl'>120</span>,
+  token <span class='op'>=</span> <span class='fu'><a href='get_token.html'>get_token</a></span><span class='op'>(</span><span class='op'>)</span>,
+  url <span class='op'>=</span> <span class='st'>"https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  class <span class='op'>=</span> <span class='cn'>NULL</span>,
+  extra <span class='op'>=</span> <span class='st'>"StationBoard"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Station code.</p></td>
+      <th>crs</th>
+      <td><p>(string, 3 characters, alphabetic): The CRS code (see above) of
+the location for which the request is being made.</p></td>
     </tr>
     <tr>
-      <th>parameter</th>
-      <td><p>String with the name of the parameter to check.</p></td>
+      <th>filterCrs</th>
+      <td><p>(string, 3 characters, alphabetic): The CRS code of either
+an origin or destination location to filter in. Optional.</p></td>
+    </tr>
+    <tr>
+      <th>filterType</th>
+      <td><p>(string, either "from" or "to"): The type of filter to
+apply. Filters services to include only those originating or terminating
+at the <code>filterCrs</code> location. Defaults to "to".</p></td>
+    </tr>
+    <tr>
+      <th>numRows</th>
+      <td><p>(integer, between 0 and 150 exclusive): The number of
+services to return in the resulting station board.</p></td>
+    </tr>
+    <tr>
+      <th>timeOffset</th>
+      <td><p>(integer, between -120 and 120 exclusive): An offset in
+minutes against the current time to provide the station board for.
+Defaults to 0.</p></td>
+    </tr>
+    <tr>
+      <th>timeWindow</th>
+      <td><p>(integer, between -120 and 120 exclusive): How far into
+the future in minutes, relative to <code>timeOffset</code>, to return services
+for. Defaults to 120.</p></td>
+    </tr>
+    <tr>
+      <th>token</th>
+      <td><p>Token to access the data feed. The token can be obtained at
+<a href='http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/'>http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/</a>.</p></td>
+    </tr>
+    <tr>
+      <th>class</th>
+      <td><p>String with request class.</p></td>
+    </tr>
+    <tr>
+      <th>extra</th>
+      <td><p>String with extra classes (default = "StationBoard").</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Nothing, call for its side effect.</p>
+    <p>Tibble with request data.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
