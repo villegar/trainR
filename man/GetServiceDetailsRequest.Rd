@@ -36,3 +36,10 @@ obtained. This is normally for two minutes after it is expected to have
 departed, or after a terminal arrival. If a request is made for a service
 that is no longer available then a \code{NULL} value is returned.
 }
+\seealso{
+Other OpenLDBSVWS requests: 
+\code{\link{GetArrBoardWithDetailsRequest}()},
+\code{\link{GetArrDepBoardWithDetailsRequest}()},
+\code{\link{GetDepBoardWithDetailsRequest}()}
+}
+\concept{OpenLDBSVWS requests}

@@ -5,10 +5,11 @@
 
 <!-- badges: start -->
 
+[![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
 [![](https://img.shields.io/badge/devel%20version-0.0.1-yellow.svg)](https://github.com/villegar/trainR)
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
-[![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
+[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of `trainR` is to provide a simple interface to the National
@@ -71,24 +72,24 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-16 19:59:12.
+Generated on 2021-01-24 16:37:39.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-16 19:59:13
+#> Reading (RDG) Station Board on 2021-01-24 16:37:40
 #> Time   From                                    Plat  Expected
-#> 19:58  Great Malvern                           10A   19:55
-#> 19:59  Basingstoke                             2     On time
-#> 20:01  Didcot Parkway                          15    On time
-#> 20:08  London Paddington                       8     On time
-#> 20:11  London Waterloo                         6     On time
-#> 20:13  London Paddington                       14    On time
-#> 20:16  London Paddington                       9     On time
-#> 20:21  Bedwyn                                  11    On time
-#> 20:27  Basingstoke                             2     On time
-#> Time   From                                    Plat  Expected
-#> 20:13  Swindon (Wilts)                         BUS   On time
+#> 16:18  Bristol Temple Meads                    10    16:38
+#> 16:39  Manchester Piccadilly                   13    On time
+#> 16:41  London Paddington                       7B    On time
+#> 16:43  London Paddington                       14    16:37
+#> 16:45  Salisbury                               1     On time
+#> 16:51  Swansea                                 10A   16:53
+#> 16:58  Worcester Shrub Hill                    10A   On time
+#> 16:45  Guildford                               BUS   On time
+#> 16:50  Swindon                                 BUS   On time
+#> 16:52  Ascot                                   BUS   On time
+
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -97,24 +98,25 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-16 19:59:13.
+Generated on 2021-01-24 16:37:40.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-16 19:59:13
+
+#> Reading (RDG) Station Board on 2021-01-24 16:37:40
 #> Time   To                                      Plat  Expected
-#> 20:00  London Paddington                       10A   On time
-#> 20:01  Redhill                                 6     On time
-#> 20:10  Swansea                                 8     On time
-#> 20:12  London Waterloo                         4     On time
-#> 20:14  Newbury                                 1     On time
-#> 20:15  Ealing Broadway                         15    On time
-#> 20:15  Manchester Piccadilly                   13    On time
-#> 20:19  Great Malvern                           9     On time
-#> 20:22  Ealing Broadway                         14    On time
-#> Time   To                                      Plat  Expected
-#> 20:20  Swindon (Wilts)                         BUS   On time
+#> 16:25  London Paddington                       10    16:44
+#> 16:35  Newbury                                 8     On time
+#> 16:38  Basingstoke                             2     On time
+#> 16:46  Bristol Temple Meads                    7B    On time
+#> 16:52  Ealing Broadway                         14    On time
+#> 16:55  London Paddington                       10A   On time
+#> 16:40  Guildford                               BUS   On time
+#> 16:45  Ascot                                   BUS   On time
+#> 16:55  Chippenham                              BUS   On time
+#> 17:00  Ascot                                   BUS   On time
+
 ```
 
 <!-- #### Previous calling points -->
@@ -126,4 +128,4 @@ Enquiries. This package is just a tool to facilitate access to the data.
 For more information about the available data feeds, visit
 <https://www.nationalrail.co.uk>.
 
-![](https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg)
+<img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%">

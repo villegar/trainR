@@ -3,10 +3,13 @@
 \name{extract}
 \alias{extract}
 \alias{extract.GetServiceDetailsResult}
+\alias{extract.ServiceLocation}
 \alias{extract.StationBoard}
 \alias{extract.busServices}
 \alias{extract.callingPoint}
 \alias{extract.callingPointList}
+\alias{extract.ferryServices}
+\alias{extract.nrccMessages}
 \alias{extract.trainServices}
 \alias{extract.service}
 \title{Extract data from XML request}
@@ -15,6 +18,8 @@ extract(x, ...)
 
 \method{extract}{GetServiceDetailsResult}(x, ...)
 
+\method{extract}{ServiceLocation}(x, ...)
+
 \method{extract}{StationBoard}(x, ...)
 
 \method{extract}{busServices}(x, ...)
@@ -22,6 +27,10 @@ extract(x, ...)
 \method{extract}{callingPoint}(x, ...)
 
 \method{extract}{callingPointList}(x, ..., class = "previousCallingPoints")
+
+\method{extract}{ferryServices}(x, ...)
+
+\method{extract}{nrccMessages}(x, ...)
 
 \method{extract}{trainServices}(x, ...)
 
@@ -36,6 +45,91 @@ extract(x, ...)
 }
 \value{
 Tibble with the appropriate format.
+
+\code{ServiceLocation:}
+\describe{
+\item{locationName}{The name of the location.}
+\item{crs}{The CRS code of this location. A CRS code of \code{???} indicates
+an error situation where no crs code is known for this location.}
+\item{via}{An optional via text that should be displayed after the location,
+to indicate further information about an ambiguous route. Note that vias are
+only present for \code{ServiceLocation} objects that appear in destination
+lists.}
+\item{futureChangeTo}{A text string containing service type
+(Bus/Ferry/Train) to which will be changed in the future.}
+\item{assocIsCancelled}{This origin or destination can no longer be reached
+because the association has been cancelled.}
+}
+
+\code{StationBoard:}
+\describe{
+\item{generatedAt}{The time at which the station board was generated.}
+\item{locationName}{The name of the location that the station board is for.}
+\item{crs}{The CRS code of the location that the station board is for.}
+\item{filterLocationName}{If a filter was requested, the location name of
+the filter location.}
+\item{filtercrs}{If a filter was requested, the CRS code of the filter
+location.}
+\item{filterType}{If a filter was requested, the type of filter.}
+\item{nrccMessages}{An optional list of textual messages that should be
+displayed with the station board. The message may include embedded and XML
+encoded HTML-like hyperlinks and paragraphs. The messages are typically
+used to display important disruption information that applies to the
+location that the station board was for. Any embedded \code{<p>} tags are
+used to force a new-line in the output. Embedded \code{<a>} tags allow
+links to external web pages that may provide more information. Output
+channels that do not support HTML should strip out the \code{<a>} tags and
+just leave the enclosed text.}
+\item{platformAvailable}{An optional value that indicates if platform
+information is available. If this value is present with the value "true"
+then platform information will be returned in the service lists. If this
+value is not present, or has the value "false", then the platform "heading"
+should be suppressed in the user interface for this station board.}
+\item{areServicesAvailable}{An optional value that indicates if services
+are currently available for this station board. If this value is present
+with the value "false" then no services will be returned in the service
+lists. This value may be set, for example, if access to a station has been
+closed to the public at short notice, even though the scheduled services
+are still running. It would be usual in such cases for one of the
+\code{nrccMessages} to describe why the list of services has been
+suppressed.}
+\item{trainServices}{A list of \code{ServiceItem} object for each services
+of the relevant type that is to appear on the station board. May contain
+zero items, or may not be present at all.}
+\item{busServices}{A list of \code{ServiceItem} object for each services
+of the relevant type that is to appear on the station board. May contain
+zero items, or may not be present at all.}
+\item{ferryServices}{A list of \code{ServiceItem} object for each services
+of the relevant type that is to appear on the station board. May contain
+zero items, or may not be present at all.}
+}
+
+\code{callingPoint:}
+\describe{
+\item{locationName}{The display name of this location.}
+\item{crs}{The CRS code of this location. A CRS code of \code{???} indicates
+an error situation where no crs code is known for this location.}
+\item{st}{The scheduled time of the service at this location. The time will
+be either an arrival or departure time, depending on whether it is in the
+subsequent or previous calling point list.}
+\item{et}{The estimated time of the service at this location. The time will
+be either an arrival or departure time, depending on whether it is in the
+subsequent or previous calling point list. Will only be present if an actual
+time (at) is not present.}
+\item{at}{The actual time of the service at this location. The time will be
+either an arrival or departure time, depending on whether it is in the
+subsequent or previous calling point list. Will only be present if an
+estimated time (et) is not present.}
+\item{isCancelled}{A flag to indicate that this service is cancelled at this
+location.}
+\item{length}{The train length (number of units) at this location. If not
+supplied, or zero, the length is unknown.}
+\item{detachFront}{True if the service detaches units from the front at this
+location.}
+\item{adhocAlerts}{A list of active Adhoc Alert texts for to this location.
+This list contains an object called \code{AdhocAlertTextType} which contains
+a string to show the Adhoc Alert Text for the location.}
+}
 }
 \description{
 Extract data from XML request

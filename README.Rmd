@@ -19,9 +19,10 @@ knitr::opts_knit$set(
 # trainR: An Interface to the National Rail Enquiries Systems <img src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/logo.png" alt="logo" align="right" height=200px/>
 
 <!-- badges: start -->
+`r badger::badge_cran_release("trainR", "black")`
 `r badger::badge_devel("villegar/trainR", "yellow")`
 `r badger::badge_github_actions("villegar/trainR")`
-`r badger::badge_cran_release("trainR", "black")`
+`r badger::badge_lifecycle()`
 <!-- badges: end -->
 
 The goal of `trainR` is to provide a simple interface to the 
@@ -155,4 +156,4 @@ print(rdg_dep)
 
 Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit https://www.nationalrail.co.uk.
 
-![](https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg)
+<img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%">

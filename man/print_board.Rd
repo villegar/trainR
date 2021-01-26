@@ -4,7 +4,14 @@
 \alias{print_board}
 \title{Print arrivals/departures board}
 \usage{
-print_board(x, show_details = FALSE, station = "destination", ...)
+print_board(
+  x,
+  show_details = FALSE,
+  station = "destination",
+  string = FALSE,
+  show_header = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{Tibble with arrivals/departures information.}
@@ -14,6 +21,12 @@ previous calling points should be included or not.}
 
 \item{station}{String to indicate if the destination or origin station
 should be displayed.}
+
+\item{string}{Boolean flag to indicate whether or not the station board
+results, should be returned as a string.}
+
+\item{show_header}{Boolean flag to indicate if the header of board should be
+displayed or not.}
 
 \item{...}{Optional parameters (not used).}
 }

@@ -12,3 +12,4 @@
 ^pkgdown$
 ^R\.ignore$
 ^cran-comments\.md$
+^CRAN-RELEASE$
