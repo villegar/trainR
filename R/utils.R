@@ -74,7 +74,7 @@ get_location <- function(crs) {
 get_token <- function(ENV = "NRE") {
   token <- Sys.getenv(ENV)
   if (token == "")
-    stop("The access token to the NRE was not found, `NRE`. ",
+    stop("The access token to the NRE data feeds was not found, `", ENV, "`. ",
          "Make sure to run `trainR::set_token()` to configure it.",
          call. = FALSE)
   token
