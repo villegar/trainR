@@ -36,6 +36,11 @@ store.StationBoard <- function(x, ..., file) {
   # Local bindings
   busServices <- ferryServices <- nrccMessages <- trainServices <- NULL
 
+  if (all(is.na(x$busServices)) &
+      all(is.na(x$ferryServices)) &
+      all(is.na(x$trainServices)))
+    return() # Don't create a workbook, if there are no services
+
   # Create workbook
   wb <- openxlsx::createWorkbook(title = "trainR")
   # Add worksheet "StationBoard"
