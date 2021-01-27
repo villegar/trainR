@@ -6,8 +6,15 @@
 \alias{trainR-package}
 \title{trainR: An Interface to the National Rail Enquiries Systems}
 \description{
-The goal of trainR is to provide a simple interface to the National 
-    Rail Enquiries (NRE) systems.
+The goal of 'trainR' is to provide a simple interface to the 
+    National Rail Enquiries (NRE) systems. There are few data feeds 
+    available, the simplest of them is Darwin, which provides real-time 
+    arrival and departure predictions, platform numbers, delay estimates, 
+    schedule changes and cancellations. Other data feeds provide historical 
+    data, Historic Service Performance (HSP), and much more. 'trainR' 
+    simplifies the data retrieval, so that the users can focus on their 
+    analyses. For more details visit 
+    <https://www.nationalrail.co.uk/46391.aspx>.
 }
 \seealso{
 Useful links:
