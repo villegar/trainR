@@ -13,7 +13,9 @@ NULL
 #' @export
 print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   if (is.na(station)) {
-    if (inherits(x, "DepBoardWithDetails")) {
+    if (inherits(x, "ArrDepBoardWithDetails")) {
+      station = "both" # Arrivals and departures
+    } else if (inherits(x, "DepBoardWithDetails")) {
       station = "destination"
     } else {
       station = "origin"
@@ -52,17 +54,12 @@ print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   # "{buses}",
   # "\n\n"))
   # cli::cat_line(x[, -c(5:6)])
-  show_header <- TRUE
-  if (!is.na(x$trainServices)) {
-    print(x$trainServices, station = station, show_header = show_header, ...)
-    show_header <- FALSE
+  if (station == "both") {
+    print_services(x, station = "origin", show_header = show_header, ...)
+    print_services(x, station = "destination", show_header = show_header, ...)
+  } else {
+    print_services(x, station = station, show_header = show_header, ...)
   }
-  if (!is.na(x$busServices)) {
-    print(x$busServices, station = station, show_header = show_header, ...)
-    show_header <- FALSE
-  }
-  if (!is.na(x$ferryServices))
-    print(x$ferryServices, station = station, show_header = show_header, ...)
   invisible(x)
 }
 
@@ -141,19 +138,24 @@ print_board <- function(x,
                         ...) {
   # Local binding
   . <- eta <- etd <- expected <- platform <- sta <- std <- time <- NULL
-  header <- "To"
-  if (station == "origin")
+  # Filter records by `station`, arrivals and departures
+  if (station == "origin") {
     header <- "From"
+    x <- x %>%
+      dplyr::filter(!is.na(sta) & !is.na(eta)) %>%
+      dplyr::mutate(time = sta,
+                    expected = eta)
+  } else {
+    header <- "To"
+    x <- x %>%
+      dplyr::filter(!is.na(std) & !is.na(etd)) %>%
+      dplyr::mutate(time = std,
+                    expected = etd)
+  }
 
   # Retrieve full station names
   x <- x %>%
-    dplyr::mutate(time = ifelse(station == "destination" & !is.na(std),
-                                std,
-                                sta),
-                  expected = ifelse(station == "destination" & !is.na(etd),
-                                    etd,
-                                    eta),
-                  platform = ifelse(is.na(platform), "-", platform),
+    dplyr::mutate(platform = ifelse(is.na(platform), "-", platform),
                   via =
                     get_element(x, station, TRUE) %>%
                     purrr::transpose() %>%
@@ -207,6 +209,22 @@ print_board <- function(x,
                       "{ifelse(!is.na(via), '\n', '')}") %>%
       purrr::walk(cat)
   }
+  cat("\n")
+}
+
+#' @keywords internal
+print_services <- function(x, station, show_header, ...) {
+  show_header <- TRUE
+  if (!is.na(x$trainServices)) {
+    print(x$trainServices, station = station, show_header = show_header, ...)
+    show_header <- FALSE
+  }
+  if (!is.na(x$busServices)) {
+    print(x$busServices, station = station, show_header = show_header, ...)
+    show_header <- FALSE
+  }
+  if (!is.na(x$ferryServices))
+    print(x$ferryServices, station = station, show_header = show_header, ...)
 }
 
 #' #' @export
