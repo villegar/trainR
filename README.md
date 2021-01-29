@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/trainR?color=black)](https://cran.r-project.org/package=trainR)
-[![](https://img.shields.io/badge/devel%20version-0.0.1-yellow.svg)](https://github.com/villegar/trainR)
+[![](https://img.shields.io/badge/devel%20version-0.0.1.9000-yellow.svg)](https://github.com/villegar/trainR)
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -72,24 +72,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-24 16:37:39.
+Generated on 2021-01-29 22:14:14.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-24 16:37:40
+#> Reading (RDG) Station Board on 2021-01-29 22:14:15
 #> Time   From                                    Plat  Expected
-#> 16:18  Bristol Temple Meads                    10    16:38
-#> 16:39  Manchester Piccadilly                   13    On time
-#> 16:41  London Paddington                       7B    On time
-#> 16:43  London Paddington                       14    16:37
-#> 16:45  Salisbury                               1     On time
-#> 16:51  Swansea                                 10A   16:53
-#> 16:58  Worcester Shrub Hill                    10A   On time
-#> 16:45  Guildford                               BUS   On time
-#> 16:50  Swindon                                 BUS   On time
-#> 16:52  Ascot                                   BUS   On time
-
+#> 22:07  Didcot Parkway                          15    22:01
+#> 22:11  London Paddington                       9B    On time
+#> 22:14  London Paddington                       13    On time
+#> 22:16  London Paddington                       9B    On time
+#> 22:18  Newbury                                 15B   On time
+#> 22:20  Bedwyn                                  11A   On time
+#> 22:24  London Paddington                       9     On time
+#> 22:40  London Waterloo                         6     On time
+#> 22:43  London Paddington                       14    On time
+#> 22:44  London Paddington                       12    On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -98,26 +97,51 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-24 16:37:40.
+Generated on 2021-01-29 22:14:15.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-
-#> Reading (RDG) Station Board on 2021-01-24 16:37:40
+#> Reading (RDG) Station Board on 2021-01-29 22:14:15
 #> Time   To                                      Plat  Expected
-#> 16:25  London Paddington                       10    16:44
-#> 16:35  Newbury                                 8     On time
-#> 16:38  Basingstoke                             2     On time
-#> 16:46  Bristol Temple Meads                    7B    On time
-#> 16:52  Ealing Broadway                         14    On time
-#> 16:55  London Paddington                       10A   On time
-#> 16:40  Guildford                               BUS   On time
-#> 16:45  Ascot                                   BUS   On time
-#> 16:55  Chippenham                              BUS   On time
-#> 17:00  Ascot                                   BUS   On time
-
+#> 22:10  Newbury                                 1     Delayed
+#> 22:13  Swansea                                 9B    On time
+#> 22:15  Ealing Broadway                         15    On time
+#> 22:18  Worcester Shrub Hill                    9B    On time
+#> 22:21  London Paddington                       11A   On time
+#> 22:22  Ealing Broadway                         14    On time
+#> 22:25  Exeter St Davids                        9     On time
+#>        via Bristol                             
+#> 22:46  Didcot Parkway                          12    On time
+#> 22:48  Ealing Broadway                         13    On time
+#> 22:49  Southampton Central                     7B    On time
 ```
+
+### Add some colour (Terminal output only)
+
+Now you can add some colour to the service boards, based on their
+expected time:
+
+  - “On time” and early services: `green`
+  - “Delayed” and delayed by 5 or less minutes: `yellow`
+  - “Cancelled” and delayed over 5 minutes: `red`
+
+Without colours:
+
+``` r
+trainR::GetDepBoardWithDetailsRequest("CRE")
+```
+
+<img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-1.png" style="max-width:500px;width:100%">
+
+With colours:
+
+``` r
+options(show_colours = TRUE)
+trainR::GetArrBoardWithDetailsRequest("CRE")
+```
+
+<img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-2.png" style="max-width:500px;width:100%">
 
 <!-- #### Previous calling points -->
 

@@ -125,6 +125,8 @@ print.subsequentCallingPoints <- function(x, ...) {
 #'     previous calling points should be included or not.
 #' @param show_header Boolean flag to indicate if the header of board should be
 #'     displayed or not.
+#' @param show_colours Boolean flag to indicate if the `Expected` time should
+#'     be colour coded or not, based on service time.
 #' @inheritParams print.StationBoard
 #' @param ... Optional parameters (not used).
 #'
@@ -135,6 +137,8 @@ print_board <- function(x,
                         station = "destination",
                         string = FALSE,
                         show_header = TRUE,
+                        show_colours = getOption("show_colours",
+                                                 default = FALSE),
                         ...) {
   # Local binding
   . <- eta <- etd <- expected <- platform <- sta <- std <- time <- NULL
@@ -198,7 +202,7 @@ print_board <- function(x,
       glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
                       "{stringr::str_pad(station, 40, 'right')}",
                       "{stringr::str_pad(platform, 6, 'right')}",
-                      "{expected}\n",
+                      "{colour_time(time, expected, show_colours)}\n",
                       "{ifelse(!is.na(via),
                                stringr::str_pad(stringr::str_pad(via,
                                                                  40,
@@ -209,7 +213,6 @@ print_board <- function(x,
                       "{ifelse(!is.na(via), '\n', '')}") %>%
       purrr::walk(cat)
   }
-  cat("\n")
 }
 
 #' @keywords internal
@@ -225,6 +228,8 @@ print_services <- function(x, station, show_header, ...) {
   }
   if (!is.na(x$ferryServices))
     print(x$ferryServices, station = station, show_header = show_header, ...)
+  if (!show_header)
+    cat("\n")
 }
 
 #' #' @export

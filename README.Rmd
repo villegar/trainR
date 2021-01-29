@@ -129,6 +129,26 @@ rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
 ```
 
+### Add some colour (Terminal output only)
+Now you can add some colour to the service boards, based on their expected time:
+
+- "On time" and early services: `green`
+- "Delayed" and delayed by 5 or less minutes: `yellow`
+- "Cancelled" and delayed over 5 minutes: `red`
+
+Without colours:
+```{r, eval = FALSE}
+trainR::GetDepBoardWithDetailsRequest("CRE")
+```
+<img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-1.png" style="max-width:500px;width:100%">
+
+With colours:
+```{r, eval = FALSE}
+options(show_colours = TRUE)
+trainR::GetArrBoardWithDetailsRequest("CRE")
+```
+<img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-2.png" style="max-width:500px;width:100%">
+
 ```{r departures-old, echo = FALSE, eval = FALSE}
 # rdg_dep <- trainR::GetArrDepBoardWithDetailsRequest("rdg_dep") %>%
 #   dplyr::mutate(origin = purrr::transpose(.$origin) %>%
