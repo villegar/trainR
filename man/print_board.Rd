@@ -10,6 +10,7 @@ print_board(
   station = "destination",
   string = FALSE,
   show_header = TRUE,
+  show_colours = getOption("show_colours", default = FALSE),
   ...
 )
 }
@@ -27,6 +28,9 @@ results, should be returned as a string.}
 
 \item{show_header}{Boolean flag to indicate if the header of board should be
 displayed or not.}
+
+\item{show_colours}{Boolean flag to indicate if the \code{Expected} time should
+be colour coded or not, based on service time.}
 
 \item{...}{Optional parameters (not used).}
 }
