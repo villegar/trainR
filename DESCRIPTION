@@ -29,6 +29,7 @@ BugReports: https://github.com/villegar/trainR/issues/
 Language: en-GB
 Imports: 
     RCurl,
+    crayon,
     dplyr,
     glue,
     lubridate,
