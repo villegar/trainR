@@ -72,23 +72,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-29 22:14:14.
+Generated on 2021-01-30 15:33:08.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-29 22:14:15
+#> Reading (RDG) Station Board on 2021-01-30 15:33:09
 #> Time   From                                    Plat  Expected
-#> 22:07  Didcot Parkway                          15    22:01
-#> 22:11  London Paddington                       9B    On time
-#> 22:14  London Paddington                       13    On time
-#> 22:16  London Paddington                       9B    On time
-#> 22:18  Newbury                                 15B   On time
-#> 22:20  Bedwyn                                  11A   On time
-#> 22:24  London Paddington                       9     On time
-#> 22:40  London Waterloo                         6     On time
-#> 22:43  London Paddington                       14    On time
-#> 22:44  London Paddington                       12    On time
+#> 15:32  London Paddington                       7B    On time
+#> 15:33  Redhill                                 4     15:30
+#> 15:38  Newbury                                 1     On time
+#> 15:39  Manchester Piccadilly                   13    On time
+#> 15:43  London Paddington                       14    On time
+#> 15:44  London Paddington                       12    On time
+#> 15:44  London Waterloo                         6     On time
+#> 15:50  Swansea                                 11    On time
+#> 15:57  Basingstoke                             2     On time
+#> 15:40  Swindon                                 BUS   On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -97,24 +97,23 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-29 22:14:15.
+Generated on 2021-01-30 15:33:09.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-29 22:14:15
+#> Reading (RDG) Station Board on 2021-01-30 15:33:09
 #> Time   To                                      Plat  Expected
-#> 22:10  Newbury                                 1     Delayed
-#> 22:13  Swansea                                 9B    On time
-#> 22:15  Ealing Broadway                         15    On time
-#> 22:18  Worcester Shrub Hill                    9B    On time
-#> 22:21  London Paddington                       11A   On time
-#> 22:22  Ealing Broadway                         14    On time
-#> 22:25  Exeter St Davids                        9     On time
-#>        via Bristol                             
-#> 22:46  Didcot Parkway                          12    On time
-#> 22:48  Ealing Broadway                         13    On time
-#> 22:49  Southampton Central                     7B    On time
+#> 15:34  Bedwyn                                  7B    On time
+#> 15:42  London Waterloo                         5     On time
+#> 15:52  Basingstoke                             2     On time
+#> 15:52  Ealing Broadway                         14    On time
+#> 15:53  Didcot Parkway                          12    On time
+#> 15:55  London Paddington                       11    On time
+#> 16:00  London Paddington                       10    On time
+#> 16:10  Swansea                                 7     On time
+#> 16:12  London Waterloo                         6     On time
+#> 15:50  Swindon                                 BUS   On time
 ```
 
 ### Add some colour (Terminal output only)
@@ -138,7 +137,7 @@ With colours:
 
 ``` r
 options(show_colours = TRUE)
-trainR::GetArrBoardWithDetailsRequest("CRE")
+trainR::GetDepBoardWithDetailsRequest("CRE")
 ```
 
 <img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-2.png" style="max-width:500px;width:100%">
