@@ -145,7 +145,7 @@ trainR::GetDepBoardWithDetailsRequest("CRE")
 With colours:
 ```{r, eval = FALSE}
 options(show_colours = TRUE)
-trainR::GetArrBoardWithDetailsRequest("CRE")
+trainR::GetDepBoardWithDetailsRequest("CRE")
 ```
 <img alt="Crewe station - Departures Board" src="man/figures/README-CRE-DEP-terminal-output-2.png" style="max-width:500px;width:100%">
 
