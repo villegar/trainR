@@ -132,4 +132,44 @@ aux2 <- aux2[!(aux2$name %in% c("Corfe Castle")), ]
 aux2 <- aux2[!(aux2$name %in% c("Dublin Ferryport", "Dublin Port - Stena")), ]
 
 aux2[is.na(aux2$elr), ]
+
+#### Convert latitude and longitude to numeric
+aux3 <- aux2 %>%
+  dplyr::mutate(latitude = as.numeric(latitude),
+                longitude = as.numeric(longitude))
+#### Find records with NAs (these records have more than one line)
+idx <- which(is.na(aux3$latitude) | is.na(aux3$longitude))
+#### Parse each location and extract only the top records
+tmp <- aux2[idx, ] %>%
+  tidyr::separate_rows(latitude, sep = " ", convert = TRUE) %>%
+  tidyr::separate_rows(longitude, sep = " ", convert = TRUE) %>%
+  tidyr::separate_rows(grid_ref, sep = " ") %>%
+  dplyr::filter((is.na(latitude) & is.na(longitude)) |
+                (!is.na(latitude) & !is.na(longitude))) %>%
+  dplyr::distinct(name, .keep_all = TRUE)
+
+aux3[idx, ] <- tmp
+
+station_info <- aux3
 usethis::use_data(station_info, overwrite = TRUE)
+
+aux3_lat <- aux2 %>%
+  tidyr::separate_rows(latitude) %>%
+  dplyr::filter(latitude != "")
+aux3_lon <- aux2 %>%
+  tidyr::separate_rows(longitude) %>%
+  dplyr::filter(longitude != "")
+aux3_grid <- aux2 %>%
+  tidyr::separate_rows(grid_ref) %>%
+  dplyr::filter(longitude != "")
+
+aux3 <- aux2 %>%
+  tidyr::separate_rows(longitude) %>%
+  dplyr::filter(longitude != "") %>%
+  tidyr::separate_rows(latitude) %>%
+  dplyr::distinct(longitude, latitude, .keep_all = TRUE)
+
+df <- tibble::tibble(lon = station_info$longitude,
+                     lat = station_info$latitude)
+df %>%
+  ggmap::qmplot(lon, lat, data = ., size = I(0.5))
