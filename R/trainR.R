@@ -290,8 +290,8 @@ GetServiceDetailsRequest <-
 
 #' Process \code{StationBoard} request
 #'
-#' @param crs (string, 3 characters, alphabetic): The CRS code (see above) of
-#'     the location for which the request is being made.
+#' @param crs (string, 3 characters, alphabetic): The CRS code of the location
+#'     for which the request is being made.
 #' @param filterCrs (string, 3 characters, alphabetic): The CRS code of either
 #'     an origin or destination location to filter in. Optional.
 #' @param filterType (string, either "from" or "to"): The type of filter to
