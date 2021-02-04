@@ -71,7 +71,6 @@ print.busServices <- function(x, ...) {
   invisible(x)
 }
 
-
 #' @rdname print
 #' @export
 print.ferryServices <- function(x, ...) {
@@ -79,11 +78,18 @@ print.ferryServices <- function(x, ...) {
   invisible(x)
 }
 
+#' #' @rdname print
+#' #' @export
+#' print.service <- function(x, ...) {
+#'   print_board(x, ...)
+#'   invisible(x)
+#' }
+
 #' @rdname print
 #' @export
 print.trainServices <- function(x, ...) {
   print_board(x[[1]], ...)
-  # invisible(x)
+  invisible(x)
 }
 
 #' @rdname print
