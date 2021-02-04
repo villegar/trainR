@@ -15,7 +15,8 @@ print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   if (is.na(station)) {
     if (inherits(x, "ArrDepBoardWithDetails")) {
       station = "both" # Arrivals and departures
-    } else if (inherits(x, "DepBoardWithDetails")) {
+    } else if (inherits(x, "DepBoardWithDetails") |
+               inherits(x, "DepartureBoard")) {
       station = "destination"
     } else {
       station = "origin"
