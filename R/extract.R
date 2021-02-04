@@ -283,6 +283,10 @@ extract.trainServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.service <- function(x, ...) {
+  class <- class(x) # Extract class(es) of the input object
+  class <- class[!grepl("list", class)] # Remove class `list`
+  if (length(x) == 1 & inherits(x, class))
+    x <- x[[1]]
   tibble::tibble(sta = get_element(x, "sta"), # arrival
                  eta = get_element(x, "eta"),
                  std = get_element(x, "std"), # departure
@@ -315,5 +319,6 @@ extract.service <- function(x, ...) {
                    extract(class = "subsequentCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
                  cancelReason = get_element(x, "cancelReason"),
-                 delayReason = get_element(x, "delayReason"))
+                 delayReason = get_element(x, "delayReason")) %>%
+    reclass(class)
 }
