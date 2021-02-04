@@ -12,11 +12,9 @@ extract <- function(x, ...) {
 
 #' @rdname extract
 #' @keywords internal
-extract.GetServiceDetailsResult <- function(x, ...) {
-  # Local binding
-  . <- NULL
-
-  class <- names(x)
+extract.ServiceDetails <- function(x, ...) {
+  class <- class(x) # Extract class(es) of the input object
+  class <- class[!grepl("list", class)] # Remove class `list`
   if (length(x) == 1 & inherits(x, class))
     x <- x[[1]]
   tibble::tibble(generatedAt =
@@ -34,22 +32,14 @@ extract.GetServiceDetailsResult <- function(x, ...) {
                  std = get_element(x, "std"),
                  atd = get_element(x, "atd"),
                  previousCallingPoints =
-                   list(get_element(x, "previousCallingPoints", TRUE) %>%
-                          .[[1]] %>%
-                          purrr::map_df(function(x) x %>%
-                                          reclass("callingPoint") %>%
-                                          extract())
-                   ) %>%
-                   reclass("previousCallingPoints"),
+                   get_element(x, "previousCallingPoints", TRUE) %>%
+                   reclass("callingPointList") %>%
+                   extract(class = "previousCallingPoints"),
                  subsequentCallingPoints =
-                   list(get_element(x, "subsequentCallingPoints", TRUE) %>%
-                          .[[1]] %>%
-                          purrr::map_df(function(x) x %>%
-                                          reclass("callingPoint") %>%
-                                          extract())
-                   ) %>%
-                   reclass("subsequentCallingPoints")
-  ) %>%
+                   get_element(x, "subsequentCallingPoints", TRUE) %>%
+                   reclass("callingPointList") %>%
+                   extract(class = "subsequentCallingPoints")
+                 ) %>%
     reclass(class)
 }
 
@@ -158,7 +148,7 @@ extract.StationBoard <- function(x, ...) {
                    get_element(x, "ferryServices", TRUE) %>%
                    reclass("ferryServices") %>%
                    extract()
-  ) %>%
+                 ) %>%
     reclass(class)
 }
 
@@ -283,6 +273,10 @@ extract.trainServices <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.service <- function(x, ...) {
+  class <- class(x) # Extract class(es) of the input object
+  class <- class[!grepl("list", class)] # Remove class `list`
+  if (length(x) == 1 & inherits(x, class))
+    x <- x[[1]]
   tibble::tibble(sta = get_element(x, "sta"), # arrival
                  eta = get_element(x, "eta"),
                  std = get_element(x, "std"), # departure
@@ -315,5 +309,6 @@ extract.service <- function(x, ...) {
                    extract(class = "subsequentCallingPoints"),
                  isCancelled = get_element(x, "isCancelled"),
                  cancelReason = get_element(x, "cancelReason"),
-                 delayReason = get_element(x, "delayReason"))
+                 delayReason = get_element(x, "delayReason")) %>%
+    reclass(class)
 }

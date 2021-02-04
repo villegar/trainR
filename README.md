@@ -34,7 +34,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("villegar/trainR")
+devtools::install_github("villegar/trainR", "dev")
 ```
 
 ## Setup
@@ -72,23 +72,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-01-30 15:33:08.
+Generated on 2021-02-04 23:19:50.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-01-30 15:33:09
+#> Reading (RDG) Station Board on 2021-02-04 23:19:50
 #> Time   From                                    Plat  Expected
-#> 15:32  London Paddington                       7B    On time
-#> 15:33  Redhill                                 4     15:30
-#> 15:38  Newbury                                 1     On time
-#> 15:39  Manchester Piccadilly                   13    On time
-#> 15:43  London Paddington                       14    On time
-#> 15:44  London Paddington                       12    On time
-#> 15:44  London Waterloo                         6     On time
-#> 15:50  Swansea                                 11    On time
-#> 15:57  Basingstoke                             2     On time
-#> 15:40  Swindon                                 BUS   On time
+#> 23:10  Penzance                                10    23:15
+#> 23:19  Newbury                                 7A    23:16
+#> 23:27  London Paddington                       -     Cancelled
+#> 23:32  London Paddington                       7     On time
+#> 23:35  Oxford                                  3     On time
+#> 23:43  London Paddington                       14    On time
+#> 23:46  Didcot Parkway                          8     On time
+#> 23:49  Basingstoke                             -     Cancelled
+#> 23:50  Manchester Piccadilly                   7     On time
+#> 23:58  London Paddington                       9B    On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -97,23 +97,23 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-01-30 15:33:09.
+Generated on 2021-02-04 23:19:51.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-01-30 15:33:09
+#> Reading (RDG) Station Board on 2021-02-04 23:19:51
 #> Time   To                                      Plat  Expected
-#> 15:34  Bedwyn                                  7B    On time
-#> 15:42  London Waterloo                         5     On time
-#> 15:52  Basingstoke                             2     On time
-#> 15:52  Ealing Broadway                         14    On time
-#> 15:53  Didcot Parkway                          12    On time
-#> 15:55  London Paddington                       11    On time
-#> 16:00  London Paddington                       10    On time
-#> 16:10  Swansea                                 7     On time
-#> 16:12  London Waterloo                         6     On time
-#> 15:50  Swindon                                 BUS   On time
+#> 23:18  London Paddington                       10    On time
+#> 23:20  Ealing Broadway                         7A    On time
+#> 23:28  Worcestershire Parkway                  -     Cancelled
+#> 23:34  Redhill                                 8A    On time
+#> 23:36  Didcot Parkway                          7     On time
+#> 00:08  Oxford                                  9B    On time
+#> 00:18  London Paddington                       14    On time
+#> 00:28  Didcot Parkway                          7     On time
+#> 00:49  Penzance                                8     On time
+#> 01:15  London Paddington                       13A   On time
 ```
 
 ### Add some colour (Terminal output only)

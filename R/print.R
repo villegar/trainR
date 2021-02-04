@@ -15,7 +15,8 @@ print.StationBoard <- function(x, ..., station = NA, string = FALSE) {
   if (is.na(station)) {
     if (inherits(x, "ArrDepBoardWithDetails")) {
       station = "both" # Arrivals and departures
-    } else if (inherits(x, "DepBoardWithDetails")) {
+    } else if (inherits(x, "DepBoardWithDetails") |
+               inherits(x, "DepartureBoard")) {
       station = "destination"
     } else {
       station = "origin"
@@ -70,7 +71,6 @@ print.busServices <- function(x, ...) {
   invisible(x)
 }
 
-
 #' @rdname print
 #' @export
 print.ferryServices <- function(x, ...) {
@@ -78,11 +78,18 @@ print.ferryServices <- function(x, ...) {
   invisible(x)
 }
 
+#' #' @rdname print
+#' #' @export
+#' print.service <- function(x, ...) {
+#'   print_board(x, ...)
+#'   invisible(x)
+#' }
+
 #' @rdname print
 #' @export
 print.trainServices <- function(x, ...) {
   print_board(x[[1]], ...)
-  # invisible(x)
+  invisible(x)
 }
 
 #' @rdname print

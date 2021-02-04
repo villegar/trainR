@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract}
 \alias{extract}
-\alias{extract.GetServiceDetailsResult}
+\alias{extract.ServiceDetails}
 \alias{extract.ServiceLocation}
 \alias{extract.StationBoard}
 \alias{extract.busServices}
@@ -16,7 +16,7 @@
 \usage{
 extract(x, ...)
 
-\method{extract}{GetServiceDetailsResult}(x, ...)
+\method{extract}{ServiceDetails}(x, ...)
 
 \method{extract}{ServiceLocation}(x, ...)
 
