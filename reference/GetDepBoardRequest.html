@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get all public departures — GetDepBoardWithDetailsRequest • trainR</title>
+<title>Get all public departures — GetDepBoardRequest • trainR</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Get all public departures — GetDepBoardWithDetailsRequest" />
+<meta property="og:title" content="Get all public departures — GetDepBoardRequest" />
 <meta property="og:description" content="Get all public departures for the supplied CRS code within a defined time
-window, including service details." />
+window." />
 
 
 
@@ -114,15 +114,15 @@ window, including service details." />
     <div class="page-header">
     <h1>Get all public departures</h1>
     <small class="dont-index">Source: <a href='https://github.com/villegar/trainR/blob/master/R/trainR.R'><code>R/trainR.R</code></a></small>
-    <div class="hidden name"><code>GetDepBoardWithDetailsRequest.Rd</code></div>
+    <div class="hidden name"><code>GetDepBoardRequest.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Get all public departures for the supplied CRS code within a defined time
-window, including service details.</p>
+window.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>GetDepBoardWithDetailsRequest</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>GetDepBoardRequest</span><span class='op'>(</span>
   <span class='va'>crs</span>,
   filterCrs <span class='op'>=</span> <span class='cn'>NA</span>,
   filterType <span class='op'>=</span> <span class='st'>"to"</span>,
@@ -242,13 +242,13 @@ zero items, or may not be present at all.</p></dd>
 <code><a href='GetArrBoardRequest.html'>GetArrBoardRequest</a>()</code>,
 <code><a href='GetArrBoardWithDetailsRequest.html'>GetArrBoardWithDetailsRequest</a>()</code>,
 <code><a href='GetArrDepBoardWithDetailsRequest.html'>GetArrDepBoardWithDetailsRequest</a>()</code>,
-<code><a href='GetDepBoardRequest.html'>GetDepBoardRequest</a>()</code>,
+<code><a href='GetDepBoardWithDetailsRequest.html'>GetDepBoardWithDetailsRequest</a>()</code>,
 <code><a href='GetServiceDetailsRequest.html'>GetServiceDetailsRequest</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>rdg_dep</span> <span class='op'>&lt;-</span> <span class='fu'>trainR</span><span class='fu'>::</span><span class='fu'>GetDepBoardWithDetailsRequest</span><span class='op'>(</span><span class='st'>"RDG"</span><span class='op'>)</span>
-<span class='va'>rdg_dep</span> <span class='op'>&lt;-</span> <span class='fu'>trainR</span><span class='fu'>::</span><span class='fu'>GetDepBoardWithDetailsRequest</span><span class='op'>(</span><span class='st'>"RDG"</span>, filterCrs <span class='op'>=</span> <span class='st'>"BRI"</span><span class='op'>)</span>
+<span class='va'>rdg_dep</span> <span class='op'>&lt;-</span> <span class='fu'>trainR</span><span class='fu'>::</span><span class='fu'>GetDepBoardRequest</span><span class='op'>(</span><span class='st'>"RDG"</span><span class='op'>)</span>
+<span class='va'>rdg_dep</span> <span class='op'>&lt;-</span> <span class='fu'>trainR</span><span class='fu'>::</span><span class='fu'>GetDepBoardRequest</span><span class='op'>(</span><span class='st'>"RDG"</span>, filterCrs <span class='op'>=</span> <span class='st'>"BRI"</span><span class='op'>)</span>
 <span class='fu'>trainR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>rdg_dep</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
