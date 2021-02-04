@@ -452,7 +452,7 @@ GetServiceDetailsRequest <-
                            <ldb:serviceID>{serviceID}</ldb:serviceID>
                         </ldb:GetServiceDetailsRequest>")
     # Submit request
-    request(body, header, url, verbose, c("ServiceDetails", "service"))
+    request(body, header, url, verbose, c("ServiceDetails"))#, "service"))
   }
 
 #' Process \code{StationBoard} request
