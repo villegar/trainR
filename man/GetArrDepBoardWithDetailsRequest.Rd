@@ -22,8 +22,8 @@ GetArrDepBoardWithDetailsRequest(
 )
 }
 \arguments{
-\item{crs}{(string, 3 characters, alphabetic): The CRS code (see above) of
-the location for which the request is being made.}
+\item{crs}{(string, 3 characters, alphabetic): The CRS code of the location
+for which the request is being made.}
 
 \item{filterCrs}{(string, 3 characters, alphabetic): The CRS code of either
 an origin or destination location to filter in. Optional.}
@@ -109,7 +109,9 @@ trainR::print(rdg)
 }
 \seealso{
 Other OpenLDBSVWS requests: 
+\code{\link{GetArrBoardRequest}()},
 \code{\link{GetArrBoardWithDetailsRequest}()},
+\code{\link{GetDepBoardRequest}()},
 \code{\link{GetDepBoardWithDetailsRequest}()},
 \code{\link{GetServiceDetailsRequest}()}
 }

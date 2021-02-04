@@ -38,8 +38,10 @@ that is no longer available then a \code{NULL} value is returned.
 }
 \seealso{
 Other OpenLDBSVWS requests: 
+\code{\link{GetArrBoardRequest}()},
 \code{\link{GetArrBoardWithDetailsRequest}()},
 \code{\link{GetArrDepBoardWithDetailsRequest}()},
+\code{\link{GetDepBoardRequest}()},
 \code{\link{GetDepBoardWithDetailsRequest}()}
 }
 \concept{OpenLDBSVWS requests}
