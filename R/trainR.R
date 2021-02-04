@@ -227,11 +227,11 @@ GetArrDepBoardWithDetailsRequest <-
 #' @export
 #' @examples
 #' \dontrun{
-#' rdg_arr <- trainR::GetArrivalBoard("RDG")
-#' rdg_arr <- trainR::GetArrivalBoard("RDG", filterCrs = "BRI")
+#' rdg_arr <- trainR::GetArrBoardRequest("RDG")
+#' rdg_arr <- trainR::GetArrBoardRequest("RDG", filterCrs = "BRI")
 #' trainR::print(rdg_arr)
 #' }
-GetArrivalBoard <-
+GetArrBoardRequest <-
   function(crs,
            filterCrs = NA,
            filterType = "from",
@@ -310,11 +310,11 @@ GetArrivalBoard <-
 #' @export
 #' @examples
 #' \dontrun{
-#' rdg_dep <- trainR::GetDepartureBoardRequest("RDG")
-#' rdg_dep <- trainR::GetDepartureBoardRequest("RDG", filterCrs = "BRI")
+#' rdg_dep <- trainR::GetDepBoardRequest("RDG")
+#' rdg_dep <- trainR::GetDepBoardRequest("RDG", filterCrs = "BRI")
 #' trainR::print(rdg_dep)
 #' }
-GetDepartureBoardRequest <-
+GetDepBoardRequest <-
   function(crs,
            filterCrs = NA,
            filterType = "to",
