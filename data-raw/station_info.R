@@ -151,25 +151,28 @@ tmp <- aux2[idx, ] %>%
 aux3[idx, ] <- tmp
 
 station_info <- aux3
+# Drop unused variables
+station_info$mileage <- NULL
 usethis::use_data(station_info, overwrite = TRUE)
 
-aux3_lat <- aux2 %>%
-  tidyr::separate_rows(latitude) %>%
-  dplyr::filter(latitude != "")
-aux3_lon <- aux2 %>%
-  tidyr::separate_rows(longitude) %>%
-  dplyr::filter(longitude != "")
-aux3_grid <- aux2 %>%
-  tidyr::separate_rows(grid_ref) %>%
-  dplyr::filter(longitude != "")
-
-aux3 <- aux2 %>%
-  tidyr::separate_rows(longitude) %>%
-  dplyr::filter(longitude != "") %>%
-  tidyr::separate_rows(latitude) %>%
-  dplyr::distinct(longitude, latitude, .keep_all = TRUE)
-
-df <- tibble::tibble(lon = station_info$longitude,
-                     lat = station_info$latitude)
-df %>%
-  ggmap::qmplot(lon, lat, data = ., size = I(0.5))
+# aux3_lat <- aux2 %>%
+#   tidyr::separate_rows(latitude) %>%
+#   dplyr::filter(latitude != "")
+# aux3_lon <- aux2 %>%
+#   tidyr::separate_rows(longitude) %>%
+#   dplyr::filter(longitude != "")
+# aux3_grid <- aux2 %>%
+#   tidyr::separate_rows(grid_ref) %>%
+#   dplyr::filter(longitude != "")
+#
+# aux3 <- aux2 %>%
+#   tidyr::separate_rows(longitude) %>%
+#   dplyr::filter(longitude != "") %>%
+#   tidyr::separate_rows(latitude) %>%
+#   dplyr::distinct(longitude, latitude, .keep_all = TRUE)
+#
+# df <- tibble::tibble(lon = station_info$longitude,
+#                      lat = station_info$latitude)
+# Generate map with stations
+station_info %>%
+  ggmap::qmplot(longitude, latitude, data = ., size = I(0.5))
