@@ -22,7 +22,8 @@ knitr::opts_knit$set(
 `r badger::badge_cran_release("trainR", "black")`
 `r badger::badge_devel("villegar/trainR", "yellow")`
 `r badger::badge_github_actions("villegar/trainR")`
-`r badger::badge_lifecycle()`
+`r badger::badge_doi("10.5281/zenodo.4506590", "black")`
+<!-- `r badger::badge_lifecycle()` -->
 <!-- badges: end -->
 
 The goal of `trainR` is to provide a simple interface to the 
@@ -177,3 +178,7 @@ trainR::GetDepBoardWithDetailsRequest("CRE")
 Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit https://www.nationalrail.co.uk.
 
 <img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%">
+
+## Code of Conduct
+
+Please note that the `trainR` package is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

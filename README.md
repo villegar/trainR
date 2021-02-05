@@ -9,7 +9,8 @@
 [![](https://img.shields.io/badge/devel%20version-0.0.1.9000-yellow.svg)](https://github.com/villegar/trainR)
 [![R build
 status](https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg)](https://github.com/villegar/trainR/actions)
-[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![](https://img.shields.io/badge/doi-10.5281/zenodo.4506590-black.svg)](https://doi.org/10.5281/zenodo.4506590)
+<!-- [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
 <!-- badges: end -->
 
 The goal of `trainR` is to provide a simple interface to the National
@@ -72,23 +73,23 @@ library(trainR)
 
 ### Arrivals board at Reading Station (RDG)
 
-Generated on 2021-02-04 23:19:50.
+Generated on 2021-02-05 12:10:10.
 
 ``` r
 rdg_arr <- trainR::GetArrBoardWithDetailsRequest("RDG")
 print(rdg_arr)
-#> Reading (RDG) Station Board on 2021-02-04 23:19:50
+#> Reading (RDG) Station Board on 2021-02-05 12:10:10
 #> Time   From                                    Plat  Expected
-#> 23:10  Penzance                                10    23:15
-#> 23:19  Newbury                                 7A    23:16
-#> 23:27  London Paddington                       -     Cancelled
-#> 23:32  London Paddington                       7     On time
-#> 23:35  Oxford                                  3     On time
-#> 23:43  London Paddington                       14    On time
-#> 23:46  Didcot Parkway                          8     On time
-#> 23:49  Basingstoke                             -     Cancelled
-#> 23:50  Manchester Piccadilly                   7     On time
-#> 23:58  London Paddington                       9B    On time
+#> 11:59  Didcot Parkway                          15    11:56
+#> 12:11  London Paddington                       9B    On time
+#> 12:13  London Paddington                       14    12:08
+#> 12:14  London Paddington                       12    On time
+#> 12:15  London Waterloo                         4     On time
+#> 12:16  London Paddington                       8B    12:18
+#> 12:17  Basingstoke                             2     On time
+#> 12:22  Bedwyn                                  11A   On time
+#> 12:29  Cheltenham Spa                          11A   On time
+#> 12:33  Redhill                                 5     On time
 ```
 
 <!-- Inspect the `rdg_arr` object: -->
@@ -97,23 +98,24 @@ print(rdg_arr)
 
 ### Departures board at Reading Station (RDG)
 
-Generated on 2021-02-04 23:19:51.
+Generated on 2021-02-05 12:10:10.
 
 ``` r
 rdg_dep <- trainR::GetDepBoardWithDetailsRequest("RDG")
 print(rdg_dep)
-#> Reading (RDG) Station Board on 2021-02-04 23:19:51
+#> Reading (RDG) Station Board on 2021-02-05 12:10:11
 #> Time   To                                      Plat  Expected
-#> 23:18  London Paddington                       10    On time
-#> 23:20  Ealing Broadway                         7A    On time
-#> 23:28  Worcestershire Parkway                  -     Cancelled
-#> 23:34  Redhill                                 8A    On time
-#> 23:36  Didcot Parkway                          7     On time
-#> 00:08  Oxford                                  9B    On time
-#> 00:18  London Paddington                       14    On time
-#> 00:28  Didcot Parkway                          7     On time
-#> 00:49  Penzance                                8     On time
-#> 01:15  London Paddington                       13A   On time
+#> 12:12  Ealing Broadway                         15    On time
+#> 12:12  London Waterloo                         6     On time
+#> 12:12  Newbury                                 1     On time
+#> 12:13  Manchester Piccadilly                   8B    On time
+#>        via Coventry & Stoke-on-Trent           
+#> 12:13  Swansea                                 9B    On time
+#> 12:18  Hereford                                8B    12:19
+#> 12:20  Redhill                                 5     On time
+#> 12:22  Ealing Broadway                         14    On time
+#> 12:23  Didcot Parkway                          12    On time
+#> 12:24  London Paddington                       11A   On time
 ```
 
 ### Add some colour (Terminal output only)
@@ -152,3 +154,10 @@ For more information about the available data feeds, visit
 <https://www.nationalrail.co.uk>.
 
 <img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%">
+
+## Code of Conduct
+
+Please note that the `trainR` package is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
