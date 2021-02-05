@@ -116,44 +116,45 @@
 <div id="arrivals-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#arrivals-board-at-reading-station-rdg" class="anchor"></a>Arrivals board at Reading Station (RDG)</h3>
-<p>Generated on 2021-02-04 23:19:50.</p>
+<p>Generated on 2021-02-05 12:10:10.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_arr</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetArrBoardWithDetailsRequest.html">GetArrBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rdg_arr</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-02-04 23:19:50</span>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-02-05 12:10:10</span>
 <span class="co">#&gt; Time   From                                    Plat  Expected</span>
-<span class="co">#&gt; 23:10  Penzance                                10    23:15</span>
-<span class="co">#&gt; 23:19  Newbury                                 7A    23:16</span>
-<span class="co">#&gt; 23:27  London Paddington                       -     Cancelled</span>
-<span class="co">#&gt; 23:32  London Paddington                       7     On time</span>
-<span class="co">#&gt; 23:35  Oxford                                  3     On time</span>
-<span class="co">#&gt; 23:43  London Paddington                       14    On time</span>
-<span class="co">#&gt; 23:46  Didcot Parkway                          8     On time</span>
-<span class="co">#&gt; 23:49  Basingstoke                             -     Cancelled</span>
-<span class="co">#&gt; 23:50  Manchester Piccadilly                   7     On time</span>
-<span class="co">#&gt; 23:58  London Paddington                       9B    On time</span></code></pre></div>
+<span class="co">#&gt; 11:59  Didcot Parkway                          15    11:56</span>
+<span class="co">#&gt; 12:11  London Paddington                       9B    On time</span>
+<span class="co">#&gt; 12:13  London Paddington                       14    12:08</span>
+<span class="co">#&gt; 12:14  London Paddington                       12    On time</span>
+<span class="co">#&gt; 12:15  London Waterloo                         4     On time</span>
+<span class="co">#&gt; 12:16  London Paddington                       8B    12:18</span>
+<span class="co">#&gt; 12:17  Basingstoke                             2     On time</span>
+<span class="co">#&gt; 12:22  Bedwyn                                  11A   On time</span>
+<span class="co">#&gt; 12:29  Cheltenham Spa                          11A   On time</span>
+<span class="co">#&gt; 12:33  Redhill                                 5     On time</span></code></pre></div>
 <!-- Inspect the `rdg_arr` object: -->
 <!-- #### Previous calling points -->
 </div>
 <div id="departures-board-at-reading-station-rdg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#departures-board-at-reading-station-rdg" class="anchor"></a>Departures board at Reading Station (RDG)</h3>
-<p>Generated on 2021-02-04 23:19:51.</p>
+<p>Generated on 2021-02-05 12:10:10.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rdg_dep</span> <span class="op">&lt;-</span> <span class="fu">trainR</span><span class="fu">::</span><span class="fu"><a href="reference/GetDepBoardWithDetailsRequest.html">GetDepBoardWithDetailsRequest</a></span><span class="op">(</span><span class="st">"RDG"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rdg_dep</span><span class="op">)</span>
-<span class="co">#&gt; Reading (RDG) Station Board on 2021-02-04 23:19:51</span>
+<span class="co">#&gt; Reading (RDG) Station Board on 2021-02-05 12:10:11</span>
 <span class="co">#&gt; Time   To                                      Plat  Expected</span>
-<span class="co">#&gt; 23:18  London Paddington                       10    On time</span>
-<span class="co">#&gt; 23:20  Ealing Broadway                         7A    On time</span>
-<span class="co">#&gt; 23:28  Worcestershire Parkway                  -     Cancelled</span>
-<span class="co">#&gt; 23:34  Redhill                                 8A    On time</span>
-<span class="co">#&gt; 23:36  Didcot Parkway                          7     On time</span>
-<span class="co">#&gt; 00:08  Oxford                                  9B    On time</span>
-<span class="co">#&gt; 00:18  London Paddington                       14    On time</span>
-<span class="co">#&gt; 00:28  Didcot Parkway                          7     On time</span>
-<span class="co">#&gt; 00:49  Penzance                                8     On time</span>
-<span class="co">#&gt; 01:15  London Paddington                       13A   On time</span></code></pre></div>
+<span class="co">#&gt; 12:12  Ealing Broadway                         15    On time</span>
+<span class="co">#&gt; 12:12  London Waterloo                         6     On time</span>
+<span class="co">#&gt; 12:12  Newbury                                 1     On time</span>
+<span class="co">#&gt; 12:13  Manchester Piccadilly                   8B    On time</span>
+<span class="co">#&gt;        via Coventry &amp; Stoke-on-Trent           </span>
+<span class="co">#&gt; 12:13  Swansea                                 9B    On time</span>
+<span class="co">#&gt; 12:18  Hereford                                8B    12:19</span>
+<span class="co">#&gt; 12:20  Redhill                                 5     On time</span>
+<span class="co">#&gt; 12:22  Ealing Broadway                         14    On time</span>
+<span class="co">#&gt; 12:23  Didcot Parkway                          12    On time</span>
+<span class="co">#&gt; 12:24  London Paddington                       11A   On time</span></code></pre></div>
 </div>
 <div id="add-some-colour-terminal-output-only" class="section level3">
 <h3 class="hasAnchor">
@@ -185,6 +186,11 @@
 <p>Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit <a href="https://www.nationalrail.co.uk" class="uri">https://www.nationalrail.co.uk</a>.</p>
 <p><img alt="Powered by NRE logo" src="https://raw.githubusercontent.com/villegar/trainR/main/inst/images/NRE_Powered_logo.jpg" style="max-width:400px;width:100%"></p>
 </div>
+<div id="code-of-conduct" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that the <code>trainR</code> package is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
 </div>
   </div>
 
@@ -207,6 +213,18 @@
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing trainR</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -220,7 +238,7 @@
 <li><a href="https://cran.r-project.org/package=trainR"><img src="https://www.r-pkg.org/badges/version/trainR?color=black"></a></li>
 <li><a href="https://github.com/villegar/trainR"><img src="https://img.shields.io/badge/devel%20version-0.0.1.9000-yellow.svg"></a></li>
 <li><a href="https://github.com/villegar/trainR/actions"><img src="https://github.com/villegar/trainR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.4506590"><img src="https://img.shields.io/badge/doi-10.5281/zenodo.4506590-black.svg"></a></li>
 </ul>
 </div>
 </div>
