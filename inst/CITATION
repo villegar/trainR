@@ -1,0 +1,14 @@
+citHeader("To cite trainR in publications use:")
+
+citEntry(
+  entry       = "Misc",
+  title       = "{trainR: An Interface to the National Rail Enquiries Systems}",
+  author      = "Roberto Villegas-Diaz",
+  month       = "January",
+  year        = 2021,
+  publisher   = "Zenodo",
+  doi         = "10.5281/zenodo.4506590",
+  url         = "https://doi.org/10.5281/zenodo.4506590",
+  textVersion = paste("Roberto Villegas-Diaz. 2021. trainR: An Interface to the National Rail Enquiries Systems. Zenodo. http://doi.org/10.5281/zenodo.4506590"),
+  key         = "trainR_villegas-diaz"
+)
