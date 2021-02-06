@@ -173,6 +173,27 @@ trainR::GetDepBoardWithDetailsRequest("CRE")
 #   knitr::kable()
 ```
 
+## Get services without details (calling points)
+These requests are useful if the calling points are not relevant for your analyses, visualisations, etc.
+
+### Arrivals board at Reading Station (RDG)
+
+Generated on `r lubridate::now()`.
+
+```{r arrivals-wo-details}
+rdg_arr <- trainR::GetArrBoardRequest("RDG")
+print(rdg_arr)
+```
+
+### Departures board at Reading Station (RDG)
+
+Generated on `r lubridate::now()`.
+
+```{r departures-wo-details}
+rdg_dep <- trainR::GetDepBoardRequest("RDG")
+print(rdg_dep)
+```
+
 ## Acknowledgements
 
 Access to the data feeds it is only possible thanks to the National Rail Enquiries. This package is just a tool to facilitate access to the data. For more information about the available data feeds, visit https://www.nationalrail.co.uk.
