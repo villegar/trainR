@@ -170,11 +170,11 @@ print_board <- function(x,
                   via =
                     get_element(x, station, TRUE) %>%
                     purrr::transpose() %>%
-                    get_element("via"),
+                    get_element("via", TRUE),
                   station =
                     get_element(x, station, TRUE) %>%
                     purrr::transpose() %>%
-                    get_element("locationName"))
+                    get_element("locationName", TRUE))
 
   if (string) {
     return(x %>%
@@ -206,18 +206,14 @@ print_board <- function(x,
                 })
   } else {
     x %>%
-      glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
-                      "{stringr::str_pad(station, 40, 'right')}",
-                      "{stringr::str_pad(platform, 6, 'right')}",
-                      "{colour_time(time, expected, show_colours)}\n",
-                      "{ifelse(!is.na(via),
-                               stringr::str_pad(stringr::str_pad(via,
-                                                                 40,
-                                                                 'right'),
-                                                47,
-                                                'left'),
-                               '')}",
-                      "{ifelse(!is.na(via), '\n', '')}") %>%
+      purrr::pmap_chr(.print_service_details,
+                      show_colours = show_colours) %>%
+      # glue::glue_data("{stringr::str_pad(time, 7, 'right')}",
+      #                 "{stringr::str_pad(station, 40, 'right')}",
+      #                 "{stringr::str_pad(platform, 6, 'right')}",
+      #                 "{colour_time(time, expected, show_colours)}\n",
+      #                 "{via %>% .print_via}",
+      #                 "{ifelse(!is.na(via), '\n', '')}") %>%
       purrr::walk(cat)
   }
 }
