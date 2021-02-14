@@ -60,17 +60,19 @@ extract.ServiceDetails <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.ServiceLocation <- function(x, ...) {
-  x <- x[[1]]
   if (all(is.null(x)) |
       all(is.na(x)) |
       length(x) == 0 |
       is.null(x[[1]]))
     return(NA)
-  tibble::tibble(locationName = get_element(x, "locationName"),
-                 crs = get_element(x, "crs"),
-                 via = get_element(x, "via"),
-                 futureChangeTo = get_element(x, "futureChangeTo"),
-                 assocIsCancelled = get_element(x, "assocIsCancelled")) %>%
+  x %>%
+    purrr::map_df(
+      ~tibble::tibble(locationName = get_element(.x, "locationName"),
+                      crs = get_element(.x, "crs"),
+                      via = get_element(.x, "via"),
+                      futureChangeTo = get_element(.x, "futureChangeTo"),
+                      assocIsCancelled = get_element(.x, "assocIsCancelled"))
+    ) %>%
     list() %>%
     reclass("ServiceLocation")
 }
