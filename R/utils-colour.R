@@ -10,6 +10,8 @@
 #' @return
 #' @keywords internal
 colour_time <- function(time, expected, show_colours = TRUE) {
+  if (is.na(time) | time == "")
+    return("")
   if (!show_colours)
     return(expected)
   purrr::map2_chr(time, expected,
