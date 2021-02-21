@@ -18,6 +18,39 @@ get_calling_points <- function(data) {
                     lubridate::as_datetime(glue::glue("{lubridate::today()} {st}:00 GMT")))
 }
 
+#' Get CRS code
+#'
+#' Get CRS code from a string with the station name.
+#'
+#' @param station String with the station name, partial names are allowed.
+#' @inheritDotParams base::grep -pattern -x
+#'
+#' @return Vector of strings with the matched CRS codes, or \code{NULL} if no
+#' match is found.
+#'
+#' @export
+#'
+#' @examples
+#' trainR::get_crs("London")
+#' trainR::get_crs("Manchester")
+#' trainR::get_crs("manchester", ignore.case = TRUE)
+get_crs <- function(station, ...) {
+  idx <- grep(pattern = station,
+              x = trainR::station_codes$name,
+              ...)
+  if (length(idx) > 0) {
+    codes <- trainR::station_codes$crs[idx]
+    names <- trainR::station_codes$name[idx]
+    message("The following station",
+            ifelse(length(idx) > 1, "s were ", "was "),
+            "found: \n",
+            paste0("- ", names, " [", codes, "]", collapse = "\n"))
+    return(invisible(codes))
+  }
+  message("Not CRS found matching: `", station ,"`")
+  return(invisible(NULL))
+}
+
 #' Wrapper for \code{\link[base:getElement]{base::getElement}}
 #'
 #' Wrapper for \code{\link[base:getElement]{base::getElement}}, but instead of
