@@ -147,7 +147,8 @@ print.subsequentCallingPoints <- function(x, ...) {
 #' @return Nothing, call for its side effect.
 #' @keywords internal
 print_board <- function(x,
-                        show_details = FALSE,
+                        show_details = getOption("show_details",
+                                                 default = FALSE),
                         station = "destination",
                         string = FALSE,
                         show_header = TRUE,
