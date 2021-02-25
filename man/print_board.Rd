@@ -6,7 +6,7 @@
 \usage{
 print_board(
   x,
-  show_details = FALSE,
+  show_details = getOption("show_details", default = FALSE),
   station = "destination",
   string = FALSE,
   show_header = TRUE,
