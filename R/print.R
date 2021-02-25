@@ -97,14 +97,17 @@ print.trainServices <- function(x, ...) {
 print.previousCallingPoints <- function(x, ...) {
   # Local binding
   . <- crs <- NULL
-  if (all(is.na(x[[1]])))
+  if (all(is.na(x)))
     return(invisible(x))
-  x[[1]] %>%
-    dplyr::mutate(station = get_location(crs)) %>%
-    glue::glue_data("{station} ({ifelse(is.na(at) | at == 'On time', st, at)})") %>%
-    paste0(collapse = ", ") %>%
-    paste0("Previous calls: ", ., "\n\n") %>%
-    cat()
+  purrr::walk(x, function(calls) {
+    # x[[1]] %>%
+    calls %>%
+      dplyr::mutate(station = get_location(crs)) %>%
+      glue::glue_data("{station} ({ifelse(is.na(at) | at == 'On time', st, at)})") %>%
+      paste0(collapse = ", ") %>%
+      paste0("Previous calls: ", ., "\n\n") %>%
+      cat()
+  })
   invisible(x)
 }
 
