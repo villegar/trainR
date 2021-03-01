@@ -208,19 +208,30 @@ extract.callingPoint <- function(x, ...) {
 #' @rdname extract
 #' @keywords internal
 extract.callingPointList <- function(x, ..., class = "previousCallingPoints") {
-  x <- x[[1]]
+  # x <- x[[1]]
   if (all(is.null(x)) |
       all(is.na(x)) |
       length(x) == 0 |
       is.null(x[[1]])) {
-    # return(NA)
     return(list(NA) %>%
              reclass(class))
   }
 
-  purrr::map_df(x, function(x) x %>% reclass("callingPoint") %>% extract()) %>%
+  x %>%
+    purrr::map_df(~purrr::map_df(.x,
+                                 function(x) {
+                                   x %>%
+                                     reclass("callingPoint") %>%
+                                     extract()
+                                 })) %>%
+    # magrittr::set_names(seq_len(length(.))) %>%
     list() %>%
     reclass(class)
+
+  # purrr::map_df(x, function(x) x %>% reclass("callingPoint") %>% extract()) %>%
+  #   list() %>%
+  #   reclass(class)
+
   # x %>% # callingPointList
   #   purrr::map_df(function(x) x %>%
   #                   reclass("callingPoint") %>%

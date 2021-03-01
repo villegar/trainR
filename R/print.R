@@ -97,14 +97,17 @@ print.trainServices <- function(x, ...) {
 print.previousCallingPoints <- function(x, ...) {
   # Local binding
   . <- crs <- NULL
-  if (all(is.na(x[[1]])))
+  if (all(is.na(x)))
     return(invisible(x))
-  x[[1]] %>%
-    dplyr::mutate(station = get_location(crs)) %>%
-    glue::glue_data("{station} ({ifelse(is.na(at) | at == 'On time', st, at)})") %>%
-    paste0(collapse = ", ") %>%
-    paste0("Previous calls: ", ., "\n\n") %>%
-    cat()
+  purrr::walk(x, function(calls) {
+    # x[[1]] %>%
+    calls %>%
+      dplyr::mutate(station = get_location(crs)) %>%
+      glue::glue_data("{station} ({ifelse(is.na(at) | at == 'On time', st, at)})") %>%
+      paste0(collapse = ", ") %>%
+      paste0("Previous calls: ", ., "\n\n") %>%
+      cat()
+  })
   invisible(x)
 }
 
@@ -113,15 +116,19 @@ print.previousCallingPoints <- function(x, ...) {
 print.subsequentCallingPoints <- function(x, ...) {
   # Local binding
   . <- crs <- NULL
-  if (all(is.na(x[[1]])))
+  if (all(is.na(x)))
     return(invisible(x))
-  x[[1]] %>%
-    # dplyr::filter_all(is.na, .preserve = TRUE) %>%
-    dplyr::mutate(station = get_location(crs)) %>%
-    glue::glue_data("{station} ({ifelse(is.na(et), st, st)})") %>%
-    paste0(collapse = ", ") %>%
-    paste0("Calling at: ", ., "\n\n") %>%
-    cat()
+  purrr::walk(x, function(calls) {
+    # x[[1]] %>%
+    calls %>%
+      # x[[1]] %>%
+      # dplyr::filter_all(is.na, .preserve = TRUE) %>%
+      dplyr::mutate(station = get_location(crs)) %>%
+      glue::glue_data("{station} ({ifelse(is.na(et), st, st)})") %>%
+      paste0(collapse = ", ") %>%
+      paste0("Calling at: ", ., "\n\n") %>%
+      cat()
+  })
   invisible(x)
 }
 
@@ -140,7 +147,8 @@ print.subsequentCallingPoints <- function(x, ...) {
 #' @return Nothing, call for its side effect.
 #' @keywords internal
 print_board <- function(x,
-                        show_details = FALSE,
+                        show_details = getOption("show_details",
+                                                 default = FALSE),
                         station = "destination",
                         string = FALSE,
                         show_header = TRUE,
